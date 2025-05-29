@@ -1,1 +1,1 @@
-# Truefans-CONNECT-05-29
+# trufans-project
