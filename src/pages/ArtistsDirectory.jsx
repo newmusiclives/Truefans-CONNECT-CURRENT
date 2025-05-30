@@ -13,7 +13,7 @@ const ArtistsDirectory = () => {
   const artists = [
     {
       id: 1,
-      name: 'Sarah Johnson',
+      name: 'Eliza Johnson',
       genre: 'Folk',
       location: 'Nashville, TN',
       image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg',

@@ -1,9 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
+  const navigate = useNavigate()
+  
+  // Function to handle navigation and scroll to top
+  const handleNavigation = (path) => {
+    navigate(path)
+    window.scrollTo(0, 0)
+  }
   
   return (
     <FooterWrapper>
@@ -45,27 +52,27 @@ const Footer = () => {
           <FooterLinks>
             <FooterLinkGroup>
               <FooterLinkTitle>Platform</FooterLinkTitle>
-              <FooterLink as={Link} to="/">Home</FooterLink>
-              <FooterLink as={Link} to="/about">About Us</FooterLink>
-              <FooterLink as={Link} to="/artist-signup">Artist Signup</FooterLink>
-              <FooterLink as={Link} to="/venue-signup">Venue Signup</FooterLink>
-              <FooterLink as={Link} to="/donation-system">Donation System</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/')}>Home</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/about')}>About Us</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/artist-signup')}>Artist Signup</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/venue-signup')}>Venue Signup</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/donation-system')}>Donation System</FooterLink>
             </FooterLinkGroup>
             
             <FooterLinkGroup>
               <FooterLinkTitle>Resources</FooterLinkTitle>
-              <FooterLink as={Link} to="/help-center">Help Center</FooterLink>
-              <FooterLink as={Link} to="/blog">Blog</FooterLink>
-              <FooterLink as={Link} to="/api-docs">API Documentation</FooterLink>
-              <FooterLink as={Link} to="/success-stories">Success Stories</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/help-center')}>Help Center</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/blog')}>Blog</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/api-docs')}>API Documentation</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/success-stories')}>Success Stories</FooterLink>
             </FooterLinkGroup>
             
             <FooterLinkGroup>
               <FooterLinkTitle>Company</FooterLinkTitle>
-              <FooterLink as={Link} to="/about">About Us</FooterLink>
-              <FooterLink as={Link} to="/careers">Careers</FooterLink>
-              <FooterLink as={Link} to="/press">Press</FooterLink>
-              <FooterLink as={Link} to="/contact">Contact</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/about')}>About Us</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/careers')}>Careers</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/press')}>Press</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/contact')}>Contact</FooterLink>
             </FooterLinkGroup>
           </FooterLinks>
         </FooterGrid>
@@ -75,9 +82,9 @@ const Footer = () => {
             © {currentYear} TrueFans CONNECT™. All rights reserved.
           </FooterCopyright>
           <FooterLegal>
-            <LegalLink as={Link} to="/terms">Terms of Service</LegalLink>
-            <LegalLink as={Link} to="/privacy">Privacy Policy</LegalLink>
-            <LegalLink as={Link} to="/cookies">Cookie Policy</LegalLink>
+            <LegalLink onClick={() => handleNavigation('/terms')}>Terms of Service</LegalLink>
+            <LegalLink onClick={() => handleNavigation('/privacy')}>Privacy Policy</LegalLink>
+            <LegalLink onClick={() => handleNavigation('/cookies')}>Cookie Policy</LegalLink>
           </FooterLegal>
         </FooterBottom>
       </Container>
@@ -180,6 +187,7 @@ const FooterLink = styled.a`
   opacity: 0.8;
   margin-bottom: ${({ theme }) => theme.space.sm};
   transition: ${({ theme }) => theme.transitions.default};
+  cursor: pointer;
   
   &:hover {
     opacity: 1;
@@ -218,6 +226,7 @@ const LegalLink = styled.a`
   color: white;
   opacity: 0.6;
   transition: ${({ theme }) => theme.transitions.default};
+  cursor: pointer;
   
   &:hover {
     opacity: 1;

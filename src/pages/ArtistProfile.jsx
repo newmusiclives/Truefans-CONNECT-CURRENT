@@ -15,9 +15,9 @@ const ArtistProfile = () => {
       <HeroSection>
         <Container>
           <ArtistHeader>
-            <ArtistAvatar src="https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg" alt="Sarah Johnson" />
+            <ArtistAvatar src="https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg" alt="Eliza Johnson" />
             <ArtistInfo>
-              <ArtistName>Sarah Johnson</ArtistName>
+              <ArtistName>Eliza Johnson</ArtistName>
               <ArtistGenre>Jazz Vocalist</ArtistGenre>
               <ArtistLocation>New Orleans, LA</ArtistLocation>
               <ArtistSocial>
@@ -46,9 +46,9 @@ const ArtistProfile = () => {
               <Section>
                 <SectionTitle>About</SectionTitle>
                 <Biography>
-                  <p>Sarah Johnson is a jazz vocalist based in New Orleans, known for her soulful interpretations of classic jazz standards and her own original compositions that blend traditional jazz with contemporary influences.</p>
-                  <p>With over a decade of experience performing in venues across the United States and Europe, Sarah has established herself as a respected voice in the jazz community. Her warm tone and improvisational skills have earned her critical acclaim and a dedicated following of jazz enthusiasts.</p>
-                  <p>Sarah's latest project, "Midnight in New Orleans," is a collection of original compositions inspired by the rich musical heritage of her hometown. The album features collaborations with some of the city's finest musicians and showcases Sarah's growth as both a vocalist and a composer.</p>
+                  <p>Eliza Johnson is a jazz vocalist based in New Orleans, known for her soulful interpretations of classic jazz standards and her own original compositions that blend traditional jazz with contemporary influences.</p>
+                  <p>With over a decade of experience performing in venues across the United States and Europe, Eliza has established herself as a respected voice in the jazz community. Her warm tone and improvisational skills have earned her critical acclaim and a dedicated following of jazz enthusiasts.</p>
+                  <p>Eliza's latest project, "Midnight in New Orleans," is a collection of original compositions inspired by the rich musical heritage of her hometown. The album features collaborations with some of the city's finest musicians and showcases Eliza's growth as both a vocalist and a composer.</p>
                 </Biography>
               </Section>
               
@@ -89,7 +89,7 @@ const ArtistProfile = () => {
             
             <Sidebar>
               <DonationWidget>
-                <DonationHeader>Support Sarah's Music</DonationHeader>
+                <DonationHeader>Support Eliza's Music</DonationHeader>
                 <DonationDescription>Your contribution helps fund new recordings, tours, and creative projects.</DonationDescription>
                 
                 <DonationOptions>
@@ -119,7 +119,7 @@ const ArtistProfile = () => {
               
               <NewsletterWidget>
                 <NewsletterHeader>Stay Updated</NewsletterHeader>
-                <NewsletterDescription>Subscribe to Sarah's newsletter for tour dates, new releases, and exclusive content.</NewsletterDescription>
+                <NewsletterDescription>Subscribe to Eliza's newsletter for tour dates, new releases, and exclusive content.</NewsletterDescription>
                 <NewsletterInput
                   type="email"
                   placeholder="Your email address"
