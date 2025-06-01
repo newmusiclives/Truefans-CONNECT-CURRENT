@@ -1,295 +1,260 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import Button from '../ui/Button'
+import { Link } from 'react-router-dom'
+import { FaArrowRight } from 'react-icons/fa'
 
 const TransformationSection = () => {
-  const [activePanel, setActivePanel] = useState('before')
-  
+  // Function to handle button click and scroll to top
+  const handleNavigateToSignup = () => {
+    // This will ensure the page scrolls to the top when navigating
+    window.scrollTo(0, 0);
+  }
+
   return (
     <SectionWrapper>
-      <div className="container">
-        <SectionTitle>The Broken vs. Beautiful Reality</SectionTitle>
-        
-        <TransformationContainer>
-          <PanelToggle>
-            <ToggleButton 
-              isActive={activePanel === 'before'} 
-              onClick={() => setActivePanel('before')}
+      <Container>
+        <ContentGrid>
+          <TextContent>
+            <SectionTitle>Choose Your Future</SectionTitle>
+            <SectionDescription>
+              The music industry doesn't have to be a struggle. With TrueFans CONNECT™, you can build a sustainable career on your own terms. Our platform gives you the tools to connect directly with your fans, get paid what you deserve, and focus on what matters most—creating amazing music.
+            </SectionDescription>
+            <FeatureList>
+              <FeatureItem>
+                <FeatureBullet />
+                <FeatureText>Instant payments at shows via custom QR codes</FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureBullet />
+                <FeatureText>Direct fan communication without algorithm interference</FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureBullet />
+                <FeatureText>Detailed analytics to understand your audience</FeatureText>
+              </FeatureItem>
+              <FeatureItem>
+                <FeatureBullet />
+                <FeatureText>Next-day deposits to your bank account</FeatureText>
+              </FeatureItem>
+            </FeatureList>
+            <ActionButton 
+              as={motion.div}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
             >
-              Before
-            </ToggleButton>
-            <ToggleButton 
-              isActive={activePanel === 'after'} 
-              onClick={() => setActivePanel('after')}
-            >
-              After
-            </ToggleButton>
-          </PanelToggle>
+              <ActionLink 
+                to="/artist-signup" 
+                onClick={handleNavigateToSignup}
+              >
+                <span>Choose Your Future</span>
+                <ActionIcon><FaArrowRight /></ActionIcon>
+              </ActionLink>
+            </ActionButton>
+          </TextContent>
           
-          <PanelsContainer>
-            <Panel 
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: activePanel === 'before' ? 1 : 0,
-                x: activePanel === 'before' ? 0 : -20
-              }}
-              transition={{ duration: 0.5 }}
-              isVisible={activePanel === 'before'}
-            >
-              <PanelImage src="https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg" alt="Empty coffee shop performance" />
-              <PanelContent>
-                <PanelTitle>The Struggle is Real</PanelTitle>
-                <PanelDescription>
-                  Playing to distracted patrons in noisy venues, competing with espresso machines and laptop keyboards.
-                </PanelDescription>
-                
-                <MetricsContainer>
-                  <Metric>
-                    <MetricValue negative>$47</MetricValue>
-                    <MetricLabel>Average earnings for 3-hour gig</MetricLabel>
-                  </Metric>
-                  <Metric>
-                    <MetricValue negative>3</MetricValue>
-                    <MetricLabel>New fan connections</MetricLabel>
-                  </Metric>
-                  <Metric>
-                    <MetricValue negative>0</MetricValue>
-                    <MetricLabel>Follow-up opportunities</MetricLabel>
-                  </Metric>
-                </MetricsContainer>
-                
-                <EmptyTipJar>
-                  <TipJarLabel>Tip Jar Status:</TipJarLabel>
-                  <TipJarStatus>Nearly Empty</TipJarStatus>
-                </EmptyTipJar>
-              </PanelContent>
-            </Panel>
-            
-            <Panel 
-              initial={{ opacity: 0 }}
-              animate={{ 
-                opacity: activePanel === 'after' ? 1 : 0,
-                x: activePanel === 'after' ? 0 : 20
-              }}
-              transition={{ duration: 0.5 }}
-              isVisible={activePanel === 'after'}
-            >
-              <PanelImage src="https://images.pexels.com/photos/7097446/pexels-photo-7097446.jpeg" alt="Engaged house concert audience" />
-              <PanelContent>
-                <PanelTitle>The Beautiful Transformation</PanelTitle>
-                <PanelDescription>
-                  Performing for engaged fans who are there specifically to experience your music and support your journey.
-                </PanelDescription>
-                
-                <MetricsContainer>
-                  <Metric>
-                    <MetricValue>$623</MetricValue>
-                    <MetricLabel>Average earnings same night</MetricLabel>
-                  </Metric>
-                  <Metric>
-                    <MetricValue>27</MetricValue>
-                    <MetricLabel>New fan connections</MetricLabel>
-                  </Metric>
-                  <Metric>
-                    <MetricValue>18</MetricValue>
-                    <MetricLabel>Recurring supporters</MetricLabel>
-                  </Metric>
-                </MetricsContainer>
-                
-                <QRCodeContainer>
-                  <QRCodeImage src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://truefansconnect.com/demo" alt="QR Code" />
-                  <QRCodeText>
-                    Fans scan your unique code to support you instantly
-                  </QRCodeText>
-                </QRCodeContainer>
-              </PanelContent>
-            </Panel>
-          </PanelsContainer>
-          
-          <TransitionButton>
-            <Button variant="gold" size="lg">
-              Choose Your Future
-            </Button>
-          </TransitionButton>
-        </TransformationContainer>
-      </div>
+          <ImageContent>
+            <TransformationImage src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg" alt="Artist performing on stage" />
+            <ImageOverlay />
+            <ImageCaption>
+              "TrueFans CONNECT™ helped me quit my day job and focus on music full-time."
+              <CaptionAuthor>— Jamie Chen, Indie Artist</CaptionAuthor>
+            </ImageCaption>
+          </ImageContent>
+        </ContentGrid>
+      </Container>
     </SectionWrapper>
   )
 }
 
 const SectionWrapper = styled.section`
-  background-color: ${({ theme }) => theme.colors.lightBackground};
-  padding: ${({ theme }) => theme.space['4xl']} 0;
+  padding: ${({ theme }) => theme.space['5xl']} 0;
+  background-color: white;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle at 80% 20%, rgba(26, 115, 232, 0.03) 0%, transparent 50%);
+    z-index: 0;
+  }
+`
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 ${({ theme }) => theme.space.lg};
+  position: relative;
+  z-index: 1;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0 ${({ theme }) => theme.space.md};
+  }
+`
+
+const ContentGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.space['3xl']};
+  align-items: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.space.xl};
+  }
+`
+
+const TextContent = styled.div`
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    order: 2;
+  }
 `
 
 const SectionTitle = styled.h2`
-  text-align: center;
-  margin-bottom: ${({ theme }) => theme.space['2xl']};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-`
-
-const TransformationContainer = styled.div`
-  position: relative;
-  max-width: 900px;
-  margin: 0 auto;
-`
-
-const PanelToggle = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-bottom: ${({ theme }) => theme.space.xl};
-`
-
-const ToggleButton = styled.button`
-  background-color: ${({ isActive, theme }) => 
-    isActive ? theme.colors.passionateCrimson : 'transparent'};
-  color: ${({ isActive, theme }) => 
-    isActive ? 'white' : theme.colors.trustworthyNavy};
-  border: 2px solid ${({ theme }) => theme.colors.passionateCrimson};
-  padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.xl};
-  font-family: ${({ theme }) => theme.fonts.heading};
+  font-size: clamp(2rem, 4vw, ${({ theme }) => theme.fontSizes['3xl']});
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  
-  &:first-child {
-    border-radius: ${({ theme }) => theme.radii.md} 0 0 ${({ theme }) => theme.radii.md};
-  }
-  
-  &:last-child {
-    border-radius: 0 ${({ theme }) => theme.radii.md} ${({ theme }) => theme.radii.md} 0;
-  }
-  
-  &:hover {
-    background-color: ${({ isActive, theme }) => 
-      isActive ? theme.colors.passionateCrimson : `${theme.colors.passionateCrimson}20`};
-  }
-`
-
-const PanelsContainer = styled.div`
-  position: relative;
-  min-height: 600px;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    min-height: 800px;
-  }
-`
-
-const Panel = styled(motion.div)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: white;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  overflow: hidden;
-  box-shadow: ${({ theme }) => theme.shadows.lg};
-  display: ${({ isVisible }) => isVisible ? 'block' : 'none'};
-`
-
-const PanelImage = styled.img`
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-`
-
-const PanelContent = styled.div`
-  padding: ${({ theme }) => theme.space.xl};
-`
-
-const PanelTitle = styled.h3`
   color: ${({ theme }) => theme.colors.trustworthyNavy};
+  margin-bottom: ${({ theme }) => theme.space.md};
+  position: relative;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background-color: ${({ theme }) => theme.colors.revolutionaryGold};
+  }
+`
+
+const SectionDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  color: ${({ theme }) => theme.colors.lightText};
+  margin-bottom: ${({ theme }) => theme.space.xl};
+  line-height: 1.6;
+`
+
+const FeatureList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0 0 ${({ theme }) => theme.space.xl};
+`
+
+const FeatureItem = styled.li`
+  display: flex;
+  align-items: flex-start;
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const PanelDescription = styled.p`
-  color: ${({ theme }) => theme.colors.modernCharcoal};
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  margin-bottom: ${({ theme }) => theme.space.xl};
+const FeatureBullet = styled.span`
+  width: 12px;
+  height: 12px;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  border-radius: 50%;
+  margin-top: 6px;
+  margin-right: ${({ theme }) => theme.space.md};
+  flex-shrink: 0;
 `
 
-const MetricsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: ${({ theme }) => theme.space.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    flex-direction: column;
-    gap: ${({ theme }) => theme.space.lg};
-  }
+const FeatureText = styled.span`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.darkText};
+  line-height: 1.5;
 `
 
-const Metric = styled.div`
-  text-align: center;
-  flex: 1;
+const ActionButton = styled.div`
+  display: inline-block;
 `
 
-const MetricValue = styled.div`
-  font-family: ${({ theme }) => theme.fonts.heading};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  font-size: ${({ theme }) => theme.fontSizes['4xl']};
-  color: ${({ negative, theme }) => 
-    negative ? theme.colors.passionateCrimson : theme.colors.successGreen};
-  margin-bottom: ${({ theme }) => theme.space.xs};
-`
-
-const MetricLabel = styled.div`
-  color: ${({ theme }) => theme.colors.modernCharcoal};
-`
-
-const EmptyTipJar = styled.div`
-  background-color: ${({ theme }) => theme.colors.lightBackground};
-  padding: ${({ theme }) => theme.space.lg};
-  border-radius: ${({ theme }) => theme.radii.md};
+const ActionLink = styled(Link)`
   display: flex;
   align-items: center;
-  justify-content: space-between;
-`
-
-const TipJarLabel = styled.span`
+  gap: ${({ theme }) => theme.space.sm};
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.modernCharcoal};
-`
-
-const TipJarStatus = styled.span`
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.passionateCrimson};
-`
-
-const QRCodeContainer = styled.div`
-  display: flex;
-  align-items: center;
-  background-color: ${({ theme }) => theme.colors.lightBackground};
-  padding: ${({ theme }) => theme.space.lg};
+  padding: ${({ theme }) => theme.space.md} ${({ theme }) => theme.space.xl};
   border-radius: ${({ theme }) => theme.radii.md};
+  text-decoration: none;
+  transition: ${({ theme }) => theme.transitions.default};
+  box-shadow: ${({ theme }) => theme.shadows.md};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    flex-direction: column;
-    gap: ${({ theme }) => theme.space.md};
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondaryDark};
+    box-shadow: ${({ theme }) => theme.shadows.lg};
   }
 `
 
-const QRCodeImage = styled.img`
-  width: 100px;
-  height: 100px;
-  margin-right: ${({ theme }) => theme.space.lg};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    margin-right: 0;
-  }
-`
-
-const QRCodeText = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-`
-
-const TransitionButton = styled.div`
-  display: flex;
+const ActionIcon = styled.span`
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  margin-top: ${({ theme }) => theme.space.xl};
+  transition: transform 0.3s ease;
+  
+  ${ActionLink}:hover & {
+    transform: translateX(4px);
+  }
+`
+
+const ImageContent = styled.div`
+  position: relative;
+  border-radius: ${({ theme }) => theme.radii.lg};
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    order: 1;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+`
+
+const TransformationImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  
+  ${ImageContent}:hover & {
+    transform: scale(1.05);
+  }
+`
+
+const ImageOverlay = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  z-index: 2;
+`
+
+const ImageCaption = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: ${({ theme }) => theme.space.xl};
+  color: white;
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-style: italic;
+  line-height: 1.4;
+  z-index: 3;
+`
+
+const CaptionAuthor = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-style: normal;
+  margin-top: ${({ theme }) => theme.space.xs};
+  opacity: 0.8;
 `
 
 export default TransformationSection

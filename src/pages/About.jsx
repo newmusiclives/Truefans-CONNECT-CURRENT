@@ -28,7 +28,7 @@ const About = () => {
             <VisionSection>
               <SectionTitle>Our Vision</SectionTitle>
               <VisionContent>
-                <VisionImage src="https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Artist performing" />
+                <VisionImage src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Artist performing" />
                 <VisionText>
                   <p>
                     At TrueFans CONNECT™, we believe that talented artists deserve to be supported directly by their fans, without intermediaries taking the majority of their earnings. Our platform is built on the principle that the relationship between artists and their supporters should be direct, transparent, and mutually beneficial.

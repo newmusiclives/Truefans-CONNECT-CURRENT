@@ -20,7 +20,7 @@ const VenuePortal = () => {
             <HeroSubtitle>Connect with talented independent artists for your venue</HeroSubtitle>
             <HeroActions>
               <HeroButton as={Link} to="/venue-signup">Register Your Venue</HeroButton>
-              <HeroButton as={Link} to="/venue-signup" variant="outline">Learn More</HeroButton>
+              <HeroButton as={Link} to="/venue-portal-info" variant="outline">Learn More</HeroButton>
             </HeroActions>
           </HeroContent>
         </Container>

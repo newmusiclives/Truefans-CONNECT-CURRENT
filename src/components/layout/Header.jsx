@@ -62,8 +62,8 @@ const Header = () => {
             <NavItem active={location.pathname === '/about'}>
               <NavLink to="/about" onClick={closeMobileMenu}>About Us</NavLink>
             </NavItem>
-            <NavItem active={location.pathname === '/artist-dashboard'}>
-              <NavLink to="/artist-dashboard" onClick={closeMobileMenu}>Artists</NavLink>
+            <NavItem active={location.pathname === '/artists-directory'}>
+              <NavLink to="/artists-directory" onClick={closeMobileMenu}>Artists Directory</NavLink>
             </NavItem>
             <NavItem active={location.pathname === '/venue-portal'}>
               <NavLink to="/venue-portal" onClick={closeMobileMenu}>Venue Portal</NavLink>
@@ -77,14 +77,16 @@ const Header = () => {
             
             {/* Mobile-only auth buttons */}
             <MobileAuthButtons>
-              <MobileLoginButton as={Link} to="/my-dashboard" onClick={closeMobileMenu}>Log In</MobileLoginButton>
-              <MobileSignupButton as={Link} to="/artist-signup" onClick={closeMobileMenu}>Sign Up</MobileSignupButton>
+              <MobileLoginButton as={Link} to="/login" onClick={closeMobileMenu}>Log In</MobileLoginButton>
+              <MobileSignupButton as={Link} to="/artist-signup" onClick={closeMobileMenu}>Artist SignUp</MobileSignupButton>
+              <MobileVenueSignupButton as={Link} to="/venue-signup" onClick={closeMobileMenu}>Venue SignUp</MobileVenueSignupButton>
             </MobileAuthButtons>
           </NavLinks>
           
           <AuthButtons>
-            <LoginButton as={Link} to="/my-dashboard">Log In</LoginButton>
-            <SignupButton as={Link} to="/artist-signup">Sign Up</SignupButton>
+            <LoginButton as={Link} to="/login">Log In</LoginButton>
+            <ArtistSignupButton as={Link} to="/artist-signup">Artist SignUp</ArtistSignupButton>
+            <VenueSignupButton as={Link} to="/venue-signup">Venue SignUp</VenueSignupButton>
           </AuthButtons>
         </HeaderContent>
       </Container>
@@ -265,19 +267,37 @@ const LoginButton = styled(Button)`
   }
 `
 
-const SignupButton = styled(Button)`
+const ArtistSignupButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
-  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.lg}`};
+  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.md}`};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: ${({ theme }) => theme.space.sm};
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primaryDark};
+    text-decoration: none;
+  }
+`
+
+const VenueSignupButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.md}`};
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: background-color 0.3s ease;
   
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryDark};
+    background-color: ${({ theme }) => theme.colors.secondaryDark};
     text-decoration: none;
   }
 `
@@ -322,6 +342,22 @@ const MobileSignupButton = styled(Button)`
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
+    text-decoration: none;
+  }
+`
+
+const MobileVenueSignupButton = styled(Button)`
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  border: none;
+  padding: ${({ theme }) => theme.space.md};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  border-radius: ${({ theme }) => theme.radii.md};
+  text-align: center;
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.secondaryDark};
     text-decoration: none;
   }
 `

@@ -6,75 +6,77 @@ const HeroSection = () => {
   return (
     <HeroWrapper>
       <HeroBackground />
-      <HeroContent>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <HeroTitle>Connect with your true fans</HeroTitle>
-          <HeroSubtitle>
-            The platform that brings artists, venues, and fans together for authentic music experiences
-          </HeroSubtitle>
-          <HeroButtons>
-            <PrimaryButton
-              as={motion.button}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Get Started
-            </PrimaryButton>
-            <SecondaryButton
-              as={motion.button}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Learn More
-            </SecondaryButton>
-          </HeroButtons>
-        </motion.div>
-        
-        <FeaturesGrid>
-          <FeatureCard
-            as={motion.div}
+      <Container>
+        <HeroContent>
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6 }}
           >
-            <FeatureIcon>🎵</FeatureIcon>
-            <FeatureTitle>For Artists</FeatureTitle>
-            <FeatureDescription>
-              Connect with venues, manage bookings, and grow your fanbase all in one place.
-            </FeatureDescription>
-          </FeatureCard>
+            <HeroTitle>Right Now Money and Fans Forever</HeroTitle>
+            <HeroSubtitle>
+              The platform that brings artists, venues, and fans together for authentic music experiences
+            </HeroSubtitle>
+            <HeroButtons>
+              <PrimaryButton
+                as={motion.button}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get Started
+              </PrimaryButton>
+              <SecondaryButton
+                as={motion.button}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Learn More
+              </SecondaryButton>
+            </HeroButtons>
+          </motion.div>
           
-          <FeatureCard
-            as={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <FeatureIcon>🏢</FeatureIcon>
-            <FeatureTitle>For Venues</FeatureTitle>
-            <FeatureDescription>
-              Discover talented artists, schedule performances, and attract more music lovers.
-            </FeatureDescription>
-          </FeatureCard>
-          
-          <FeatureCard
-            as={motion.div}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            <FeatureIcon>👥</FeatureIcon>
-            <FeatureTitle>For Fans</FeatureTitle>
-            <FeatureDescription>
-              Find your favorite artists, discover new music, and never miss a show again.
-            </FeatureDescription>
-          </FeatureCard>
-        </FeaturesGrid>
-      </HeroContent>
+          <FeaturesGrid>
+            <FeatureCard
+              as={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <FeatureIcon>🎵</FeatureIcon>
+              <FeatureTitle>For Artists</FeatureTitle>
+              <FeatureDescription>
+                Connect with venues, manage bookings, and grow your fanbase all in one place.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard
+              as={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
+              <FeatureIcon>🏢</FeatureIcon>
+              <FeatureTitle>For Venues</FeatureTitle>
+              <FeatureDescription>
+                Discover talented artists, schedule performances, and attract more music lovers.
+              </FeatureDescription>
+            </FeatureCard>
+            
+            <FeatureCard
+              as={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <FeatureIcon>👥</FeatureIcon>
+              <FeatureTitle>For Fans</FeatureTitle>
+              <FeatureDescription>
+                Find your favorite artists, discover new music, and never miss a show again.
+              </FeatureDescription>
+            </FeatureCard>
+          </FeaturesGrid>
+        </HeroContent>
+      </Container>
     </HeroWrapper>
   )
 }
@@ -87,6 +89,17 @@ const HeroWrapper = styled.section`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+`
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 ${({ theme }) => theme.space.lg};
+  width: 100%;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: 0 ${({ theme }) => theme.space.md};
+  }
 `
 
 const HeroBackground = styled.div`
@@ -115,7 +128,6 @@ const HeroBackground = styled.div`
 `
 
 const HeroContent = styled.div`
-  max-width: 1200px;
   width: 100%;
   padding: ${({ theme }) => theme.space.xl};
   text-align: center;
@@ -196,6 +208,9 @@ const FeaturesGrid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: ${({ theme }) => theme.space.xl};
   margin-top: ${({ theme }) => theme.space['3xl']};
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const FeatureCard = styled.div`
