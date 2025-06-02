@@ -26,7 +26,7 @@ const Home = () => {
             <HeroSubtitle>TrueFans CONNECT™ helps independent musicians get paid instantly at shows and build lasting relationships with their most supportive fans. Stop waiting for streaming pennies and start earning what you deserve.</HeroSubtitle>
             <HeroButtons>
               <PrimaryButton as={Link} to="/artist-signup">Join as an Artist</PrimaryButton>
-              <SecondaryButton as={Link} to="/artist-profile">View Demo Artist</SecondaryButton>
+              <SecondaryButton as={Link} to="/artist-profile/1">View Demo Artist</SecondaryButton>
             </HeroButtons>
           </HeroContent>
           <HeroImageContainer>
