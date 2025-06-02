@@ -1,12 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import PageTransition from '../components/common/PageTransition'
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('all')
+  const location = useLocation()
+  
+  // Get query parameters for category filtering
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const category = params.get('category')
+    if (category) {
+      setActiveCategory(category)
+    }
+  }, [location])
   
   // Mock data for blog posts
   const blogPosts = [
@@ -19,7 +29,8 @@ const Blog = () => {
       author: "Sarah Johnson",
       authorImage: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
-      featured: true
+      featured: true,
+      slug: "maximize-earnings-independent-artist"
     },
     {
       id: 2,
@@ -30,7 +41,8 @@ const Blog = () => {
       author: "Michael Chen",
       authorImage: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
-      featured: true
+      featured: true,
+      slug: "power-direct-fan-support"
     },
     {
       id: 3,
@@ -41,7 +53,8 @@ const Blog = () => {
       author: "Emily Rodriguez",
       authorImage: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
       image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg",
-      featured: false
+      featured: false,
+      slug: "promote-music-budget-friendly"
     },
     {
       id: 4,
@@ -52,7 +65,8 @@ const Blog = () => {
       author: "David Williams",
       authorImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
       image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
-      featured: false
+      featured: false,
+      slug: "building-artist-brand-guide"
     },
     {
       id: 5,
@@ -63,7 +77,8 @@ const Blog = () => {
       author: "John Smith",
       authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg",
-      featured: false
+      featured: false,
+      slug: "future-music-streaming"
     },
     {
       id: 6,
@@ -74,7 +89,8 @@ const Blog = () => {
       author: "Sarah Johnson",
       authorImage: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
       image: "https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg",
-      featured: true
+      featured: true,
+      slug: "truefans-revolutionizing-artist-support"
     },
     {
       id: 7,
@@ -85,7 +101,8 @@ const Blog = () => {
       author: "Emily Rodriguez",
       authorImage: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
       image: "https://images.pexels.com/photos/2747446/pexels-photo-2747446.jpeg",
-      featured: false
+      featured: false,
+      slug: "venue-relationships-booking-shows"
     },
     {
       id: 8,
@@ -96,7 +113,8 @@ const Blog = () => {
       author: "Michael Chen",
       authorImage: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
       image: "https://images.pexels.com/photos/6953867/pexels-photo-6953867.jpeg",
-      featured: false
+      featured: false,
+      slug: "understanding-music-copyright"
     }
   ]
   
@@ -110,6 +128,12 @@ const Blog = () => {
   
   // Get unique categories
   const categories = ['all', ...new Set(blogPosts.map(post => post.category))]
+  
+  // Handle category change
+  const handleCategoryChange = (category) => {
+    setActiveCategory(category)
+    window.scrollTo(0, 0)
+  }
   
   return (
     <PageTransition>
@@ -141,7 +165,7 @@ const Blog = () => {
                       <FeaturedPostDate>{post.date}</FeaturedPostDate>
                     </FeaturedPostMeta>
                     <FeaturedPostExcerpt>{post.excerpt}</FeaturedPostExcerpt>
-                    <ReadMoreButton>Read Article</ReadMoreButton>
+                    <ReadMoreButton as={Link} to={`/blog/${post.slug}`}>Read Article</ReadMoreButton>
                   </FeaturedPostOverlay>
                 </FeaturedPost>
               ))}
@@ -157,7 +181,7 @@ const Blog = () => {
               <CategoryTab 
                 key={category}
                 active={activeCategory === category}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleCategoryChange(category)}
               >
                 {category === 'all' ? 'All Posts' : category.charAt(0).toUpperCase() + category.slice(1)}
               </CategoryTab>
@@ -166,22 +190,22 @@ const Blog = () => {
           
           <BlogGrid>
             {filteredPosts.map(post => (
-              <BlogPost key={post.id}>
-                <BlogPostImage src={post.image} alt={post.title} />
-                <BlogPostContent>
-                  <BlogPostCategory>{post.category.charAt(0).toUpperCase() + post.category.slice(1)}</BlogPostCategory>
-                  <BlogPostTitle>{post.title}</BlogPostTitle>
-                  <BlogPostExcerpt>{post.excerpt}</BlogPostExcerpt>
-                  <BlogPostMeta>
-                    <BlogPostAuthor>
-                      <BlogPostAuthorImage src={post.authorImage} alt={post.author} />
-                      <BlogPostAuthorName>By {post.author}</BlogPostAuthorName>
-                    </BlogPostAuthor>
-                    <BlogPostDate>{post.date}</BlogPostDate>
-                  </BlogPostMeta>
-                  <ReadMoreLink>Read More →</ReadMoreLink>
-                </BlogPostContent>
-              </BlogPost>
+              <BlogArticle key={post.id}>
+                <BlogArticleImage src={post.image} alt={post.title} />
+                <BlogArticleContent>
+                  <BlogArticleCategory>{post.category.charAt(0).toUpperCase() + post.category.slice(1)}</BlogArticleCategory>
+                  <BlogArticleTitle>{post.title}</BlogArticleTitle>
+                  <BlogArticleExcerpt>{post.excerpt}</BlogArticleExcerpt>
+                  <BlogArticleMeta>
+                    <BlogArticleAuthor>
+                      <BlogArticleAuthorImage src={post.authorImage} alt={post.author} />
+                      <BlogArticleAuthorName>By {post.author}</BlogArticleAuthorName>
+                    </BlogArticleAuthor>
+                    <BlogArticleDate>{post.date}</BlogArticleDate>
+                  </BlogArticleMeta>
+                  <ReadMoreLink as={Link} to={`/blog/${post.slug}`}>Read More →</ReadMoreLink>
+                </BlogArticleContent>
+              </BlogArticle>
             ))}
           </BlogGrid>
           
@@ -367,6 +391,8 @@ const ReadMoreButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
+  text-decoration: none;
+  display: inline-block;
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
@@ -414,7 +440,7 @@ const BlogGrid = styled.div`
   }
 `
 
-const BlogPost = styled.article`
+const BlogArticle = styled.article`
   background-color: white;
   border-radius: ${({ theme }) => theme.radii.lg};
   overflow: hidden;
@@ -427,17 +453,17 @@ const BlogPost = styled.article`
   }
 `
 
-const BlogPostImage = styled.img`
+const BlogArticleImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
 `
 
-const BlogPostContent = styled.div`
+const BlogArticleContent = styled.div`
   padding: ${({ theme }) => theme.space.lg};
 `
 
-const BlogPostCategory = styled.div`
+const BlogArticleCategory = styled.div`
   display: inline-block;
   background-color: ${({ theme }) => theme.colors.lightGray};
   color: ${({ theme }) => theme.colors.darkText};
@@ -448,7 +474,7 @@ const BlogPostCategory = styled.div`
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const BlogPostTitle = styled.h3`
+const BlogArticleTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
@@ -456,26 +482,26 @@ const BlogPostTitle = styled.h3`
   line-height: 1.3;
 `
 
-const BlogPostExcerpt = styled.p`
+const BlogArticleExcerpt = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.lightText};
   line-height: 1.5;
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const BlogPostMeta = styled.div`
+const BlogArticleMeta = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const BlogPostAuthor = styled.div`
+const BlogArticleAuthor = styled.div`
   display: flex;
   align-items: center;
 `
 
-const BlogPostAuthorImage = styled.img`
+const BlogArticleAuthorImage = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -483,23 +509,24 @@ const BlogPostAuthorImage = styled.img`
   object-fit: cover;
 `
 
-const BlogPostAuthorName = styled.span`
+const BlogArticleAuthorName = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
 `
 
-const BlogPostDate = styled.span`
+const BlogArticleDate = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
 `
 
-const ReadMoreLink = styled.a`
+const ReadMoreLink = styled(Link)`
   display: inline-block;
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
+  text-decoration: none;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primaryDark};

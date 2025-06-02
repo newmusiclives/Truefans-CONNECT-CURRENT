@@ -47,6 +47,36 @@ const Header = () => {
             </Link>
           </LogoContainer>
           
+          <NavContainer>
+            <NavLinks open={mobileMenuOpen}>
+              <NavItem active={location.pathname === '/'}>
+                <NavLink to="/" onClick={closeMobileMenu}>Home</NavLink>
+              </NavItem>
+              <NavItem active={location.pathname === '/about'}>
+                <NavLink to="/about" onClick={closeMobileMenu}>About Us</NavLink>
+              </NavItem>
+              <NavItem active={location.pathname === '/artists-directory'}>
+                <NavLink to="/artists-directory" onClick={closeMobileMenu}>Artists Directory</NavLink>
+              </NavItem>
+              <NavItem active={location.pathname === '/venue-portal-info' || location.pathname === '/venue-portal' || location.pathname === '/venue-signup'}>
+                <NavLink to="/venue-portal-info" onClick={closeMobileMenu}>Venue Portal</NavLink>
+              </NavItem>
+              <NavItem active={location.pathname === '/donation-system'}>
+                <NavLink to="/donation-system" onClick={closeMobileMenu}>Donation System</NavLink>
+              </NavItem>
+              <NavItem active={location.pathname === '/affiliate-program'}>
+                <NavLink to="/affiliate-program" onClick={closeMobileMenu}>Affiliate Program</NavLink>
+              </NavItem>
+              
+              {/* Mobile-only auth buttons */}
+              <MobileAuthButtons>
+                <MobileLoginButton as={Link} to="/login" onClick={closeMobileMenu}>Log In</MobileLoginButton>
+                <MobileSignupButton as={Link} to="/artist-signup" onClick={closeMobileMenu}>Artist SignUp</MobileSignupButton>
+                <MobileVenueSignupButton as={Link} to="/venue-signup" onClick={closeMobileMenu}>Venue SignUp</MobileVenueSignupButton>
+              </MobileAuthButtons>
+            </NavLinks>
+          </NavContainer>
+          
           <MobileMenuButton 
             onClick={toggleMobileMenu}
             aria-expanded={mobileMenuOpen}
@@ -54,34 +84,6 @@ const Header = () => {
           >
             <MenuIcon open={mobileMenuOpen} />
           </MobileMenuButton>
-          
-          <NavLinks open={mobileMenuOpen}>
-            <NavItem active={location.pathname === '/'}>
-              <NavLink to="/" onClick={closeMobileMenu}>Home</NavLink>
-            </NavItem>
-            <NavItem active={location.pathname === '/about'}>
-              <NavLink to="/about" onClick={closeMobileMenu}>About Us</NavLink>
-            </NavItem>
-            <NavItem active={location.pathname === '/artists-directory'}>
-              <NavLink to="/artists-directory" onClick={closeMobileMenu}>Artists Directory</NavLink>
-            </NavItem>
-            <NavItem active={location.pathname === '/venue-portal'}>
-              <NavLink to="/venue-portal" onClick={closeMobileMenu}>Venue Portal</NavLink>
-            </NavItem>
-            <NavItem active={location.pathname === '/donation-system'}>
-              <NavLink to="/donation-system" onClick={closeMobileMenu}>Donation System</NavLink>
-            </NavItem>
-            <NavItem active={location.pathname === '/affiliate-program'}>
-              <NavLink to="/affiliate-program" onClick={closeMobileMenu}>Affiliate Program</NavLink>
-            </NavItem>
-            
-            {/* Mobile-only auth buttons */}
-            <MobileAuthButtons>
-              <MobileLoginButton as={Link} to="/login" onClick={closeMobileMenu}>Log In</MobileLoginButton>
-              <MobileSignupButton as={Link} to="/artist-signup" onClick={closeMobileMenu}>Artist SignUp</MobileSignupButton>
-              <MobileVenueSignupButton as={Link} to="/venue-signup" onClick={closeMobileMenu}>Venue SignUp</MobileVenueSignupButton>
-            </MobileAuthButtons>
-          </NavLinks>
           
           <AuthButtons>
             <LoginButton as={Link} to="/login">Log In</LoginButton>
@@ -129,6 +131,16 @@ const Logo = styled.h1`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.primary};
   margin: 0;
+`
+
+const NavContainer = styled.div`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    justify-content: flex-end;
+  }
 `
 
 const MobileMenuButton = styled.button`

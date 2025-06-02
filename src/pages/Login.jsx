@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation } from 'react-router-dom'
 import Button from '../components/ui/Button'
 
-const Login = () => {
+const Login = ({ onLogin, onLoginSuccess }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
+  const location = useLocation()
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -21,11 +22,27 @@ const Login = () => {
       return
     }
     
-    // For demo purposes, hardcode a successful login
+    // For demo purposes, hardcode successful logins
     // In a real app, this would be an API call
-    if (email === 'sarah@example.com' && password === 'password') {
-      // Redirect to artist dashboard on successful login
-      navigate('/my-dashboard')
+    if (email === 'admin@example.com' && password === 'admin123') {
+      // Admin login
+      sessionStorage.setItem('isAdminLoggedIn', 'true')
+      
+      if (onLoginSuccess) {
+        onLoginSuccess()
+      } else {
+        navigate('/admin')
+      }
+      
+      if (onLogin) {
+        onLogin({ email, role: 'admin' })
+      }
+    } else if (email === 'sarah@example.com' && password === 'password') {
+      // Artist login
+      if (onLogin) {
+        onLogin({ email, role: 'artist' })
+      }
+      navigate('/artist-portal')
     } else {
       setError('Invalid email or password')
     }
@@ -92,8 +109,8 @@ const Login = () => {
             
             <DemoCredentials>
               <DemoTitle>Demo Credentials</DemoTitle>
-              <DemoText>Email: sarah@example.com</DemoText>
-              <DemoText>Password: password</DemoText>
+              <DemoText>Artist Login: sarah@example.com / password</DemoText>
+              <DemoText>Admin Login: admin@example.com / admin123</DemoText>
             </DemoCredentials>
           </LoginForm>
           
@@ -263,6 +280,11 @@ const DemoTitle = styled.div`
 const DemoText = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 `
 
 const SignupPrompt = styled.div`

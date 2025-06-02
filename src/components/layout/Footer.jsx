@@ -63,8 +63,8 @@ const Footer = () => {
               <FooterLinkTitle>Resources</FooterLinkTitle>
               <FooterLink onClick={() => handleNavigation('/help-center')}>Help Center</FooterLink>
               <FooterLink onClick={() => handleNavigation('/blog')}>Blog</FooterLink>
-              <FooterLink onClick={() => handleNavigation('/api-docs')}>API Documentation</FooterLink>
               <FooterLink onClick={() => handleNavigation('/success-stories')}>Success Stories</FooterLink>
+              <FooterLink onClick={() => handleNavigation('/admin')}>Admin Portal</FooterLink>
             </FooterLinkGroup>
             
             <FooterLinkGroup>

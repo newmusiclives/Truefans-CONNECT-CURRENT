@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { Link, Routes, Route, useNavigate, useLocation } from 'react-router-dom'
 import PageTransition from '../components/common/PageTransition'
@@ -9,13 +9,14 @@ import AdminVenues from '../components/admin/AdminVenues'
 import AdminFinancials from '../components/admin/AdminFinancials'
 import AdminBrandKit from '../components/admin/AdminBrandKit'
 import AdminSettings from '../components/admin/AdminSettings'
-// Use simple unicode icons instead of react-icons
-// This avoids any dependency issues with react-icons
+import AdminTeamMembers from '../components/admin/AdminTeamMembers'
+import Login from './Login'
 
 const AdminDashboard = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   
   // Check if we're on a specific admin route
   const isActive = (path) => {
@@ -24,6 +25,33 @@ const AdminDashboard = () => {
   
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen)
+  }
+  
+  // Check for authentication when component mounts
+  useEffect(() => {
+    // In a real app, this would check for a valid auth token
+    // For demo purposes, we'll check if the user has logged in during this session
+    const isLoggedIn = sessionStorage.getItem('isAdminLoggedIn') === 'true'
+    setIsAuthenticated(isLoggedIn)
+  }, [])
+  
+  // Handle successful login
+  const handleLoginSuccess = () => {
+    sessionStorage.setItem('isAdminLoggedIn', 'true')
+    setIsAuthenticated(true)
+    navigate('/admin')
+  }
+  
+  // Handle logout
+  const handleLogout = () => {
+    sessionStorage.removeItem('isAdminLoggedIn')
+    setIsAuthenticated(false)
+    navigate('/login')
+  }
+  
+  // If not authenticated, show login page
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={handleLoginSuccess} />
   }
   
   return (
@@ -66,6 +94,13 @@ const AdminDashboard = () => {
               </SidebarNavLink>
             </SidebarNavItem>
             
+            <SidebarNavItem active={isActive('/team-members')}>
+              <SidebarNavLink to="/admin/team-members" onClick={() => setIsSidebarOpen(true)}>
+                <SidebarNavIcon>👥</SidebarNavIcon>
+                <SidebarNavText open={isSidebarOpen}>Team Members</SidebarNavText>
+              </SidebarNavLink>
+            </SidebarNavItem>
+            
             <SidebarNavItem active={isActive('/brand-kit')}>
               <SidebarNavLink to="/admin/brand-kit" onClick={() => setIsSidebarOpen(true)}>
                 <SidebarNavIcon>🎨</SidebarNavIcon>
@@ -83,9 +118,9 @@ const AdminDashboard = () => {
           
           <SidebarFooter>
             <SidebarNavItem>
-              <SidebarNavLink to="/" onClick={() => setIsSidebarOpen(true)}>
+              <SidebarNavLink as="button" onClick={handleLogout}>
                 <SidebarNavIcon>🚪</SidebarNavIcon>
-                <SidebarNavText open={isSidebarOpen}>Exit Admin</SidebarNavText>
+                <SidebarNavText open={isSidebarOpen}>Logout</SidebarNavText>
               </SidebarNavLink>
             </SidebarNavItem>
           </SidebarFooter>
@@ -97,6 +132,7 @@ const AdminDashboard = () => {
             <Route path="/artists" element={<AdminArtists />} />
             <Route path="/venues" element={<AdminVenues />} />
             <Route path="/financials" element={<AdminFinancials />} />
+            <Route path="/team-members" element={<AdminTeamMembers />} />
             <Route path="/brand-kit" element={<AdminBrandKit />} />
             <Route path="/settings" element={<AdminSettings />} />
           </Routes>
@@ -185,6 +221,11 @@ const SidebarNavLink = styled(Link)`
   color: white;
   text-decoration: none;
   transition: all 0.2s ease;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
