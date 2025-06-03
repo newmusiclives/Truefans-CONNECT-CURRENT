@@ -17,7 +17,7 @@ const Footer = () => {
       <Container>
         <FooterGrid>
           <FooterBrand>
-            <FooterLogo>TrueFans CONNECT™</FooterLogo>
+            <FooterLogo onClick={() => handleNavigation('/about')}>TrueFans CONNECT™</FooterLogo>
             <FooterTagline>Connecting artists with their supporters</FooterTagline>
             <FooterSocial>
               <SocialLink href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
@@ -80,7 +80,7 @@ const Footer = () => {
         <FooterBottom>
           <FooterCopyrightContainer>
             <FooterCopyright>
-              TrueFans CONNECT™ is a subsidiary of New Music Lives, which is owned and operated by Lightwork Digital.
+              <BrandLink onClick={() => handleNavigation('/about')}>TrueFans CONNECT™</BrandLink> is a subsidiary of New Music Lives, which is owned and operated by Lightwork Digital.
               <br />
               © 2025 New Music Lives. All rights reserved.
             </FooterCopyright>
@@ -100,12 +100,20 @@ const FooterWrapper = styled.footer`
   background-color: ${({ theme }) => theme.colors.trustworthyNavy};
   color: white;
   padding: ${({ theme }) => theme.space.xl} 0;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space.lg} 0;
+  }
 `
 
 const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${({ theme }) => theme.space.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 0 ${({ theme }) => theme.space.md};
+  }
 `
 
 const FooterGrid = styled.div`
@@ -116,27 +124,56 @@ const FooterGrid = styled.div`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.space.lg};
+    margin-bottom: ${({ theme }) => theme.space.lg};
   }
 `
 
-const FooterBrand = styled.div``
+const FooterBrand = styled.div`
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    text-align: center;
+  }
+`
 
 const FooterLogo = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   margin-bottom: ${({ theme }) => theme.space.sm};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
 `
 
 const FooterTagline = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   opacity: 0.8;
   margin-bottom: ${({ theme }) => theme.space.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    margin-bottom: ${({ theme }) => theme.space.md};
+  }
 `
 
 const FooterSocial = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.space.md};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    justify-content: center;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    gap: ${({ theme }) => theme.space.lg};
+  }
 `
 
 const SocialIcon = styled.span`
@@ -158,6 +195,10 @@ const SocialLink = styled.a`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.primary};
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
 `
 
 const FooterLinks = styled.div`
@@ -178,12 +219,26 @@ const FooterLinks = styled.div`
 const FooterLinkGroup = styled.div`
   display: flex;
   flex-direction: column;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    align-items: center;
+    text-align: center;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin-bottom: ${({ theme }) => theme.space.md};
+  }
 `
 
 const FooterLinkTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   margin-bottom: ${({ theme }) => theme.space.md};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    margin-bottom: ${({ theme }) => theme.space.sm};
+  }
 `
 
 const FooterLink = styled.a`
@@ -198,11 +253,20 @@ const FooterLink = styled.a`
     text-decoration: none;
     color: ${({ theme }) => theme.colors.primary};
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    margin-bottom: ${({ theme }) => theme.space.xs};
+  }
 `
 
 const FooterBottom = styled.div`
   padding-top: ${({ theme }) => theme.space.lg};
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding-top: ${({ theme }) => theme.space.md};
+  }
 `
 
 const FooterCopyrightContainer = styled.div`
@@ -210,12 +274,31 @@ const FooterCopyrightContainer = styled.div`
   flex-direction: column;
   gap: ${({ theme }) => theme.space.md};
   text-align: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    gap: ${({ theme }) => theme.space.sm};
+  }
 `
 
 const FooterCopyright = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   opacity: 0.6;
   text-align: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+    line-height: 1.6;
+  }
+`
+
+const BrandLink = styled.span`
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    color: ${({ theme }) => theme.colors.primary};
+    opacity: 1;
+  }
 `
 
 const FooterLegal = styled.div`
@@ -223,6 +306,10 @@ const FooterLegal = styled.div`
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.space.md};
   justify-content: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    gap: ${({ theme }) => theme.space.sm};
+  }
 `
 
 const LegalLink = styled.a`
@@ -236,6 +323,10 @@ const LegalLink = styled.a`
     opacity: 1;
     text-decoration: none;
     color: ${({ theme }) => theme.colors.primary};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
   }
 `
 

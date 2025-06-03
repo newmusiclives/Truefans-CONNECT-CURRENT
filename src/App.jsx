@@ -85,87 +85,89 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Header isLoggedIn={isLoggedIn} userRole={userRole} onLogout={handleLogout} />
-      <Routes>
-        {/* Public routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/artist-signup" element={<ArtistSignup />} />
-        <Route path="/venue-signup" element={<VenueSignup />} />
-        <Route path="/venue-portal-info" element={<VenuePortalInfo />} />
-        <Route path="/donation-system" element={<DonationSystem />} />
-        <Route path="/help-center" element={<HelpCenter />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPostPage />} />
-        <Route path="/success-stories" element={<SuccessStories />} />
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
-        <Route path="/terms" element={<Terms />} />
-        <Route path="/privacy" element={<Privacy />} />
-        <Route path="/cookies" element={<Cookies />} />
-        <Route path="/press" element={<Press />} />
-        <Route path="/careers" element={<Careers />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/artists-directory" element={<ArtistsDirectory />} />
-        <Route path="/affiliate-program" element={<AffiliateProgram />} />
-        <Route path="/artist-profile/:id" element={<ArtistProfile />} />
-        
-        {/* Admin routes */}
-        <Route path="/admin/*" element={<AdminDashboard />} />
-        
-        {/* Artist routes */}
-        <Route 
-          path="/artist-portal" 
-          element={
-            <ProtectedRoute allowedRoles={['artist']}>
-              <ArtistDashboard />
-            </ProtectedRoute>
-          } 
-        />
-        
-        {/* Venue routes */}
-        <Route 
-          path="/venue-portal" 
-          element={
-            <ProtectedRoute allowedRoles={['venue']}>
-              <VenuePortal />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/venue-portal/events" 
-          element={
-            <ProtectedRoute allowedRoles={['venue']}>
-              <VenueEvents />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/venue-portal/artists" 
-          element={
-            <ProtectedRoute allowedRoles={['venue']}>
-              <VenueArtists />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/venue-portal/settings" 
-          element={
-            <ProtectedRoute allowedRoles={['venue']}>
-              <VenueSettings />
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/venue-portal/analytics" 
-          element={
-            <ProtectedRoute allowedRoles={['venue']}>
-              <VenueAnalytics />
-            </ProtectedRoute>
-          } 
-        />
-        
-        {/* 404 route */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+      <main>
+        <Routes>
+          {/* Public routes */}
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/artist-signup" element={<ArtistSignup />} />
+          <Route path="/venue-signup" element={<VenueSignup />} />
+          <Route path="/venue-portal-info" element={<VenuePortalInfo />} />
+          <Route path="/donation-system" element={<DonationSystem />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPostPage />} />
+          <Route path="/success-stories" element={<SuccessStories />} />
+          <Route path="/login" element={<Login onLogin={handleLogin} />} />
+          <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/cookies" element={<Cookies />} />
+          <Route path="/press" element={<Press />} />
+          <Route path="/careers" element={<Careers />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/artists-directory" element={<ArtistsDirectory />} />
+          <Route path="/affiliate-program" element={<AffiliateProgram />} />
+          <Route path="/artist-profile/:id" element={<ArtistProfile />} />
+          
+          {/* Admin routes */}
+          <Route path="/admin/*" element={<AdminDashboard />} />
+          
+          {/* Artist routes */}
+          <Route 
+            path="/artist-portal" 
+            element={
+              <ProtectedRoute allowedRoles={['artist']}>
+                <ArtistDashboard />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* Venue routes */}
+          <Route 
+            path="/venue-portal" 
+            element={
+              <ProtectedRoute allowedRoles={['venue']}>
+                <VenuePortal />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/venue-portal/events" 
+            element={
+              <ProtectedRoute allowedRoles={['venue']}>
+                <VenueEvents />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/venue-portal/artists" 
+            element={
+              <ProtectedRoute allowedRoles={['venue']}>
+                <VenueArtists />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/venue-portal/settings" 
+            element={
+              <ProtectedRoute allowedRoles={['venue']}>
+                <VenueSettings />
+              </ProtectedRoute>
+            } 
+          />
+          <Route 
+            path="/venue-portal/analytics" 
+            element={
+              <ProtectedRoute allowedRoles={['venue']}>
+                <VenueAnalytics />
+              </ProtectedRoute>
+            } 
+          />
+          
+          {/* 404 route */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </main>
       <Footer />
     </ThemeProvider>
   )

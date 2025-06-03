@@ -31,10 +31,16 @@ const About = () => {
                 <VisionImage src="https://images.pexels.com/photos/2747449/pexels-photo-2747449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" alt="Artist performing" />
                 <VisionText>
                   <p>
-                    At TrueFans CONNECT™, we believe that talented artists deserve to be supported directly by their fans, without intermediaries taking the majority of their earnings. Our platform is built on the principle that the relationship between artists and their supporters should be direct, transparent, and mutually beneficial.
+                    TrueFans CONNECT™ is the premier platform forging deeper connections between artists and their most passionate fans. We're proud to operate as a flagship brand of New Music Lives, with the full support and innovation of our parent company, Lightwork Digital.
                   </p>
                   <p>
-                    We're creating a revolutionary ecosystem where independent artists can thrive, venues can discover new talent, and fans can directly support the creators they love. Our mission is to democratize the music industry by putting the power back in the hands of those who create and appreciate art.
+                    As part of the Lightwork Digital family, we combine New Music Lives' industry expertise with cutting-edge technology to revolutionize fan engagement. Our platform gives artists powerful tools to grow their careers while offering fans exclusive experiences and meaningful ways to support the creators they love.
+                  </p>
+                  <p>
+                    From our unique location-based donation system to seamless financial transactions, every aspect of TrueFans CONNECT™ is designed to redefine the artist-fan relationship. Backed by Lightwork Digital's technical excellence and New Music Lives' music industry vision, we're building the future of fandom - one authentic connection at a time.
+                  </p>
+                  <p>
+                    Join the movement. Experience the future of fan engagement.
                   </p>
                 </VisionText>
               </VisionContent>

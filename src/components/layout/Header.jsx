@@ -130,6 +130,10 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${({ theme }) => theme.space.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: 0 ${({ theme }) => theme.space.md};
+  }
 `
 
 const HeaderContent = styled.div`
@@ -146,6 +150,11 @@ const LogoContainer = styled.div`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     margin-right: 0;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    transform: scale(0.9);
+    transform-origin: left center;
   }
 `
 
@@ -257,6 +266,8 @@ const NavItem = styled.li`
     
     &::after {
       bottom: -2px;
+      height: 2px;
+      width: 50px;
     }
   }
 `
@@ -354,6 +365,7 @@ const MobileAuthButtons = styled.div`
     flex-direction: column;
     gap: ${({ theme }) => theme.space.md};
     margin-top: ${({ theme }) => theme.space.xl};
+    width: 100%;
   }
 `
 
@@ -366,6 +378,7 @@ const MobileLoginButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   border-radius: ${({ theme }) => theme.radii.md};
   text-align: center;
+  width: 100%;
   
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -382,6 +395,7 @@ const MobileSignupButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   border-radius: ${({ theme }) => theme.radii.md};
   text-align: center;
+  width: 100%;
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
@@ -398,6 +412,7 @@ const MobileVenueSignupButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   border-radius: ${({ theme }) => theme.radii.md};
   text-align: center;
+  width: 100%;
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondaryDark};
