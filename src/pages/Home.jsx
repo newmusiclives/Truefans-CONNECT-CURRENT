@@ -22,11 +22,11 @@ const Home = () => {
       <HeroSection>
         <Container>
           <HeroContent>
-            <HeroTitle>Right Now Money and Fans Forever</HeroTitle>
+            <HeroTitle>Right Now Money and TrueFans Forever</HeroTitle>
             <HeroSubtitle>TrueFans CONNECT™ helps independent musicians get paid instantly at shows and build lasting relationships with their most supportive fans. Stop waiting for streaming pennies and start earning what you deserve.</HeroSubtitle>
             <HeroButtons>
               <PrimaryButton as={Link} to="/artist-signup">Join as an Artist</PrimaryButton>
-              <SecondaryButton as={Link} to="/artist-profile/1">View Demo Artist</SecondaryButton>
+              <SecondaryButton as={Link} to="/artist-profile">View Demo Artist</SecondaryButton>
             </HeroButtons>
           </HeroContent>
           <HeroImageContainer>
@@ -40,19 +40,19 @@ const Home = () => {
       
       <ValuePropositionSection>
         <Container>
-          <ValuePropositionTitle>The Music Industry Is Broken. We're Fixing It.</ValuePropositionTitle>
+          <ValuePropositionTitle>The Music Industry Is Broken. Together Let's Fix It.</ValuePropositionTitle>
           <ValuePropositionGrid>
             <ValuePropositionItem>
-              <ValuePropositionStat>$0.004</ValuePropositionStat>
-              <ValuePropositionLabel>Average streaming payout per play</ValuePropositionLabel>
+              <ValuePropositionStat>$500</ValuePropositionStat>
+              <ValuePropositionLabel>Average streaming revenue</ValuePropositionLabel>
             </ValuePropositionItem>
             <ValuePropositionItem>
-              <ValuePropositionStat>250,000</ValuePropositionStat>
+              <ValuePropositionStat>300,000</ValuePropositionStat>
               <ValuePropositionLabel>Streams needed to earn minimum wage</ValuePropositionLabel>
             </ValuePropositionItem>
             <ValuePropositionItem>
               <ValuePropositionStat>80%</ValuePropositionStat>
-              <ValuePropositionLabel>Of your donation goes directly to artists</ValuePropositionLabel>
+              <ValuePropositionLabel>Of TrueFans CONNECT™ donations go direct to you</ValuePropositionLabel>
             </ValuePropositionItem>
           </ValuePropositionGrid>
           <ValuePropositionText>
@@ -148,7 +148,7 @@ const Home = () => {
             <ComparisonTable>
               <thead>
                 <tr>
-                  <th>Feature</th>
+                  <th className="sticky-column">Feature</th>
                   <th>TrueFans CONNECT™</th>
                   <th>Streaming Platforms</th>
                   <th>Traditional Tipping</th>
@@ -156,38 +156,131 @@ const Home = () => {
               </thead>
               <tbody>
                 <tr>
-                  <td>Artist Payout</td>
-                  <td>80% of all donations</td>
+                  <td className="sticky-column">Artist Payout</td>
+                  <td className="highlight">80% of all donations</td>
                   <td>$0.003-$0.005 per stream</td>
                   <td>Variable, often shared with venue</td>
                 </tr>
                 <tr>
-                  <td>Payment Speed</td>
-                  <td>Next day deposits</td>
+                  <td className="sticky-column">Payment Speed</td>
+                  <td className="highlight">Next day deposits</td>
                   <td>30-90 days</td>
                   <td>Immediate but cash only</td>
                 </tr>
                 <tr>
-                  <td>Fan Data</td>
-                  <td>Detailed analytics</td>
+                  <td className="sticky-column">Fan Data</td>
+                  <td className="highlight">Detailed analytics</td>
                   <td>Limited or none</td>
                   <td>None</td>
                 </tr>
                 <tr>
-                  <td>Relationship Building</td>
-                  <td>Direct communication tools</td>
+                  <td className="sticky-column">Relationship Building</td>
+                  <td className="highlight">Direct communication tools</td>
                   <td>None or algorithm-dependent</td>
                   <td>In-person only</td>
                 </tr>
                 <tr>
-                  <td>Setup Difficulty</td>
-                  <td>Simple, smooth and one-time</td>
+                  <td className="sticky-column">Setup Difficulty</td>
+                  <td className="highlight">Simple, smooth and one-time</td>
                   <td>Complex distribution required</td>
                   <td>No setup, no tracking</td>
                 </tr>
               </tbody>
             </ComparisonTable>
           </ComparisonTableWrapper>
+          
+          {/* Mobile-friendly comparison cards */}
+          <MobileComparisonCards>
+            <MobileComparisonCard>
+              <MobileComparisonFeature>Artist Payout</MobileComparisonFeature>
+              <MobileComparisonGrid>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>TrueFans CONNECT™</MobileComparisonPlatform>
+                  <MobileComparisonValue isHighlighted>80% of all donations</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Streaming Platforms</MobileComparisonPlatform>
+                  <MobileComparisonValue>$0.003-$0.005 per stream</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Traditional Tipping</MobileComparisonPlatform>
+                  <MobileComparisonValue>Variable, often shared with venue</MobileComparisonValue>
+                </MobileComparisonItem>
+              </MobileComparisonGrid>
+            </MobileComparisonCard>
+            
+            <MobileComparisonCard>
+              <MobileComparisonFeature>Payment Speed</MobileComparisonFeature>
+              <MobileComparisonGrid>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>TrueFans CONNECT™</MobileComparisonPlatform>
+                  <MobileComparisonValue isHighlighted>Next day deposits</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Streaming Platforms</MobileComparisonPlatform>
+                  <MobileComparisonValue>30-90 days</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Traditional Tipping</MobileComparisonPlatform>
+                  <MobileComparisonValue>Immediate but cash only</MobileComparisonValue>
+                </MobileComparisonItem>
+              </MobileComparisonGrid>
+            </MobileComparisonCard>
+            
+            <MobileComparisonCard>
+              <MobileComparisonFeature>Fan Data</MobileComparisonFeature>
+              <MobileComparisonGrid>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>TrueFans CONNECT™</MobileComparisonPlatform>
+                  <MobileComparisonValue isHighlighted>Detailed analytics</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Streaming Platforms</MobileComparisonPlatform>
+                  <MobileComparisonValue>Limited or none</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Traditional Tipping</MobileComparisonPlatform>
+                  <MobileComparisonValue>None</MobileComparisonValue>
+                </MobileComparisonItem>
+              </MobileComparisonGrid>
+            </MobileComparisonCard>
+            
+            <MobileComparisonCard>
+              <MobileComparisonFeature>Relationship Building</MobileComparisonFeature>
+              <MobileComparisonGrid>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>TrueFans CONNECT™</MobileComparisonPlatform>
+                  <MobileComparisonValue isHighlighted>Direct communication tools</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Streaming Platforms</MobileComparisonPlatform>
+                  <MobileComparisonValue>None or algorithm-dependent</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Traditional Tipping</MobileComparisonPlatform>
+                  <MobileComparisonValue>In-person only</MobileComparisonValue>
+                </MobileComparisonItem>
+              </MobileComparisonGrid>
+            </MobileComparisonCard>
+            
+            <MobileComparisonCard>
+              <MobileComparisonFeature>Setup Difficulty</MobileComparisonFeature>
+              <MobileComparisonGrid>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>TrueFans CONNECT™</MobileComparisonPlatform>
+                  <MobileComparisonValue isHighlighted>Simple, smooth and one-time</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Streaming Platforms</MobileComparisonPlatform>
+                  <MobileComparisonValue>Complex distribution required</MobileComparisonValue>
+                </MobileComparisonItem>
+                <MobileComparisonItem>
+                  <MobileComparisonPlatform>Traditional Tipping</MobileComparisonPlatform>
+                  <MobileComparisonValue>No setup, no tracking</MobileComparisonValue>
+                </MobileComparisonItem>
+              </MobileComparisonGrid>
+            </MobileComparisonCard>
+          </MobileComparisonCards>
         </ComparisonSection>
       </Container>
       
@@ -230,18 +323,18 @@ const SectionSpacer = styled.div`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     height: ${({ size }) => 
-    size === 'xxl' ? '120px' :
-    size === 'xl' ? '100px' : 
-    size === 'lg' ? '60px' : 
-    '40px'};
+    size === 'xxl' ? '80px' :
+    size === 'xl' ? '60px' : 
+    size === 'lg' ? '40px' : 
+    '30px'};
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     height: ${({ size }) => 
-    size === 'xxl' ? '100px' :
-    size === 'xl' ? '80px' : 
-    size === 'lg' ? '40px' : 
-    '30px'};
+    size === 'xxl' ? '60px' :
+    size === 'xl' ? '40px' : 
+    size === 'lg' ? '30px' : 
+    '20px'};
   }
 `
 
@@ -273,6 +366,14 @@ const HeroSection = styled.section`
       flex-direction: column;
     }
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['2xl']} 0;
+  }
 `
 
 const HeroContent = styled.div`
@@ -281,6 +382,10 @@ const HeroContent = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     text-align: center;
     margin-bottom: ${({ theme }) => theme.space.xl};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin-bottom: ${({ theme }) => theme.space.lg};
   }
 `
 
@@ -306,6 +411,20 @@ const HeroTitle = styled.h1`
       transform: translateX(-50%);
     }
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes['3xl']};
+    margin-bottom: ${({ theme }) => theme.space.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+    
+    &::after {
+      width: 60px;
+      height: 3px;
+    }
+  }
 `
 
 const HeroSubtitle = styled.p`
@@ -318,6 +437,16 @@ const HeroSubtitle = styled.p`
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
     margin-left: auto;
     margin-right: auto;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    margin-bottom: ${({ theme }) => theme.space.md};
+    line-height: 1.5;
   }
 `
 
@@ -333,6 +462,7 @@ const HeroButtons = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: column;
     gap: ${({ theme }) => theme.space.sm};
+    margin-bottom: ${({ theme }) => theme.space.lg};
   }
 `
 
@@ -363,6 +493,8 @@ const PrimaryButton = styled(Button)`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 100%;
+    padding: ${({ theme }) => `${theme.space.sm} ${theme.space.lg}`};
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `
 
@@ -392,6 +524,8 @@ const SecondaryButton = styled(Button)`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 100%;
+    padding: ${({ theme }) => `${theme.space.sm} ${theme.space.lg}`};
+    font-size: ${({ theme }) => theme.fontSizes.md};
   }
 `
 
@@ -428,6 +562,25 @@ const HeroImageContainer = styled.div`
     border-radius: 50%;
     opacity: 0.1;
     z-index: 1;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    max-width: 90%;
+    
+    &::before {
+      width: 70px;
+      height: 70px;
+    }
+    
+    &::after {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    max-width: 100%;
+    aspect-ratio: 16/9;
   }
 `
 
@@ -481,6 +634,14 @@ const ValuePropositionSection = styled.section`
     background-color: rgba(255, 255, 255, 0.02);
     border-radius: 50%;
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['4xl']} 0;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
+  }
 `
 
 const ValuePropositionTitle = styled.h2`
@@ -502,6 +663,22 @@ const ValuePropositionTitle = styled.h2`
     height: 3px;
     background-color: ${({ theme }) => theme.colors.revolutionaryGold};
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+    margin-bottom: ${({ theme }) => theme.space.lg};
+    
+    &::after {
+      width: 60px;
+      height: 2px;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+    padding: 0 ${({ theme }) => theme.space.md};
+    line-height: 1.4;
+  }
 `
 
 const ValuePropositionGrid = styled.div`
@@ -511,8 +688,13 @@ const ValuePropositionGrid = styled.div`
   margin-bottom: ${({ theme }) => theme.space.xl};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: ${({ theme }) => theme.space.md};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.space.lg};
+    gap: ${({ theme }) => theme.space.md};
   }
 `
 
@@ -528,6 +710,20 @@ const ValuePropositionItem = styled.div`
     transform: translateY(-5px);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space.md};
+    margin-bottom: ${({ theme }) => theme.space.md};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+  }
 `
 
 const ValuePropositionStat = styled.div`
@@ -535,12 +731,24 @@ const ValuePropositionStat = styled.div`
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.revolutionaryGold};
   margin-bottom: ${({ theme }) => theme.space.sm};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes['3xl']};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  }
 `
 
 const ValuePropositionLabel = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.warmCream};
   line-height: 1.4;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+  }
 `
 
 const ValuePropositionText = styled.p`
@@ -550,6 +758,17 @@ const ValuePropositionText = styled.p`
   margin: 0 auto;
   line-height: 1.6;
   color: ${({ theme }) => theme.colors.warmCream};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+    max-width: 90%;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    line-height: 1.5;
+    padding: 0 ${({ theme }) => theme.space.sm};
+  }
 `
 
 // Feature Showcase Wrapper
@@ -559,6 +778,16 @@ const FeatureShowcaseWrapper = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.lg};
   overflow: hidden;
   padding: ${({ theme }) => theme.space['4xl']} 0;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['2xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
 `
 
 // How It Works Wrapper
@@ -567,6 +796,16 @@ const HowItWorksWrapper = styled.div`
   overflow: hidden;
   box-shadow: ${({ theme }) => theme.shadows.lg};
   padding: ${({ theme }) => theme.space['4xl']} 0;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['2xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
 `
 
 // Transformation Section Wrapper
@@ -576,6 +815,16 @@ const TransformationSectionWrapper = styled.div`
   box-shadow: ${({ theme }) => theme.shadows.lg};
   overflow: hidden;
   padding: ${({ theme }) => theme.space['4xl']} 0;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['2xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
 `
 
 // Testimonials Section
@@ -594,6 +843,14 @@ const TestimonialsSection = styled.section`
     height: 100%;
     background-image: radial-gradient(circle at 80% 20%, rgba(26, 115, 232, 0.03) 0%, transparent 50%);
     z-index: 0;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['4xl']} 0;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
   }
 `
 
@@ -616,12 +873,36 @@ const SectionTitle = styled.h2`
     height: 3px;
     background-color: ${({ theme }) => theme.colors.revolutionaryGold};
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+    margin-bottom: ${({ theme }) => theme.space.lg};
+    
+    &::after {
+      width: 60px;
+      height: 2px;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+  }
 `
 
 const TestimonialsGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: ${({ theme }) => theme.space.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: ${({ theme }) => theme.space.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+    gap: ${({ theme }) => theme.space.md};
+  }
 `
 
 const TestimonialCard = styled.div`
@@ -646,6 +927,27 @@ const TestimonialCard = styled.div`
     line-height: 0;
     opacity: 0.3;
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space.lg};
+    
+    &::before {
+      font-size: 60px;
+      top: 15px;
+      left: 15px;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space.md};
+    margin-bottom: ${({ theme }) => theme.space.md};
+    
+    &::before {
+      font-size: 50px;
+      top: 10px;
+      left: 10px;
+    }
+  }
 `
 
 const TestimonialQuote = styled.p`
@@ -658,6 +960,16 @@ const TestimonialQuote = styled.p`
   position: relative;
   z-index: 1;
   padding-top: ${({ theme }) => theme.space.md};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes.md};
+    margin-bottom: ${({ theme }) => theme.space.md};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    line-height: 1.5;
+  }
 `
 
 const TestimonialAuthor = styled.div`
@@ -665,6 +977,10 @@ const TestimonialAuthor = styled.div`
   align-items: center;
   border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
   padding-top: ${({ theme }) => theme.space.md};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding-top: ${({ theme }) => theme.space.sm};
+  }
 `
 
 const TestimonialAvatar = styled.img`
@@ -675,6 +991,18 @@ const TestimonialAvatar = styled.img`
   margin-right: ${({ theme }) => theme.space.md};
   border: 3px solid ${({ theme }) => theme.colors.background};
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 50px;
+    height: 50px;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 40px;
+    height: 40px;
+    margin-right: ${({ theme }) => theme.space.sm};
+    border-width: 2px;
+  }
 `
 
 const TestimonialInfo = styled.div``
@@ -684,11 +1012,20 @@ const TestimonialName = styled.h4`
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
   margin-bottom: ${({ theme }) => theme.space.xs};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.sm};
+    margin-bottom: 0;
+  }
 `
 
 const TestimonialRole = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.xs};
+  }
 `
 
 // Comparison Section
@@ -709,6 +1046,16 @@ const ComparisonSection = styled.section`
     height: 100%;
     background-image: radial-gradient(circle at 20% 80%, rgba(26, 115, 232, 0.03) 0%, transparent 50%);
     z-index: 0;
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['4xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['2xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.md};
   }
 `
 
@@ -731,12 +1078,47 @@ const ComparisonTitle = styled.h2`
     height: 3px;
     background-color: ${({ theme }) => theme.colors.revolutionaryGold};
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes['2xl']};
+    margin-bottom: ${({ theme }) => theme.space.lg};
+    
+    &::after {
+      width: 60px;
+      height: 2px;
+    }
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    font-size: ${({ theme }) => theme.fontSizes.xl};
+  }
 `
 
 const ComparisonTableWrapper = styled.div`
   overflow-x: auto;
   border-radius: ${({ theme }) => theme.radii.lg};
   box-shadow: ${({ theme }) => theme.shadows.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: none; /* Hide table on mobile */
+  }
+  
+  @media (min-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin: 0 ${({ theme }) => theme.space.sm};
+    
+    &::-webkit-scrollbar {
+      height: 4px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.colors.mediumGray};
+      border-radius: 4px;
+    }
+    
+    &::-webkit-scrollbar-track {
+      background-color: ${({ theme }) => theme.colors.lightGray};
+    }
+  }
 `
 
 const ComparisonTable = styled.table`
@@ -764,6 +1146,12 @@ const ComparisonTable = styled.table`
       width: 1px;
       background-color: rgba(255, 255, 255, 0.2);
     }
+    
+    &.sticky-column {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+    }
   }
   
   tr:nth-child(even) {
@@ -774,19 +1162,101 @@ const ComparisonTable = styled.table`
     border-bottom: none;
   }
   
-  td:first-child {
+  td.sticky-column {
+    position: sticky;
+    left: 0;
+    background-color: inherit;
+    z-index: 1;
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
     color: ${({ theme }) => theme.colors.trustworthyNavy};
+    
+    /* Ensure proper background color based on row */
+    tr:nth-child(even) & {
+      background-color: ${({ theme }) => theme.colors.background};
+    }
+    
+    tr:nth-child(odd) & {
+      background-color: white;
+    }
   }
   
-  td:nth-child(2) {
+  td.highlight {
     color: ${({ theme }) => theme.colors.successGreen};
     font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   }
   
   tr:hover {
     background-color: rgba(26, 115, 232, 0.05);
+    
+    td.sticky-column {
+      background-color: rgba(26, 115, 232, 0.05);
+    }
   }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    th, td {
+      padding: ${({ theme }) => theme.space.md};
+    }
+  }
+`
+
+// Mobile Comparison Cards (only shown on mobile)
+const MobileComparisonCards = styled.div`
+  display: none;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    display: flex;
+    flex-direction: column;
+    gap: ${({ theme }) => theme.space.md};
+    padding: 0 ${({ theme }) => theme.space.sm};
+    margin-top: ${({ theme }) => theme.space.lg};
+  }
+`
+
+const MobileComparisonCard = styled.div`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.md};
+  box-shadow: ${({ theme }) => theme.shadows.md};
+  overflow: hidden;
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const MobileComparisonFeature = styled.div`
+  background-color: ${({ theme }) => theme.colors.trustworthyNavy};
+  color: white;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  padding: ${({ theme }) => theme.space.md};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  text-align: center;
+`
+
+const MobileComparisonGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.space.xs};
+  padding: ${({ theme }) => theme.space.xs};
+`
+
+const MobileComparisonItem = styled.div`
+  padding: ${({ theme }) => theme.space.sm};
+  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
+  
+  &:last-child {
+    border-bottom: none;
+  }
+`
+
+const MobileComparisonPlatform = styled.div`
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+  color: ${({ theme }) => theme.colors.darkText};
+`
+
+const MobileComparisonValue = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ isHighlighted, theme }) => isHighlighted ? theme.colors.successGreen : theme.colors.lightText};
+  font-weight: ${({ isHighlighted, theme }) => isHighlighted ? theme.fontWeights.semiBold : theme.fontWeights.normal};
 `
 
 const CallToActionWrapper = styled.div`
@@ -795,6 +1265,16 @@ const CallToActionWrapper = styled.div`
   border-radius: ${({ theme }) => theme.radii.xl};
   box-shadow: ${({ theme }) => theme.shadows.lg};
   overflow: hidden;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space['3xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.lg};
+  }
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    padding: ${({ theme }) => theme.space['2xl']} 0;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
 `
 
 export default Home

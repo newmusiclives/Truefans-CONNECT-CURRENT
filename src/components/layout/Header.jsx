@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../ui/Button'
+import Logo from '../ui/Logo'
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -29,6 +30,19 @@ const Header = () => {
     setMobileMenuOpen(false)
   }, [location])
   
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+    
+    return () => {
+      document.body.style.overflow = 'auto'
+    }
+  }, [mobileMenuOpen])
+  
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
   }
@@ -43,7 +57,7 @@ const Header = () => {
         <HeaderContent>
           <LogoContainer>
             <Link to="/">
-              <Logo>TrueFans CONNECT™</Logo>
+              <Logo size="large" />
             </Link>
           </LogoContainer>
           
@@ -92,6 +106,8 @@ const Header = () => {
           </AuthButtons>
         </HeaderContent>
       </Container>
+      {/* Overlay for mobile menu background */}
+      {mobileMenuOpen && <MobileMenuOverlay onClick={closeMobileMenu} />}
     </HeaderWrapper>
   )
 }
@@ -120,17 +136,17 @@ const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 1001;
 `
 
 const LogoContainer = styled.div`
   flex-shrink: 0;
-`
-
-const Logo = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.primary};
-  margin: 0;
+  margin-right: ${({ theme }) => theme.space.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-right: 0;
+  }
 `
 
 const NavContainer = styled.div`
@@ -149,6 +165,7 @@ const MobileMenuButton = styled.button`
   border: none;
   cursor: pointer;
   padding: ${({ theme }) => theme.space.sm};
+  z-index: 1002;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: block;
@@ -186,28 +203,35 @@ const NavLinks = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  width: 100%;
+  justify-content: space-between;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     position: fixed;
-    top: 70px; /* Adjust based on header height */
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     flex-direction: column;
     background-color: ${({ theme }) => theme.colors.trustworthyNavy};
     padding: ${({ theme }) => theme.space.lg};
+    padding-top: 80px;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
     opacity: ${({ open }) => open ? 1 : 0};
     visibility: ${({ open }) => open ? 'visible' : 'hidden'};
     transition: all 0.3s ease;
     overflow-y: auto;
-    z-index: 999;
+    z-index: 1001;
+    justify-content: flex-start;
+    height: 100vh;
+    width: 100vw;
   }
 `
 
 const NavItem = styled.li`
-  margin: 0 ${({ theme }) => theme.space.md};
   position: relative;
+  text-align: center;
+  padding: 0 ${({ theme }) => theme.space.md};
   
   &::after {
     content: '';
@@ -228,6 +252,8 @@ const NavItem = styled.li`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     margin: ${({ theme }) => `${theme.space.md} 0`};
+    text-align: left;
+    padding: 0;
     
     &::after {
       bottom: -2px;
@@ -241,6 +267,9 @@ const NavLink = styled(Link)`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   transition: color 0.3s ease;
+  display: block;
+  text-align: center;
+  white-space: nowrap;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
@@ -251,12 +280,14 @@ const NavLink = styled(Link)`
     font-size: ${({ theme }) => theme.fontSizes.lg};
     display: block;
     padding: ${({ theme }) => theme.space.sm} 0;
+    text-align: left;
   }
 `
 
 const AuthButtons = styled.div`
   display: flex;
   align-items: center;
+  margin-left: ${({ theme }) => theme.space.xl};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
@@ -371,6 +402,22 @@ const MobileVenueSignupButton = styled(Button)`
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondaryDark};
     text-decoration: none;
+  }
+`
+
+// Overlay for mobile menu
+const MobileMenuOverlay = styled.div`
+  display: none;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
   }
 `
 

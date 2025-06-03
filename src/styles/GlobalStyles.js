@@ -90,4 +90,11 @@ export const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar-thumb:hover {
     background: ${({ theme }) => theme.colors.primary};
   }
+  
+  /* Fix for sticky positioning in mobile Safari */
+  @supports (-webkit-touch-callout: none) {
+    .sticky-column {
+      position: -webkit-sticky;
+    }
+  }
 `

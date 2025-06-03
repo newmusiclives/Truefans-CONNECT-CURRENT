@@ -6,6 +6,8 @@ export const theme = {
     secondaryDark: '#3A7BC8',
     trustworthyNavy: '#1E3A8A',
     trustworthyNavyLight: '#2D4BA0',
+    passionateCrimson: '#DC2626', // Adding missing color for TrueText
+    energyOrange: '#F97316', // Adding missing color for ConnectText
     background: '#F9FAFB',
     darkText: '#1F2937',
     lightText: '#6B7280',
@@ -18,6 +20,10 @@ export const theme = {
     error: '#EF4444',
     white: '#FFFFFF',
     black: '#000000'
+  },
+  fonts: {
+    heading: "'Montserrat', sans-serif",
+    body: "'Open Sans', sans-serif"
   },
   fontSizes: {
     xs: '0.75rem',
@@ -37,7 +43,8 @@ export const theme = {
     medium: 500,
     semiBold: 600,
     bold: 700,
-    extraBold: 800
+    extraBold: 800,
+    black: 900
   },
   space: {
     xs: '0.25rem',
