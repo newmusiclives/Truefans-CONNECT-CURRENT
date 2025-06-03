@@ -78,14 +78,18 @@ const Footer = () => {
         </FooterGrid>
         
         <FooterBottom>
-          <FooterCopyright>
-            © {currentYear} TrueFans CONNECT™. All rights reserved.
-          </FooterCopyright>
-          <FooterLegal>
-            <LegalLink onClick={() => handleNavigation('/terms')}>Terms of Service</LegalLink>
-            <LegalLink onClick={() => handleNavigation('/privacy')}>Privacy Policy</LegalLink>
-            <LegalLink onClick={() => handleNavigation('/cookies')}>Cookie Policy</LegalLink>
-          </FooterLegal>
+          <FooterCopyrightContainer>
+            <FooterCopyright>
+              TrueFans CONNECT™ is a subsidiary of New Music Lives, which is owned and operated by Lightwork Digital.
+              <br />
+              © 2025 New Music Lives. All rights reserved.
+            </FooterCopyright>
+            <FooterLegal>
+              <LegalLink onClick={() => handleNavigation('/terms')}>Terms of Service</LegalLink>
+              <LegalLink onClick={() => handleNavigation('/privacy')}>Privacy Policy</LegalLink>
+              <LegalLink onClick={() => handleNavigation('/cookies')}>Cookie Policy</LegalLink>
+            </FooterLegal>
+          </FooterCopyrightContainer>
         </FooterBottom>
       </Container>
     </FooterWrapper>
@@ -197,28 +201,28 @@ const FooterLink = styled.a`
 `
 
 const FooterBottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding-top: ${({ theme }) => theme.space.lg};
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    flex-direction: column;
-    gap: ${({ theme }) => theme.space.md};
-    align-items: flex-start;
-  }
+`
+
+const FooterCopyrightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.space.md};
+  text-align: center;
 `
 
 const FooterCopyright = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   opacity: 0.6;
+  text-align: center;
 `
 
 const FooterLegal = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.space.md};
+  justify-content: center;
 `
 
 const LegalLink = styled.a`

@@ -7,8 +7,7 @@ const Logo = ({ size = 'default' }) => {
     <LogoWrapper size={size}>
       <LogoText>
         <MainText>
-          <BrandText>True</BrandText>
-          <BrandText>Fans</BrandText>
+          <BrandText>TrueFans</BrandText>
         </MainText>
         <ConnectText
           initial={{ opacity: 0, y: 5 }}
@@ -52,7 +51,7 @@ const MainText = styled.div`
   display: flex;
   align-items: center;
   font-family: 'Montserrat', sans-serif;
-  font-weight: ${({ theme }) => theme.fontWeights.black};
+  font-weight: ${({ theme }) => theme.fontWeights.normal};
   font-size: 1.4rem;
 `
 
@@ -65,7 +64,7 @@ const BrandText = styled.span`
 
 const ConnectText = styled(motion.div)`
   font-family: 'Montserrat', sans-serif;
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-weight: ${({ theme }) => theme.fontWeights.black};
   font-size: 1.4rem;
   letter-spacing: 2px;
   color: ${({ theme }) => theme.colors.primary};
