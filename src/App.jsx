@@ -27,6 +27,8 @@ import MyDashboard from './pages/MyDashboard'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
 import NotFound from './pages/NotFound'
+import ArtistsDirectory from './pages/ArtistsDirectory'
+import ArtistProfile from './pages/ArtistProfile'
 
 function App() {
   return (
@@ -51,6 +53,8 @@ function App() {
           <Route path="/my-dashboard" element={<MyDashboard />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/artists" element={<ArtistsDirectory />} />
+          <Route path="/artist-profile" element={<ArtistProfile />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </AnimatePresence>

@@ -4,170 +4,115 @@ import { motion } from 'framer-motion'
 
 const TechnologyPartners = () => {
   return (
-    <TechnologyPartnersContainer>
-      <TechnologyPartnersHeader>
-        <TechnologyPartnersTitle>TrueFans Connect – Enhanced by Leading Tech Partnerships</TechnologyPartnersTitle>
-        <TechnologyPartnersDescription>
-          At TrueFans Connect, we're building the future of fan engagement—powered by best-in-class technology. 
-          Our parent company, New Music Lives, has partnered with top innovators to provide a seamless, secure, 
-          and immersive experience.
-        </TechnologyPartnersDescription>
-      </TechnologyPartnersHeader>
-      
-      <PartnersSubheading>Our Technology Partners</PartnersSubheading>
-      
-      <PartnersGrid>
-        <PartnerCard
-          as={motion.div}
-          whileHover={{ y: -8, boxShadow: '0 12px 30px rgba(0,0,0,0.2)' }}
-          transition={{ duration: 0.3 }}
-        >
-          <PartnerLogo>
-            <img src="https://via.placeholder.com/150x60?text=SET.Tools" alt="SET.Tools Logo" />
-          </PartnerLogo>
-          <PartnerTitle>SET.Tools</PartnerTitle>
-          <PartnerDescription>
-            Enables location-based donations, letting fans support artists in real time at live events, 
-            virtual shows, and exclusive experiences through geofencing technology.
-          </PartnerDescription>
-        </PartnerCard>
+    <SectionWrapper>
+      <Container>
+        <SectionHeader>
+          <SectionTitle>TrueFans CONNECT™ – Enhanced by Leading Tech Partnerships</SectionTitle>
+          <SectionDescription>
+            At TrueFans CONNECT™, we're building the future of fan engagement—powered by best-in-class technology. 
+            Our parent company, New Music Lives, has partnered with top innovators to provide a seamless, secure, 
+            and immersive experience.
+          </SectionDescription>
+        </SectionHeader>
         
-        <PartnerCard
-          as={motion.div}
-          whileHover={{ y: -8, boxShadow: '0 12px 30px rgba(0,0,0,0.2)' }}
-          transition={{ duration: 0.3 }}
-        >
-          <PartnerLogo>
-            <img src="https://via.placeholder.com/150x60?text=Manifest" alt="Manifest Financial Logo" />
-          </PartnerLogo>
-          <PartnerTitle>Manifest Financial</PartnerTitle>
-          <PartnerDescription>
-            Handles secure transactions and fast payouts, ensuring artists receive earnings reliably 
-            while protecting every payment.
-          </PartnerDescription>
-        </PartnerCard>
-      </PartnersGrid>
-      
-      <ClosingSection>
-        <ClosingTitle>A Smarter Way to Connect</ClosingTitle>
-        <ClosingDescription>
-          By integrating these solutions, TrueFans Connect delivers a platform where artists thrive 
-          and fans engage like never before.
-        </ClosingDescription>
-        <ClosingCta>
-          Join us and be part of the next era of music fandom.
-        </ClosingCta>
-      </ClosingSection>
-    </TechnologyPartnersContainer>
+        <PartnersSubheading>Our Technology Partners</PartnersSubheading>
+        
+        <PartnersGrid>
+          <PartnerCard
+            as={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5 }}
+          >
+            <PartnerName>SET.Tools</PartnerName>
+            <PartnerDescription>
+              Enables location-based donations, letting fans support artists in real time at live events, 
+              virtual shows, and exclusive experiences through geofencing technology.
+            </PartnerDescription>
+          </PartnerCard>
+          
+          <PartnerCard
+            as={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            <PartnerName>Manifest Financial</PartnerName>
+            <PartnerDescription>
+              Handles secure transactions and fast payouts, ensuring artists receive earnings reliably 
+              while protecting every payment.
+            </PartnerDescription>
+          </PartnerCard>
+        </PartnersGrid>
+        
+        <OtherPartnersSection>
+          <OtherPartnersTitle>Other Partners</OtherPartnersTitle>
+          <OtherPartnersText>
+            We will be adding other partners to enhance and expand the services and resources in the 
+            TrueFans ecosystem over time - watch this space for me details...
+          </OtherPartnersText>
+        </OtherPartnersSection>
+        
+        <ClosingSection>
+          <ClosingTitle>A Smarter Way to Connect</ClosingTitle>
+          <ClosingText>
+            By integrating these solutions, TrueFans Connect delivers a platform where artists thrive 
+            and fans engage like never before.
+          </ClosingText>
+          <ClosingText>
+            Join us and be part of the next era of music fandom.
+          </ClosingText>
+        </ClosingSection>
+      </Container>
+    </SectionWrapper>
   )
 }
 
-const TechnologyPartnersContainer = styled.section`
-  padding: ${({ theme }) => theme.space['4xl']} ${({ theme }) => theme.space.lg};
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.trustworthyNavy} 0%, #0A1A2F 100%);
-  color: white;
-  position: relative;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50px;
-    right: -50px;
-    width: 200px;
-    height: 200px;
-    background-color: rgba(255, 255, 255, 0.03);
-    border-radius: 50%;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -100px;
-    left: -100px;
-    width: 300px;
-    height: 300px;
-    background-color: rgba(255, 255, 255, 0.02);
-    border-radius: 50%;
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.space['3xl']} ${({ theme }) => theme.space.md};
-  }
+const SectionWrapper = styled.section`
+  padding: ${({ theme }) => theme.space['4xl']} 0;
+  background-color: ${({ theme }) => theme.colors.background};
 `
 
-const TechnologyPartnersHeader = styled.div`
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 ${({ theme }) => theme.space.lg};
+`
+
+const SectionHeader = styled.div`
   text-align: center;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto ${({ theme }) => theme.space['2xl']};
 `
 
-const TechnologyPartnersTitle = styled.h2`
-  font-size: clamp(1.875rem, 3vw, ${({ theme }) => theme.fontSizes['3xl']});
+const SectionTitle = styled.h2`
+  font-size: ${({ theme }) => theme.fontSizes['3xl']};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: white;
-  margin-bottom: ${({ theme }) => theme.space.md};
-  position: relative;
-  display: inline-block;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: ${({ theme }) => theme.colors.revolutionaryGold};
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes['2xl']};
-    
-    &::after {
-      width: 60px;
-      height: 2px;
-    }
-  }
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.lg};
 `
 
-const TechnologyPartnersDescription = styled.p`
+const SectionDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.warmCream || 'rgba(255, 255, 255, 0.9)'};
+  color: ${({ theme }) => theme.colors.lightText};
   line-height: 1.6;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-  }
 `
 
 const PartnersSubheading = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes['xl']};
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.revolutionaryGold};
+  color: ${({ theme }) => theme.colors.darkText};
   text-align: center;
-  margin-bottom: ${({ theme }) => theme.space.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    margin-bottom: ${({ theme }) => theme.space.lg};
-  }
+  margin: ${({ theme }) => theme.space.xl} 0;
 `
 
 const PartnersGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: ${({ theme }) => theme.space.xl};
   margin-bottom: ${({ theme }) => theme.space['2xl']};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    gap: ${({ theme }) => theme.space.lg};
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    grid-template-columns: 1fr;
-    gap: ${({ theme }) => theme.space.md};
-  }
 `
 
 const PartnerCard = styled.div`
@@ -175,87 +120,66 @@ const PartnerCard = styled.div`
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: ${({ theme }) => theme.space.xl};
   box-shadow: ${({ theme }) => theme.shadows.md};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
+  transition: ${({ theme }) => theme.transitions.default};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.space.lg};
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${({ theme }) => theme.shadows.lg};
   }
 `
 
-const PartnerLogo = styled.div`
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: ${({ theme }) => theme.space.md};
-  
-  img {
-    max-height: 100%;
-    max-width: 100%;
-  }
-`
-
-const PartnerTitle = styled.h4`
+const PartnerName = styled.h4`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-  margin-bottom: ${({ theme }) => theme.space.sm};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-  }
+  color: ${({ theme }) => theme.colors.secondary};
+  margin-bottom: ${({ theme }) => theme.space.md};
 `
 
 const PartnerDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.lightText};
   line-height: 1.6;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    font-size: ${({ theme }) => theme.fontSizes.sm};
-  }
+`
+
+const OtherPartnersSection = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border-radius: ${({ theme }) => theme.radii.lg};
+  padding: ${({ theme }) => theme.space.xl};
+  margin-bottom: ${({ theme }) => theme.space['2xl']};
+  text-align: center;
+`
+
+const OtherPartnersTitle = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const OtherPartnersText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.lightText};
+  line-height: 1.6;
 `
 
 const ClosingSection = styled.div`
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
 `
 
 const ClosingTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes['xl']};
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: white;
+  color: ${({ theme }) => theme.colors.darkText};
   margin-bottom: ${({ theme }) => theme.space.md};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-  }
 `
 
-const ClosingDescription = styled.p`
+const ClosingText = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.warmCream || 'rgba(255, 255, 255, 0.9)'};
+  color: ${({ theme }) => theme.colors.lightText};
   line-height: 1.6;
   margin-bottom: ${({ theme }) => theme.space.md};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-  }
-`
-
-const ClosingCta = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.revolutionaryGold};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-  }
 `
 
 export default TechnologyPartners

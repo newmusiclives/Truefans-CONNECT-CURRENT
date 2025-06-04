@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
+import TechnologyPartners from '../components/home/TechnologyPartners'
 
 const HomePage = () => {
   return (
@@ -16,8 +17,8 @@ const HomePage = () => {
       <HeroSection>
         <Container>
           <HeroContent>
-            <HeroTitle>Support Your Favorite Artists Directly</HeroTitle>
-            <HeroSubtitle>TrueFans CONNECT™ helps independent musicians receive financial support from their fans through a simple, transparent donation system.</HeroSubtitle>
+            <HeroTitle>Right Now Now and TrueFans Forever</HeroTitle>
+            <HeroSubtitle>TrueFans CONNECT™ helps independent music artists receive financial support from their fans through a simple, transparent donation system.</HeroSubtitle>
             <HeroButtons>
               <PrimaryButton as={Link} to="/artist-signup">Join as an Artist</PrimaryButton>
               <SecondaryButton as={Link} to="/artist-profile">View Demo Artist</SecondaryButton>
@@ -59,6 +60,8 @@ const HomePage = () => {
           </FeaturesGrid>
         </Container>
       </FeaturesSection>
+      
+      <TechnologyPartners />
       
       <CTASection>
         <Container>

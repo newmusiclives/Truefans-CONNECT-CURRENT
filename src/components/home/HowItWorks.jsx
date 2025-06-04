@@ -117,7 +117,6 @@ const StepNumber = styled.div`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.revolutionaryGold};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
-  font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   font-size: ${({ theme }) => theme.fontSizes.xl};
   display: flex;

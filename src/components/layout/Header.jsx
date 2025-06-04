@@ -62,8 +62,8 @@ const Header = () => {
             <NavItem active={location.pathname === '/about'}>
               <NavLink to="/about" onClick={closeMobileMenu}>About Us</NavLink>
             </NavItem>
-            <NavItem active={location.pathname === '/artist-dashboard'}>
-              <NavLink to="/artist-dashboard" onClick={closeMobileMenu}>Artists</NavLink>
+            <NavItem active={location.pathname === '/artists'}>
+              <NavLink to="/artists" onClick={closeMobileMenu}>Artist Dashboard</NavLink>
             </NavItem>
             <NavItem active={location.pathname === '/venue-portal'}>
               <NavLink to="/venue-portal" onClick={closeMobileMenu}>Venue Portal</NavLink>
@@ -172,6 +172,8 @@ const NavLinks = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
+  justify-content: center;
+  flex: 1;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     position: fixed;
@@ -188,12 +190,14 @@ const NavLinks = styled.ul`
     transition: all 0.3s ease;
     overflow-y: auto;
     z-index: 999;
+    justify-content: flex-start;
   }
 `
 
 const NavItem = styled.li`
   margin: 0 ${({ theme }) => theme.space.md};
   position: relative;
+  text-align: center;
   
   &::after {
     content: '';
@@ -214,6 +218,7 @@ const NavItem = styled.li`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     margin: ${({ theme }) => `${theme.space.md} 0`};
+    text-align: left;
     
     &::after {
       bottom: -2px;
@@ -227,6 +232,7 @@ const NavLink = styled(Link)`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   transition: color 0.3s ease;
+  display: block;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
