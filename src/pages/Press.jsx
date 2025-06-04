@@ -5,21 +5,21 @@ import Button from '../components/ui/Button'
 import PageTransition from '../components/common/PageTransition'
 
 const Press = () => {
-  // Mock data for press releases - all featuring Paul Saunders
+  // Mock data for press releases - updated to reflect current state
   const pressReleases = [
     {
       id: 1,
-      title: "TrueFans CONNECT™ Raises $5M to Revolutionize Artist Support",
+      title: "TrueFans CONNECT™ Launches Platform to Revolutionize Artist Support",
       date: "June 15, 2023",
-      excerpt: "Funding will accelerate platform growth and expand venue partnerships across North America, says founder Paul Saunders.",
+      excerpt: "Platform launch marks a significant milestone in creating a more equitable ecosystem for independent artists, says founder Paul Saunders.",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
       link: "/press/truefans-raises-5m"
     },
     {
       id: 2,
-      title: "TrueFans CONNECT™ Surpasses 10,000 Artists on Platform",
+      title: "TrueFans CONNECT™ Launches Beta Program with Select Artists",
       date: "May 2, 2023",
-      excerpt: "Milestone highlights growing adoption of direct fan support model among independent musicians, according to founder Paul Saunders.",
+      excerpt: "Initial beta program highlights potential of direct fan support model among independent musicians, according to founder Paul Saunders.",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
       link: "/press/truefans-surpasses-10000-artists"
     },

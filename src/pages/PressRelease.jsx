@@ -10,56 +10,52 @@ const PressRelease = () => {
   // Mock data for press releases
   const pressReleaseData = {
     'truefans-raises-5m': {
-      title: "TrueFans CONNECT™ Raises $5M to Revolutionize Artist Support",
+      title: "TrueFans CONNECT™ Launches Platform to Revolutionize Artist Support",
       date: "June 15, 2023",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
       content: `
-        <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the innovative platform connecting independent artists with their supporters, announced today that it has secured $5 million in Series A funding led by Harmony Ventures, with participation from Music Tech Investments and several angel investors.</p>
+        <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the innovative platform connecting independent artists with their supporters, announced today the official launch of its platform designed to create a more equitable ecosystem for independent artists.</p>
         
-        <p>The funding will be used to accelerate platform growth, expand venue partnerships across North America, and enhance the company's proprietary fan engagement technology.</p>
+        <p>"This launch represents a significant milestone for TrueFans CONNECT™ and our mission to create a more equitable ecosystem for independent artists," said Paul Saunders, Founder and CEO of TrueFans CONNECT™. "We're providing artists with the tools and connections they need to thrive in today's music industry."</p>
         
-        <p>"This investment represents a significant milestone for TrueFans CONNECT™ and validates our mission to create a more equitable ecosystem for independent artists," said Paul Saunders, Founder and CEO of TrueFans CONNECT™. "With this funding, we'll be able to reach more artists and venues, providing them with the tools and connections they need to thrive in today's music industry."</p>
+        <p>TrueFans CONNECT™ helps independent artists increase their revenue through its innovative platform that facilitates direct fan support, venue bookings, and merchandise sales.</p>
         
-        <p>Since its launch in 2022, TrueFans CONNECT™ has helped over 5,000 independent artists increase their revenue by an average of 40% through its innovative platform that facilitates direct fan support, venue bookings, and merchandise sales.</p>
-        
-        <p>Mark Reynolds, Partner at Harmony Ventures, commented on the investment: "We're excited to back Paul and the TrueFans CONNECT™ team. Their platform addresses a critical gap in the music industry by providing independent artists with the infrastructure they need to build sustainable careers. We believe their approach of combining venue partnerships with direct fan support creates a powerful ecosystem that benefits all stakeholders."</p>
-        
-        <p>The company plans to use the funding to:</p>
+        <p>The company plans to focus on:</p>
         <ul>
-          <li>Expand its venue network from 200 to 500 locations by the end of 2023</li>
-          <li>Enhance its mobile application with new fan engagement features</li>
-          <li>Grow its team, particularly in engineering and artist relations</li>
-          <li>Launch in 10 new metropolitan markets across the United States and Canada</li>
+          <li>Building a network of venue partnerships across North America</li>
+          <li>Enhancing its mobile application with new fan engagement features</li>
+          <li>Growing its team, particularly in engineering and artist relations</li>
+          <li>Expanding into key metropolitan markets across the United States</li>
         </ul>
         
-        <p>"We're just getting started," added Saunders. "Our vision is to create the most artist-friendly platform in the industry, and this funding brings us one step closer to making that vision a reality."</p>
+        <p>"We're just getting started," added Saunders. "Our vision is to create the most artist-friendly platform in the industry, and this launch brings us one step closer to making that vision a reality."</p>
       `
     },
     'truefans-surpasses-10000-artists': {
-      title: "TrueFans CONNECT™ Surpasses 10,000 Artists on Platform",
+      title: "TrueFans CONNECT™ Launches Beta Program with Select Artists",
       date: "May 2, 2023",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
       content: `
-        <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the leading platform for independent artist support and venue connections, announced today that it has surpassed 10,000 artists on its platform, marking a significant milestone in the company's growth.</p>
+        <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the platform for independent artist support and venue connections, announced today the successful launch of its beta program with a select group of independent artists.</p>
         
-        <p>This achievement highlights the growing adoption of TrueFans CONNECT™'s direct fan support model among independent musicians across North America.</p>
+        <p>This achievement marks an important first step in the company's mission to revolutionize how independent musicians connect with fans and venues.</p>
         
-        <p>"Reaching 10,000 artists on our platform is a testament to the value we're providing to independent musicians," said Paul Saunders, Founder and CEO of TrueFans CONNECT™. "We're proud to be empowering artists to build sustainable careers on their own terms, without having to sacrifice creative control or revenue potential."</p>
+        <p>"Launching our beta program with these talented artists is a testament to the value we're aiming to provide to independent musicians," said Paul Saunders, Founder and CEO of TrueFans CONNECT™. "We're proud to be working toward empowering artists to build sustainable careers on their own terms, without having to sacrifice creative control or revenue potential."</p>
         
-        <p>The platform has processed over $3.5 million in direct fan contributions to artists since its launch, with artists keeping 80% of all revenue generated through the platform – significantly higher than industry standards.</p>
+        <p>The platform is designed to process direct fan contributions to artists, with artists keeping 80% of all revenue generated through the platform – significantly higher than industry standards.</p>
         
-        <p>Among the 10,000 artists, several success stories have emerged:</p>
+        <p>Among the beta testers, several early success indicators have emerged:</p>
         <ul>
-          <li>Folk duo The Wandering Pines increased their monthly income by 300% within six months of joining the platform</li>
-          <li>Hip-hop artist J-Lyric funded his entire album production through fan contributions on TrueFans CONNECT™</li>
-          <li>Indie rock band Velvet Horizon booked a 15-city tour exclusively through venues in the TrueFans CONNECT™ network</li>
+          <li>Artists report improved fan engagement through the platform's direct connection tools</li>
+          <li>The streamlined booking process has helped artists secure performance opportunities more efficiently</li>
+          <li>The platform's all-in-one approach reduces the need for multiple services and subscriptions</li>
         </ul>
         
-        <p>"What sets TrueFans CONNECT™ apart is their holistic approach to artist support," said Sarah Chen, an independent singer-songwriter who joined the platform in 2022. "It's not just about fan donations – it's about connecting with venues, building a community, and accessing tools that help me grow my career. The platform has completely changed how I approach my music business."</p>
+        <p>"What sets TrueFans CONNECT™ apart is their holistic approach to artist support," said Sarah Chen, an independent singer-songwriter who joined the beta program. "It's not just about fan donations – it's about connecting with venues, building a community, and accessing tools that help me grow my career. The platform has great potential to change how I approach my music business."</p>
         
-        <p>To celebrate this milestone, TrueFans CONNECT™ is launching an "Artist Spotlight" series, highlighting the diverse talent on the platform through featured placements, social media promotion, and exclusive performance opportunities.</p>
+        <p>To highlight the talent in the beta program, TrueFans CONNECT™ is launching an "Artist Spotlight" series, featuring these pioneering artists through social media promotion and exclusive performance opportunities.</p>
         
-        <p>"This is just the beginning," said Saunders. "Our goal is to reach 50,000 artists by the end of 2024, and to continue expanding our venue network to provide even more performance opportunities. We're committed to building the most artist-friendly ecosystem in the music industry."</p>
+        <p>"This is just the beginning," said Saunders. "Based on feedback from our beta artists, we're refining the platform before our full public launch. We're committed to building the most artist-friendly ecosystem in the music industry."</p>
       `
     },
     'truefans-launches-affiliate-program': {
