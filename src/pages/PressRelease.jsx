@@ -11,7 +11,7 @@ const PressRelease = () => {
   const pressReleaseData = {
     'truefans-raises-5m': {
       title: "TrueFans CONNECT™ Launches Platform to Revolutionize Artist Support",
-      date: "June 15, 2023",
+      date: "May 15, 2025",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
       content: `
         <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the innovative platform connecting independent artists with their supporters, announced today the official launch of its platform designed to create a more equitable ecosystem for independent artists.</p>
@@ -33,7 +33,7 @@ const PressRelease = () => {
     },
     'truefans-surpasses-10000-artists': {
       title: "TrueFans CONNECT™ Launches Beta Program with Select Artists",
-      date: "May 2, 2023",
+      date: "March 2, 2025",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
       content: `
         <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the platform for independent artist support and venue connections, announced today the successful launch of its beta program with a select group of independent artists.</p>
@@ -60,7 +60,7 @@ const PressRelease = () => {
     },
     'truefans-launches-affiliate-program': {
       title: "TrueFans CONNECT™ Launches Two-Tier Affiliate Program",
-      date: "April 10, 2023",
+      date: "January 10, 2025",
       image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg",
       content: `
         <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the innovative platform connecting independent artists with fans and venues, today announced the launch of its two-tier affiliate program, enabling artists to earn passive income through platform referrals.</p>
@@ -89,18 +89,18 @@ const PressRelease = () => {
     },
     'truefans-partners-with-venues': {
       title: "TrueFans CONNECT™ Partners with Major Venue Network",
-      date: "March 5, 2023",
+      date: "September 5, 2024",
       image: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg",
       content: `
-        <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the platform revolutionizing how independent artists connect with fans, announced today a strategic partnership with LiveStages, a network of over 200 performance venues across the United States.</p>
+        <p><strong>PHOENIX, AZ</strong> - TrueFans CONNECT™, the platform revolutionizing how independent artists connect with fans, announced today a strategic partnership with a major Open Mic network of over 200 performance venues across the United States.</p>
         
-        <p>This partnership will enable independent artists on the TrueFans CONNECT™ platform to book performances at LiveStages venues directly through the TrueFans CONNECT™ interface, streamlining the booking process and creating new opportunities for live performances.</p>
+        <p>This partnership will enable independent artists on the TrueFans CONNECT™ platform to book performances at venues within this network directly through the TrueFans CONNECT™ interface, streamlining the booking process and creating new opportunities for live performances.</p>
         
         <p>"This partnership represents a major step forward in our mission to help independent artists build sustainable careers," said Paul Saunders, Founder and CEO of TrueFans CONNECT™. "Access to quality venues is one of the biggest challenges independent artists face, and we're now removing that barrier by connecting our artists directly with hundreds of performance spaces across the country."</p>
         
-        <p>The LiveStages network includes a diverse range of venues, from intimate coffee shops and bars to mid-sized theaters and outdoor event spaces in over 50 cities. Through the partnership, venue owners will gain access to TrueFans CONNECT™'s roster of verified artists, complete with performance metrics, fan engagement data, and sample performances.</p>
+        <p>The venue network includes a diverse range of spaces, from intimate coffee shops and bars to mid-sized theaters and outdoor event spaces in over 50 cities. Through the partnership, venue owners will gain access to TrueFans CONNECT™'s roster of verified artists, complete with performance metrics, fan engagement data, and sample performances.</p>
         
-        <p>"We're excited to partner with TrueFans CONNECT™ to bring fresh talent to our venues," said Jennifer Martinez, CEO of LiveStages. "Their platform provides us with valuable data about artists' draw and engagement, making it easier for our venue managers to book acts that will resonate with local audiences. It's a more efficient system that benefits both artists and venues."</p>
+        <p>"We're excited to partner with TrueFans CONNECT™ to bring fresh talent to our venues," said Jennifer Martinez, CEO of the Open Mic network. "Their platform provides us with valuable data about artists' draw and engagement, making it easier for our venue managers to book acts that will resonate with local audiences. It's a more efficient system that benefits both artists and venues."</p>
         
         <p>Key features of the partnership include:</p>
         <ul>
@@ -113,9 +113,9 @@ const PressRelease = () => {
         
         <p>"Before TrueFans CONNECT™, I was spending hours every week cold-emailing venues, often with no response," said Eliza Chen, an independent folk artist from Portland. "Now I can see which venues in my area are looking for artists like me, send a booking request with all my materials already attached, and get a response within days. It's completely changed how I tour."</p>
         
-        <p>The venue booking feature is now live on the TrueFans CONNECT™ platform, with the full integration of all LiveStages venues expected to be complete by the end of April 2023.</p>
+        <p>The venue booking feature is now live on the TrueFans CONNECT™ platform, with the full integration of all network venues expected to be complete by the end of October 2024.</p>
         
-        <p>"This is just the beginning of our venue partnership strategy," added Saunders. "We plan to expand to international venues by the end of the year, creating a global network of performance opportunities for independent artists."</p>
+        <p>"This is just the beginning of our venue partnership strategy," added Saunders. "We plan to expand to international venues by early 2025, creating a global network of performance opportunities for independent artists."</p>
       `
     }
   }
@@ -135,13 +135,16 @@ const PressRelease = () => {
   
   return (
     <PageTransition>
-      <HeroSection style={{ backgroundImage: `linear-gradient(rgba(26, 43, 76, 0.85), rgba(26, 43, 76, 0.85)), url(${pressRelease.image})` }}>
-        <Container>
-          <HeroContent>
-            <PressReleaseDate>{pressRelease.date}</PressReleaseDate>
-            <HeroTitle>{pressRelease.title}</HeroTitle>
-          </HeroContent>
-        </Container>
+      <HeroSection>
+        <HeroImage src={pressRelease.image} alt={pressRelease.title} />
+        <HeroOverlay>
+          <Container>
+            <HeroContent>
+              <PressReleaseDate>{pressRelease.date}</PressReleaseDate>
+              <HeroTitle>{pressRelease.title}</HeroTitle>
+            </HeroContent>
+          </Container>
+        </HeroOverlay>
       </HeroSection>
       
       <ContentSection>
@@ -161,10 +164,31 @@ const PressRelease = () => {
 }
 
 const HeroSection = styled.section`
-  background-size: cover;
-  background-position: center;
-  padding: ${({ theme }) => theme.space.xxl} 0;
+  position: relative;
+  height: 400px;
   color: white;
+  overflow: hidden;
+`
+
+const HeroImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+`
+
+const HeroOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(26, 43, 76, 0.85), rgba(26, 43, 76, 0.85));
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 const Container = styled.div`

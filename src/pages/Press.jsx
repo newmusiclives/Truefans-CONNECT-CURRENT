@@ -10,7 +10,7 @@ const Press = () => {
     {
       id: 1,
       title: "TrueFans CONNECT™ Launches Platform to Revolutionize Artist Support",
-      date: "June 15, 2023",
+      date: "May 15, 2025",
       excerpt: "Platform launch marks a significant milestone in creating a more equitable ecosystem for independent artists, says founder Paul Saunders.",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
       link: "/press/truefans-raises-5m"
@@ -18,7 +18,7 @@ const Press = () => {
     {
       id: 2,
       title: "TrueFans CONNECT™ Launches Beta Program with Select Artists",
-      date: "May 2, 2023",
+      date: "March 2, 2025",
       excerpt: "Initial beta program highlights potential of direct fan support model among independent musicians, according to founder Paul Saunders.",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
       link: "/press/truefans-surpasses-10000-artists"
@@ -26,7 +26,7 @@ const Press = () => {
     {
       id: 3,
       title: "TrueFans CONNECT™ Launches Two-Tier Affiliate Program",
-      date: "April 10, 2023",
+      date: "January 10, 2025",
       excerpt: "New program allows artists to earn passive income through platform referrals, explains founder Paul Saunders.",
       image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg",
       link: "/press/truefans-launches-affiliate-program"
@@ -34,7 +34,7 @@ const Press = () => {
     {
       id: 4,
       title: "TrueFans CONNECT™ Partners with Major Venue Network",
-      date: "March 5, 2023",
+      date: "September 5, 2024",
       excerpt: "Partnership connects independent artists with 200+ performance venues across the country, announces founder Paul Saunders.",
       image: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg",
       link: "/press/truefans-partners-with-venues"
@@ -47,36 +47,31 @@ const Press = () => {
       id: 1,
       outlet: "Music Industry Today",
       title: "Paul Saunders on How TrueFans CONNECT™ Is Changing the Game for Independent Artists",
-      date: "May 28, 2023",
-      link: "https://www.musicindustrytoday.com/paul-saunders-truefans-connect"
+      date: "April 28, 2025"
     },
     {
       id: 2,
       outlet: "Tech Innovators",
       title: "TrueFans CONNECT™: Paul Saunders on Disrupting Traditional Music Revenue Models",
-      date: "April 15, 2023",
-      link: "https://www.techinnovators.com/paul-saunders-truefans-connect"
+      date: "February 15, 2025"
     },
     {
       id: 3,
       outlet: "Entrepreneur Weekly",
       title: "Paul Saunders of TrueFans CONNECT™ on Building a More Equitable Music Industry",
-      date: "March 22, 2023",
-      link: "https://www.entrepreneurweekly.com/paul-saunders-truefans-connect"
+      date: "December 22, 2024"
     },
     {
       id: 4,
       outlet: "Digital Music News",
       title: "Artist-First Platforms: Paul Saunders' TrueFans CONNECT™ Leads the Way with 80/20 Revenue Split",
-      date: "February 10, 2023",
-      link: "https://www.digitalmusicnews.com/paul-saunders-truefans-connect"
+      date: "November 10, 2024"
     },
     {
       id: 5,
       outlet: "Startup Spotlight",
       title: "Paul Saunders: From Idea to Industry Disruptor with TrueFans CONNECT™ in 12 Months",
-      date: "January 5, 2023",
-      link: "https://www.startupspotlight.com/paul-saunders-truefans-connect"
+      date: "October 5, 2024"
     }
   ]
   
@@ -159,7 +154,6 @@ const Press = () => {
                 <MediaCoverageOutlet>{coverage.outlet}</MediaCoverageOutlet>
                 <MediaCoverageTitle>{coverage.title}</MediaCoverageTitle>
                 <MediaCoverageDate>{coverage.date}</MediaCoverageDate>
-                <MediaCoverageLink href={coverage.link} target="_blank" rel="noopener noreferrer">Read Article →</MediaCoverageLink>
               </MediaCoverageItem>
             ))}
           </MediaCoverageList>
@@ -411,22 +405,6 @@ const MediaCoverageDate = styled.div`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     order: 3;
-  }
-`
-
-const MediaCoverageLink = styled.a`
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  text-decoration: none;
-  flex-shrink: 0;
-  
-  &:hover {
-    text-decoration: underline;
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    order: 4;
   }
 `
 
