@@ -1,116 +1,121 @@
 import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
+import { FaQrcode, FaMoneyBillWave, FaChartLine, FaUsers, FaCalendarAlt, FaStore } from 'react-icons/fa'
+
+const features = [
+  {
+    id: 1,
+    icon: <FaQrcode />,
+    title: 'Instant QR Payments',
+    description: 'Generate custom QR codes for shows that fans can scan to support you directly. No more "check out my website later" - get paid on the spot.',
+    color: 'passionateCrimson',
+  },
+  {
+    id: 2,
+    icon: <FaMoneyBillWave />,
+    title: 'Same-Day Deposits',
+    description: 'Money hits your account the same day - not weeks or months later. Pay your band, buy gas for the tour van, or celebrate with a nice meal.',
+    color: 'revolutionaryGold',
+  },
+  {
+    id: 3,
+    icon: <FaChartLine />,
+    title: 'Fan Analytics',
+    description: "Know exactly who your true fans are, where they're located, and what they love about your music. Build your career on real data.",
+    color: 'energyOrange',
+  },
+  {
+    id: 4,
+    icon: <FaUsers />,
+    title: 'Fan Relationship Tools',
+    description: "Send exclusive updates, behind-the-scenes content, and special offers to the fans who've directly supported you.",
+    color: 'successGreen',
+  },
+  {
+    id: 5,
+    icon: <FaCalendarAlt />,
+    title: 'Show Management',
+    description: 'Create events, track attendance, and see which venues and cities are most profitable for your specific fanbase.',
+    color: 'trustworthyNavy',
+  },
+  {
+    id: 6,
+    icon: <FaStore />,
+    title: 'Digital Merch Store',
+    description: 'Sell digital products, exclusive tracks, and experiences directly to fans without platform fees eating into your earnings.',
+    color: 'authenticBrown',
+  },
+]
 
 const FeatureShowcase = () => {
-  const features = [
-    {
-      id: 1,
-      title: "Instant QR Code Donations",
-      description: "Generate custom QR codes that fans can scan to donate directly to you at shows, on merch, or anywhere you perform.",
-      icon: "💸",
-    },
-    {
-      id: 2,
-      title: "Fan Relationship Management",
-      description: "Build a database of your most supportive fans and communicate with them directly through our platform.",
-      icon: "❤️",
-    },
-    {
-      id: 3,
-      title: "Next-Day Deposits",
-      description: "Get paid quickly with deposits hitting your account the next business day, not weeks or months later.",
-      icon: "🏦",
-    },
-    {
-      id: 4,
-      title: "Performance Analytics",
-      description: "Track your earnings, fan growth, and donation patterns to optimize your performance strategy.",
-      icon: "📊",
-    },
-    {
-      id: 5,
-      title: "Venue Integration",
-      description: "Partner with venues in our network for seamless promotion and additional earning opportunities.",
-      icon: "🏟️",
-    },
-    {
-      id: 6,
-      title: "Customizable Artist Profile",
-      description: "Create a beautiful profile that showcases your music, upcoming shows, and makes it easy for fans to support you.",
-      icon: "🎵",
-    }
-  ]
-
   return (
-    <FeatureShowcaseContainer>
-      <FeatureShowcaseHeader>
-        <FeatureShowcaseTitle>Powerful Tools for Independent Artists</FeatureShowcaseTitle>
-        <FeatureShowcaseSubtitle>Everything you need to monetize your music career and build lasting fan relationships</FeatureShowcaseSubtitle>
-      </FeatureShowcaseHeader>
-      
-      <FeatureGrid>
-        {features.map((feature) => (
-          <FeatureCard
-            key={feature.id}
-            as={motion.div}
-            whileHover={{ y: -8, boxShadow: '0 12px 30px rgba(0,0,0,0.1)' }}
-            transition={{ duration: 0.3 }}
-          >
-            <FeatureIcon>{feature.icon}</FeatureIcon>
-            <FeatureTitle>{feature.title}</FeatureTitle>
-            <FeatureDescription>{feature.description}</FeatureDescription>
-          </FeatureCard>
-        ))}
-      </FeatureGrid>
-    </FeatureShowcaseContainer>
+    <SectionWrapper>
+      <div className="container">
+        <SectionHeader>
+          <SectionTitle>Everything You Need to Succeed</SectionTitle>
+          <SectionDescription>
+            TrueFans CONNECT™ gives independent artists the tools to build sustainable careers through direct fan support.
+          </SectionDescription>
+        </SectionHeader>
+        
+        <FeaturesGrid>
+          {features.map((feature, index) => (
+            <FeatureCard
+              key={feature.id}
+              as={motion.div}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{ y: -5, boxShadow: '0 10px 30px rgba(0,0,0,0.1)' }}
+            >
+              <FeatureIconWrapper color={feature.color}>
+                {feature.icon}
+              </FeatureIconWrapper>
+              <FeatureTitle>{feature.title}</FeatureTitle>
+              <FeatureDescription>{feature.description}</FeatureDescription>
+            </FeatureCard>
+          ))}
+        </FeaturesGrid>
+      </div>
+    </SectionWrapper>
   )
 }
 
-const FeatureShowcaseContainer = styled.section`
-  padding: ${({ theme }) => theme.space['4xl']} ${({ theme }) => theme.space.lg};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.space['3xl']} ${({ theme }) => theme.space.md};
-  }
+const SectionWrapper = styled.section`
+  padding: ${({ theme }) => theme.space['5xl']} 0;
+  background-color: ${({ theme }) => theme.colors.lightBackground};
 `
 
-const FeatureShowcaseHeader = styled.div`
+const SectionHeader = styled.div`
   text-align: center;
   max-width: 800px;
   margin: 0 auto ${({ theme }) => theme.space['3xl']};
 `
 
-const FeatureShowcaseTitle = styled.h2`
-  font-size: clamp(1.875rem, 3vw, ${({ theme }) => theme.fontSizes['3xl']});
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
+const SectionTitle = styled.h2`
   color: ${({ theme }) => theme.colors.trustworthyNavy};
-  margin-bottom: ${({ theme }) => theme.space.md};
-  position: relative;
-  display: inline-block;
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
+const SectionDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.lightText};
   
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: ${({ theme }) => theme.colors.revolutionaryGold};
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
   }
 `
 
-const FeatureShowcaseSubtitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.6;
-`
-
-const FeatureGrid = styled.div`
+const FeaturesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: ${({ theme }) => theme.space.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
@@ -122,39 +127,28 @@ const FeatureCard = styled.div`
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: ${({ theme }) => theme.space.xl};
   box-shadow: ${({ theme }) => theme.shadows.md};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${({ theme }) => theme.shadows.lg};
-  }
+  transition: ${({ theme }) => theme.transitions.default};
 `
 
-const FeatureIcon = styled.div`
-  font-size: 3rem;
-  margin-bottom: ${({ theme }) => theme.space.md};
-  background-color: ${({ theme }) => theme.colors.background};
-  width: 80px;
-  height: 80px;
+const FeatureIconWrapper = styled.div`
+  width: 60px;
+  height: 60px;
+  border-radius: ${({ theme }) => theme.radii.md};
+  background-color: ${({ theme, color }) => theme.colors[color] || theme.colors.passionateCrimson};
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  margin-bottom: ${({ theme }) => theme.space.lg};
 `
 
 const FeatureTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
-  margin-bottom: ${({ theme }) => theme.space.sm};
+  margin-bottom: ${({ theme }) => theme.space.md};
 `
 
 const FeatureDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.lightText};
   line-height: 1.6;
 `

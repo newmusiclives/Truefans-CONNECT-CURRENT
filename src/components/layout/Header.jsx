@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../ui/Button'
-import Logo from '../ui/Logo'
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -30,19 +29,6 @@ const Header = () => {
     setMobileMenuOpen(false)
   }, [location])
   
-  // Prevent body scroll when mobile menu is open
-  useEffect(() => {
-    if (mobileMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
-    }
-    
-    return () => {
-      document.body.style.overflow = 'auto'
-    }
-  }, [mobileMenuOpen])
-  
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen)
   }
@@ -57,39 +43,9 @@ const Header = () => {
         <HeaderContent>
           <LogoContainer>
             <Link to="/">
-              <Logo size="large" />
+              <Logo>TrueFans CONNECT™</Logo>
             </Link>
           </LogoContainer>
-          
-          <NavContainer>
-            <NavLinks open={mobileMenuOpen}>
-              <NavItem active={location.pathname === '/'}>
-                <NavLink to="/" onClick={closeMobileMenu}>Home</NavLink>
-              </NavItem>
-              <NavItem active={location.pathname === '/about'}>
-                <NavLink to="/about" onClick={closeMobileMenu}>About Us</NavLink>
-              </NavItem>
-              <NavItem active={location.pathname === '/artists-directory'}>
-                <NavLink to="/artists-directory" onClick={closeMobileMenu}>Artists Directory</NavLink>
-              </NavItem>
-              <NavItem active={location.pathname === '/venue-portal-info' || location.pathname === '/venue-portal' || location.pathname === '/venue-signup'}>
-                <NavLink to="/venue-portal-info" onClick={closeMobileMenu}>Venue Portal</NavLink>
-              </NavItem>
-              <NavItem active={location.pathname === '/donation-system'}>
-                <NavLink to="/donation-system" onClick={closeMobileMenu}>Donation System</NavLink>
-              </NavItem>
-              <NavItem active={location.pathname === '/affiliate-program'}>
-                <NavLink to="/affiliate-program" onClick={closeMobileMenu}>Affiliate Program</NavLink>
-              </NavItem>
-              
-              {/* Mobile-only auth buttons */}
-              <MobileAuthButtons>
-                <MobileLoginButton as={Link} to="/login" onClick={closeMobileMenu}>Log In</MobileLoginButton>
-                <MobileSignupButton as={Link} to="/artist-signup" onClick={closeMobileMenu}>Artist SignUp</MobileSignupButton>
-                <MobileVenueSignupButton as={Link} to="/venue-signup" onClick={closeMobileMenu}>Venue SignUp</MobileVenueSignupButton>
-              </MobileAuthButtons>
-            </NavLinks>
-          </NavContainer>
           
           <MobileMenuButton 
             onClick={toggleMobileMenu}
@@ -99,15 +55,39 @@ const Header = () => {
             <MenuIcon open={mobileMenuOpen} />
           </MobileMenuButton>
           
+          <NavLinks open={mobileMenuOpen}>
+            <NavItem active={location.pathname === '/'}>
+              <NavLink to="/" onClick={closeMobileMenu}>Home</NavLink>
+            </NavItem>
+            <NavItem active={location.pathname === '/about'}>
+              <NavLink to="/about" onClick={closeMobileMenu}>About Us</NavLink>
+            </NavItem>
+            <NavItem active={location.pathname === '/artist-dashboard'}>
+              <NavLink to="/artist-dashboard" onClick={closeMobileMenu}>Artists</NavLink>
+            </NavItem>
+            <NavItem active={location.pathname === '/venue-portal'}>
+              <NavLink to="/venue-portal" onClick={closeMobileMenu}>Venue Portal</NavLink>
+            </NavItem>
+            <NavItem active={location.pathname === '/donation-system'}>
+              <NavLink to="/donation-system" onClick={closeMobileMenu}>Donation System</NavLink>
+            </NavItem>
+            <NavItem active={location.pathname === '/affiliate-program'}>
+              <NavLink to="/affiliate-program" onClick={closeMobileMenu}>Affiliate Program</NavLink>
+            </NavItem>
+            
+            {/* Mobile-only auth buttons */}
+            <MobileAuthButtons>
+              <MobileLoginButton as={Link} to="/my-dashboard" onClick={closeMobileMenu}>Log In</MobileLoginButton>
+              <MobileSignupButton as={Link} to="/artist-signup" onClick={closeMobileMenu}>Sign Up</MobileSignupButton>
+            </MobileAuthButtons>
+          </NavLinks>
+          
           <AuthButtons>
-            <LoginButton as={Link} to="/login">Log In</LoginButton>
-            <ArtistSignupButton as={Link} to="/artist-signup">Artist SignUp</ArtistSignupButton>
-            <VenueSignupButton as={Link} to="/venue-signup">Venue SignUp</VenueSignupButton>
+            <LoginButton as={Link} to="/my-dashboard">Log In</LoginButton>
+            <SignupButton as={Link} to="/artist-signup">Sign Up</SignupButton>
           </AuthButtons>
         </HeaderContent>
       </Container>
-      {/* Overlay for mobile menu background */}
-      {mobileMenuOpen && <MobileMenuOverlay onClick={closeMobileMenu} />}
     </HeaderWrapper>
   )
 }
@@ -130,42 +110,23 @@ const Container = styled.div`
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 ${({ theme }) => theme.space.lg};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    padding: 0 ${({ theme }) => theme.space.md};
-  }
 `
 
 const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  position: relative;
-  z-index: 1001;
 `
 
 const LogoContainer = styled.div`
   flex-shrink: 0;
-  margin-right: ${({ theme }) => theme.space.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    margin-right: 0;
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    transform: scale(0.9);
-    transform-origin: left center;
-  }
 `
 
-const NavContainer = styled.div`
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    justify-content: flex-end;
-  }
+const Logo = styled.h1`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.primary};
+  margin: 0;
 `
 
 const MobileMenuButton = styled.button`
@@ -174,7 +135,6 @@ const MobileMenuButton = styled.button`
   border: none;
   cursor: pointer;
   padding: ${({ theme }) => theme.space.sm};
-  z-index: 1002;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: block;
@@ -212,35 +172,28 @@ const NavLinks = styled.ul`
   list-style: none;
   margin: 0;
   padding: 0;
-  width: 100%;
-  justify-content: space-between;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     position: fixed;
-    top: 0;
+    top: 70px; /* Adjust based on header height */
     left: 0;
     right: 0;
     bottom: 0;
     flex-direction: column;
     background-color: ${({ theme }) => theme.colors.trustworthyNavy};
     padding: ${({ theme }) => theme.space.lg};
-    padding-top: 80px;
     transform: ${({ open }) => open ? 'translateX(0)' : 'translateX(100%)'};
     opacity: ${({ open }) => open ? 1 : 0};
     visibility: ${({ open }) => open ? 'visible' : 'hidden'};
     transition: all 0.3s ease;
     overflow-y: auto;
-    z-index: 1001;
-    justify-content: flex-start;
-    height: 100vh;
-    width: 100vw;
+    z-index: 999;
   }
 `
 
 const NavItem = styled.li`
+  margin: 0 ${({ theme }) => theme.space.md};
   position: relative;
-  text-align: center;
-  padding: 0 ${({ theme }) => theme.space.md};
   
   &::after {
     content: '';
@@ -261,13 +214,9 @@ const NavItem = styled.li`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     margin: ${({ theme }) => `${theme.space.md} 0`};
-    text-align: left;
-    padding: 0;
     
     &::after {
       bottom: -2px;
-      height: 2px;
-      width: 50px;
     }
   }
 `
@@ -278,9 +227,6 @@ const NavLink = styled(Link)`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   transition: color 0.3s ease;
-  display: block;
-  text-align: center;
-  white-space: nowrap;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primary};
@@ -291,14 +237,12 @@ const NavLink = styled(Link)`
     font-size: ${({ theme }) => theme.fontSizes.lg};
     display: block;
     padding: ${({ theme }) => theme.space.sm} 0;
-    text-align: left;
   }
 `
 
 const AuthButtons = styled.div`
   display: flex;
   align-items: center;
-  margin-left: ${({ theme }) => theme.space.xl};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     display: none;
@@ -321,37 +265,19 @@ const LoginButton = styled(Button)`
   }
 `
 
-const ArtistSignupButton = styled(Button)`
+const SignupButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
-  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.md}`};
+  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.lg}`};
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-right: ${({ theme }) => theme.space.sm};
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
-    text-decoration: none;
-  }
-`
-
-const VenueSignupButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: white;
-  border: none;
-  border-radius: ${({ theme }) => theme.radii.md};
-  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.md}`};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.secondaryDark};
     text-decoration: none;
   }
 `
@@ -365,7 +291,6 @@ const MobileAuthButtons = styled.div`
     flex-direction: column;
     gap: ${({ theme }) => theme.space.md};
     margin-top: ${({ theme }) => theme.space.xl};
-    width: 100%;
   }
 `
 
@@ -378,7 +303,6 @@ const MobileLoginButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   border-radius: ${({ theme }) => theme.radii.md};
   text-align: center;
-  width: 100%;
   
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -395,44 +319,10 @@ const MobileSignupButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   border-radius: ${({ theme }) => theme.radii.md};
   text-align: center;
-  width: 100%;
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
     text-decoration: none;
-  }
-`
-
-const MobileVenueSignupButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.secondary};
-  color: white;
-  border: none;
-  padding: ${({ theme }) => theme.space.md};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  border-radius: ${({ theme }) => theme.radii.md};
-  text-align: center;
-  width: 100%;
-  
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.secondaryDark};
-    text-decoration: none;
-  }
-`
-
-// Overlay for mobile menu
-const MobileMenuOverlay = styled.div`
-  display: none;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    display: block;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000;
   }
 `
 

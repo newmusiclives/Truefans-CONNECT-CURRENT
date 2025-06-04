@@ -17,26 +17,7 @@ const ArtistSignup = () => {
       spotify: ''
     },
     referralCode: '',
-    acceptTerms: false,
-    // New fields for music tracks
-    music: [
-      {
-        title: '',
-        duration: '',
-        audioUrl: '',
-        image: ''
-      }
-    ],
-    // New fields for upcoming shows
-    upcomingShows: [
-      {
-        venue: '',
-        location: '',
-        date: '',
-        time: '',
-        ticketPrice: ''
-      }
-    ]
+    acceptTerms: false
   })
   
   const [step, setStep] = useState(1)
@@ -59,63 +40,6 @@ const ArtistSignup = () => {
         [name]: type === 'checkbox' ? checked : value
       })
     }
-  }
-  
-  // Handle changes to nested arrays (music tracks and upcoming shows)
-  const handleArrayChange = (arrayName, index, field, value) => {
-    const updatedArray = [...formData[arrayName]]
-    updatedArray[index] = {
-      ...updatedArray[index],
-      [field]: value
-    }
-    
-    setFormData({
-      ...formData,
-      [arrayName]: updatedArray
-    })
-  }
-  
-  // Add a new item to an array (music track or upcoming show)
-  const handleAddItem = (arrayName) => {
-    if (arrayName === 'music') {
-      setFormData({
-        ...formData,
-        music: [
-          ...formData.music,
-          {
-            title: '',
-            duration: '',
-            audioUrl: '',
-            image: ''
-          }
-        ]
-      })
-    } else if (arrayName === 'upcomingShows') {
-      setFormData({
-        ...formData,
-        upcomingShows: [
-          ...formData.upcomingShows,
-          {
-            venue: '',
-            location: '',
-            date: '',
-            time: '',
-            ticketPrice: ''
-          }
-        ]
-      })
-    }
-  }
-  
-  // Remove an item from an array (music track or upcoming show)
-  const handleRemoveItem = (arrayName, index) => {
-    const updatedArray = [...formData[arrayName]]
-    updatedArray.splice(index, 1)
-    
-    setFormData({
-      ...formData,
-      [arrayName]: updatedArray
-    })
   }
   
   const nextStep = () => {
@@ -154,8 +78,6 @@ const ArtistSignup = () => {
             <ProgressStep active={step >= 2}>2</ProgressStep>
             <ProgressLine active={step >= 3} />
             <ProgressStep active={step >= 3}>3</ProgressStep>
-            <ProgressLine active={step >= 4} />
-            <ProgressStep active={step >= 4}>4</ProgressStep>
           </ProgressBar>
           
           <SignupForm onSubmit={handleSubmit}>
@@ -338,174 +260,7 @@ const ArtistSignup = () => {
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.3 }}
               >
-                <StepTitle>Your Music (Optional)</StepTitle>
-                <FormHint>Add tracks that fans can listen to on your profile. You can add more later.</FormHint>
-                
-                {formData.music.map((track, index) => (
-                  <TrackContainer key={index}>
-                    <TrackHeader>
-                      <TrackNumber>Track {index + 1}</TrackNumber>
-                      {index > 0 && (
-                        <RemoveButton 
-                          type="button" 
-                          onClick={() => handleRemoveItem('music', index)}
-                        >
-                          Remove
-                        </RemoveButton>
-                      )}
-                    </TrackHeader>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`track-title-${index}`}>Track Title</Label>
-                      <Input
-                        type="text"
-                        id={`track-title-${index}`}
-                        value={track.title}
-                        onChange={(e) => handleArrayChange('music', index, 'title', e.target.value)}
-                        placeholder="Enter track title"
-                      />
-                    </FormGroup>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`track-duration-${index}`}>Duration</Label>
-                      <Input
-                        type="text"
-                        id={`track-duration-${index}`}
-                        value={track.duration}
-                        onChange={(e) => handleArrayChange('music', index, 'duration', e.target.value)}
-                        placeholder="e.g. 3:42"
-                      />
-                    </FormGroup>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`track-audio-${index}`}>Audio URL</Label>
-                      <Input
-                        type="url"
-                        id={`track-audio-${index}`}
-                        value={track.audioUrl}
-                        onChange={(e) => handleArrayChange('music', index, 'audioUrl', e.target.value)}
-                        placeholder="Link to your audio file (MP3, WAV, etc.)"
-                      />
-                      <FormHint>Provide a link to your audio file hosted on SoundCloud, Dropbox, Google Drive, etc.</FormHint>
-                    </FormGroup>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`track-image-${index}`}>Track Image URL (Optional)</Label>
-                      <Input
-                        type="url"
-                        id={`track-image-${index}`}
-                        value={track.image}
-                        onChange={(e) => handleArrayChange('music', index, 'image', e.target.value)}
-                        placeholder="Link to track artwork image"
-                      />
-                    </FormGroup>
-                  </TrackContainer>
-                ))}
-                
-                <AddItemButton 
-                  type="button" 
-                  onClick={() => handleAddItem('music')}
-                >
-                  + Add Another Track
-                </AddItemButton>
-                
-                <ButtonGroup>
-                  <BackButton onClick={prevStep}>Back</BackButton>
-                  <NextButton onClick={nextStep}>Continue</NextButton>
-                </ButtonGroup>
-              </FormStep>
-            )}
-            
-            {step === 4 && (
-              <FormStep
-                as={motion.div}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.3 }}
-              >
-                <StepTitle>Upcoming Shows (Optional)</StepTitle>
-                <FormHint>Add your upcoming performances. You can add more or update these later.</FormHint>
-                
-                {formData.upcomingShows.map((show, index) => (
-                  <ShowContainer key={index}>
-                    <ShowHeader>
-                      <ShowNumber>Show {index + 1}</ShowNumber>
-                      {index > 0 && (
-                        <RemoveButton 
-                          type="button" 
-                          onClick={() => handleRemoveItem('upcomingShows', index)}
-                        >
-                          Remove
-                        </RemoveButton>
-                      )}
-                    </ShowHeader>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`show-venue-${index}`}>Venue Name</Label>
-                      <Input
-                        type="text"
-                        id={`show-venue-${index}`}
-                        value={show.venue}
-                        onChange={(e) => handleArrayChange('upcomingShows', index, 'venue', e.target.value)}
-                        placeholder="Enter venue name"
-                      />
-                    </FormGroup>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`show-location-${index}`}>Location</Label>
-                      <Input
-                        type="text"
-                        id={`show-location-${index}`}
-                        value={show.location}
-                        onChange={(e) => handleArrayChange('upcomingShows', index, 'location', e.target.value)}
-                        placeholder="City, State"
-                      />
-                    </FormGroup>
-                    
-                    <FormRow>
-                      <FormGroup>
-                        <Label htmlFor={`show-date-${index}`}>Date</Label>
-                        <Input
-                          type="date"
-                          id={`show-date-${index}`}
-                          value={show.date}
-                          onChange={(e) => handleArrayChange('upcomingShows', index, 'date', e.target.value)}
-                        />
-                      </FormGroup>
-                      
-                      <FormGroup>
-                        <Label htmlFor={`show-time-${index}`}>Time</Label>
-                        <Input
-                          type="time"
-                          id={`show-time-${index}`}
-                          value={show.time}
-                          onChange={(e) => handleArrayChange('upcomingShows', index, 'time', e.target.value)}
-                        />
-                      </FormGroup>
-                    </FormRow>
-                    
-                    <FormGroup>
-                      <Label htmlFor={`show-price-${index}`}>Ticket Price ($)</Label>
-                      <Input
-                        type="number"
-                        id={`show-price-${index}`}
-                        value={show.ticketPrice}
-                        onChange={(e) => handleArrayChange('upcomingShows', index, 'ticketPrice', e.target.value)}
-                        placeholder="0.00"
-                        min="0"
-                        step="0.01"
-                      />
-                    </FormGroup>
-                  </ShowContainer>
-                ))}
-                
-                <AddItemButton 
-                  type="button" 
-                  onClick={() => handleAddItem('upcomingShows')}
-                >
-                  + Add Another Show
-                </AddItemButton>
+                <StepTitle>Donation & Affiliate Setup</StepTitle>
                 
                 <InfoBox>
                   <InfoTitle>How It Works</InfoTitle>
@@ -638,16 +393,6 @@ const FormGroup = styled.div`
   margin-bottom: ${({ theme }) => theme.space.lg};
 `
 
-const FormRow = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.space.md};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    grid-template-columns: 1fr;
-  }
-`
-
 const Label = styled.label`
   display: block;
   font-size: ${({ theme }) => theme.fontSizes.md};
@@ -756,81 +501,6 @@ const SubmitButton = styled(Button)`
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondaryDark};
-  }
-`
-
-// Track and Show containers
-const TrackContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
-  border-radius: ${({ theme }) => theme.radii.md};
-  padding: ${({ theme }) => theme.space.lg};
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  border-left: 3px solid ${({ theme }) => theme.colors.primary};
-`
-
-const TrackHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const TrackNumber = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-`
-
-const ShowContainer = styled.div`
-  background-color: ${({ theme }) => theme.colors.background};
-  border-radius: ${({ theme }) => theme.radii.md};
-  padding: ${({ theme }) => theme.space.lg};
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  border-left: 3px solid ${({ theme }) => theme.colors.trustworthyNavy};
-`
-
-const ShowHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const ShowNumber = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-`
-
-const RemoveButton = styled.button`
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.danger};
-  border: none;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  
-  &:hover {
-    text-decoration: underline;
-  }
-`
-
-const AddItemButton = styled.button`
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.primary};
-  border: 1px dashed ${({ theme }) => theme.colors.primary};
-  border-radius: ${({ theme }) => theme.radii.md};
-  padding: ${({ theme }) => theme.space.md};
-  width: 100%;
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  margin-bottom: ${({ theme }) => theme.space.xl};
-  
-  &:hover {
-    background-color: ${({ theme }) => `${theme.colors.primary}10`};
   }
 `
 

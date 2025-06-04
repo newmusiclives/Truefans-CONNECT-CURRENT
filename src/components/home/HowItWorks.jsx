@@ -2,185 +2,175 @@ import React from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
-const HowItWorks = () => {
-  const steps = [
-    {
-      id: 1,
-      title: "Sign Up",
-      description: "Create your artist profile in minutes. Connect your payment account to start receiving donations.",
-      icon: "📝",
-    },
-    {
-      id: 2,
-      title: "Generate QR Codes",
-      description: "Create custom QR codes for your shows, merch table, or anywhere fans might want to support you.",
-      icon: "📱",
-    },
-    {
-      id: 3,
-      title: "Display at Shows",
-      description: "Print your QR codes or display them digitally at your performances and on merchandise.",
-      icon: "🎭",
-    },
-    {
-      id: 4,
-      title: "Collect Donations",
-      description: "Fans scan your code and donate directly to you. They can also follow you for updates.",
-      icon: "💰",
-    },
-    {
-      id: 5,
-      title: "Get Paid Fast",
-      description: "Receive your earnings the next business day directly to your connected account.",
-      icon: "💳",
-    },
-    {
-      id: 6,
-      title: "Build Relationships",
-      description: "Connect with your supporters, share updates, and turn one-time donors into lifelong fans.",
-      icon: "🤝",
-    }
-  ]
+const steps = [
+  {
+    id: 1,
+    title: 'Create Your Artist Profile',
+    description: 'Sign up and build your artist profile in minutes. Connect your payment account for same-day deposits.',
+    image: 'https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg',
+  },
+  {
+    id: 2,
+    title: 'Generate Your QR Codes',
+    description: 'Create custom QR codes for each show, merch item, or special offer. Each code is tracked for analytics.',
+    image: 'https://images.pexels.com/photos/4386366/pexels-photo-4386366.jpeg',
+  },
+  {
+    id: 3,
+    title: 'Display at Shows & Online',
+    description: 'Show your QR code on stage, merch table, or share digitally. Fans scan to support you instantly.',
+    image: 'https://images.pexels.com/photos/2747448/pexels-photo-2747448.jpeg',
+  },
+  {
+    id: 4,
+    title: 'Build Lasting Fan Relationships',
+    description: "Use our tools to nurture relationships with fans who've supported you. Send exclusive content and offers.",
+    image: 'https://images.pexels.com/photos/3984827/pexels-photo-3984827.jpeg',
+  },
+]
 
+const HowItWorks = () => {
   return (
-    <HowItWorksContainer>
-      <HowItWorksHeader>
-        <HowItWorksTitle>How TrueFans CONNECT™ Works</HowItWorksTitle>
-        <HowItWorksSubtitle>Get started in minutes and start earning at your very next show</HowItWorksSubtitle>
-      </HowItWorksHeader>
-      
-      <StepsContainer>
-        {steps.map((step) => (
-          <StepCard
-            key={step.id}
-            as={motion.div}
-            whileHover={{ y: -5, boxShadow: '0 10px 25px rgba(0,0,0,0.1)' }}
-            transition={{ duration: 0.3 }}
-          >
-            <StepNumber>{step.id}</StepNumber>
-            <StepIcon>{step.icon}</StepIcon>
-            <StepContent>
-              <StepTitle>{step.title}</StepTitle>
-              <StepDescription>{step.description}</StepDescription>
-            </StepContent>
-          </StepCard>
-        ))}
-      </StepsContainer>
-    </HowItWorksContainer>
+    <SectionWrapper>
+      <div className="container">
+        <SectionHeader>
+          <SectionTitle>How It Works</SectionTitle>
+          <SectionDescription>
+            Get started in minutes and start receiving direct fan support at your very next show.
+          </SectionDescription>
+        </SectionHeader>
+        
+        <StepsContainer>
+          {steps.map((step, index) => (
+            <StepItem
+              key={step.id}
+              as={motion.div}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+            >
+              <StepNumber>{step.id}</StepNumber>
+              <StepContent>
+                <StepImageWrapper>
+                  <StepImage src={step.image} alt={step.title} />
+                </StepImageWrapper>
+                <StepInfo>
+                  <StepTitle>{step.title}</StepTitle>
+                  <StepDescription>{step.description}</StepDescription>
+                </StepInfo>
+              </StepContent>
+            </StepItem>
+          ))}
+        </StepsContainer>
+      </div>
+    </SectionWrapper>
   )
 }
 
-const HowItWorksContainer = styled.section`
-  padding: ${({ theme }) => theme.space['4xl']} ${({ theme }) => theme.space.lg};
-  background: linear-gradient(135deg, ${({ theme }) => theme.colors.background} 0%, ${({ theme }) => theme.colors.lightBackground} 100%);
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    padding: ${({ theme }) => theme.space['3xl']} ${({ theme }) => theme.space.md};
-  }
+const SectionWrapper = styled.section`
+  padding: ${({ theme }) => theme.space['5xl']} 0;
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.trustworthyNavy} 0%, #0A1A2F 100%);
+  color: white;
 `
 
-const HowItWorksHeader = styled.div`
+const SectionHeader = styled.div`
   text-align: center;
   max-width: 800px;
   margin: 0 auto ${({ theme }) => theme.space['3xl']};
 `
 
-const HowItWorksTitle = styled.h2`
-  font-size: clamp(1.875rem, 3vw, ${({ theme }) => theme.fontSizes['3xl']});
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-  margin-bottom: ${({ theme }) => theme.space.md};
-  position: relative;
-  display: inline-block;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: ${({ theme }) => theme.colors.revolutionaryGold};
-  }
+const SectionTitle = styled.h2`
+  color: white;
+  margin-bottom: ${({ theme }) => theme.space.lg};
 `
 
-const HowItWorksSubtitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.6;
+const SectionDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.warmCream};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
 `
 
 const StepsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: ${({ theme }) => theme.space.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    grid-template-columns: 1fr;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: ${({ theme }) => theme.space['2xl']};
+  max-width: 900px;
+  margin: 0 auto;
 `
 
-const StepCard = styled.div`
-  background-color: white;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  padding: ${({ theme }) => theme.space.xl};
-  box-shadow: ${({ theme }) => theme.shadows.md};
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+const StepItem = styled.div`
   display: flex;
-  position: relative;
-  overflow: hidden;
+  align-items: flex-start;
   
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 4px;
-    height: 100%;
-    background-color: ${({ theme }) => theme.colors.secondary};
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    flex-direction: column;
   }
 `
 
 const StepNumber = styled.div`
-  position: absolute;
-  top: -5px;
-  right: 10px;
-  font-size: 5rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.revolutionaryGold};
+  color: ${({ theme }) => theme.colors.trustworthyNavy};
+  font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.lightGray};
-  opacity: 0.3;
-  z-index: 0;
-`
-
-const StepIcon = styled.div`
-  font-size: 2rem;
-  margin-right: ${({ theme }) => theme.space.lg};
-  background-color: ${({ theme }) => theme.colors.background};
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
+  font-size: ${({ theme }) => theme.fontSizes.xl};
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  z-index: 1;
+  flex-shrink: 0;
+  margin-right: ${({ theme }) => theme.space.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    margin-bottom: ${({ theme }) => theme.space.md};
+  }
 `
 
 const StepContent = styled.div`
-  z-index: 1;
+  flex: 1;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: ${({ theme }) => theme.radii.lg};
+  overflow: hidden;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+  }
+`
+
+const StepImageWrapper = styled.div`
+  width: 200px;
+  flex-shrink: 0;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    width: 100%;
+    height: 200px;
+  }
+`
+
+const StepImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`
+
+const StepInfo = styled.div`
+  padding: ${({ theme }) => theme.space.xl};
+  flex: 1;
 `
 
 const StepTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-  margin-bottom: ${({ theme }) => theme.space.sm};
+  color: ${({ theme }) => theme.colors.revolutionaryGold};
+  margin-bottom: ${({ theme }) => theme.space.md};
 `
 
 const StepDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
+  color: ${({ theme }) => theme.colors.warmCream};
   line-height: 1.6;
 `
 

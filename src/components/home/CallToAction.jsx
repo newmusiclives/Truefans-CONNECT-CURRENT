@@ -1,150 +1,179 @@
 import React from 'react'
 import styled from 'styled-components'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import Button from '../ui/Button'
+import { FaArrowRight } from 'react-icons/fa'
 
 const CallToAction = () => {
   return (
-    <CallToActionContainer>
-      <CallToActionContent>
-        <CallToActionTitle>Ready to Transform Your Music Career?</CallToActionTitle>
-        <CallToActionText>
-          Join thousands of independent artists who are taking control of their careers and building sustainable income streams with TrueFans CONNECT™.
-        </CallToActionText>
-        <CallToActionButtons>
-          <PrimaryButton as={Link} to="/artist-signup">Join as an Artist</PrimaryButton>
-          <SecondaryButton as={Link} to="/venue-signup">Partner as a Venue</SecondaryButton>
-        </CallToActionButtons>
-      </CallToActionContent>
-      
-      <CallToActionImage src="https://images.pexels.com/photos/1763075/pexels-photo-1763075.jpeg" alt="Artist performing" />
-    </CallToActionContainer>
+    <SectionWrapper>
+      <div className="container">
+        <ContentWrapper>
+          <BackgroundShape />
+          <CTAContent
+            as={motion.div}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <CTATitle>Ready to Transform Your Music Career?</CTATitle>
+            <CTADescription>
+              Join thousands of independent artists who are building sustainable careers through direct fan support.
+            </CTADescription>
+            
+            <CTAFeatures>
+              <CTAFeatureItem>
+                <FeatureCheck>✓</FeatureCheck>
+                <FeatureText>Get paid instantly at shows</FeatureText>
+              </CTAFeatureItem>
+              <CTAFeatureItem>
+                <FeatureCheck>✓</FeatureCheck>
+                <FeatureText>Build lasting fan relationships</FeatureText>
+              </CTAFeatureItem>
+              <CTAFeatureItem>
+                <FeatureCheck>✓</FeatureCheck>
+                <FeatureText>Same-day deposits to your account</FeatureText>
+              </CTAFeatureItem>
+              <CTAFeatureItem>
+                <FeatureCheck>✓</FeatureCheck>
+                <FeatureText>No more waiting for streaming pennies</FeatureText>
+              </CTAFeatureItem>
+            </CTAFeatures>
+            
+            <CTAButtons>
+              <Button 
+                as={Link} 
+                to="/signup" 
+                size="lg" 
+                icon={<FaArrowRight />} 
+                iconPosition="right"
+              >
+                Start Your Revolution
+              </Button>
+              <NoCardText>No credit card required to start</NoCardText>
+            </CTAButtons>
+          </CTAContent>
+        </ContentWrapper>
+      </div>
+    </SectionWrapper>
   )
 }
 
-const CallToActionContainer = styled.div`
+const SectionWrapper = styled.section`
+  padding: ${({ theme }) => theme.space['5xl']} 0;
+  background-color: ${({ theme }) => theme.colors.lightBackground};
+  overflow: hidden;
+`
+
+const ContentWrapper = styled.div`
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+`
+
+const BackgroundShape = styled.div`
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, ${({ theme }) => theme.colors.passionateCrimson}20, ${({ theme }) => theme.colors.energyOrange}20);
+  z-index: 0;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 150px;
+    left: -250px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, ${({ theme }) => theme.colors.revolutionaryGold}20, ${({ theme }) => theme.colors.successGreen}20);
+  }
+`
+
+const CTAContent = styled.div`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.xl};
+  padding: ${({ theme }) => theme.space['3xl']};
+  text-align: center;
+  box-shadow: ${({ theme }) => theme.shadows.xl};
+  position: relative;
+  z-index: 1;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    padding: ${({ theme }) => theme.space.xl};
+  }
+`
+
+const CTATitle = styled.h2`
+  color: ${({ theme }) => theme.colors.trustworthyNavy};
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
+const CTADescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.lightText};
+  max-width: 700px;
+  margin: 0 auto ${({ theme }) => theme.space.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    font-size: ${({ theme }) => theme.fontSizes.lg};
+  }
+`
+
+const CTAFeatures = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${({ theme }) => theme.space.lg};
+  max-width: 700px;
+  margin: 0 auto ${({ theme }) => theme.space.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const CTAFeatureItem = styled.div`
   display: flex;
   align-items: center;
-  gap: ${({ theme }) => theme.space.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    flex-direction: column;
-  }
+  text-align: left;
 `
 
-const CallToActionContent = styled.div`
-  flex: 1;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    text-align: center;
-    margin-bottom: ${({ theme }) => theme.space.xl};
-  }
-`
-
-const CallToActionTitle = styled.h2`
-  font-size: clamp(1.875rem, 3vw, ${({ theme }) => theme.fontSizes['3xl']});
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-  margin-bottom: ${({ theme }) => theme.space.md};
-  line-height: 1.2;
-`
-
-const CallToActionText = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.lightText};
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  line-height: 1.6;
-  max-width: 600px;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-`
-
-const CallToActionButtons = styled.div`
+const FeatureCheck = styled.span`
   display: flex;
-  gap: ${({ theme }) => theme.space.md};
-  flex-wrap: wrap;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    justify-content: center;
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    flex-direction: column;
-    gap: ${({ theme }) => theme.space.sm};
-  }
-`
-
-const PrimaryButton = styled(Button)`
-  padding: ${({ theme }) => `${theme.space.md} ${theme.space.xl}`};
-  background-color: ${({ theme }) => theme.colors.secondary};
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.successGreen};
   color: white;
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  border: none;
-  border-radius: ${({ theme }) => theme.radii.md};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  text-decoration: none;
-  display: inline-block;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.secondaryDark};
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-  }
-  
-  &:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    width: 100%;
-  }
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  margin-right: ${({ theme }) => theme.space.md};
+  flex-shrink: 0;
 `
 
-const SecondaryButton = styled(Button)`
-  padding: ${({ theme }) => `${theme.space.md} ${theme.space.xl}`};
-  background-color: transparent;
-  color: ${({ theme }) => theme.colors.darkText};
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  border: 2px solid ${({ theme }) => theme.colors.mediumGray};
-  border-radius: ${({ theme }) => theme.radii.md};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  text-decoration: none;
-  display: inline-block;
-  
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.lightGray};
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  }
-  
-  &:active {
-    transform: translateY(0);
-    box-shadow: none;
-  }
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    width: 100%;
-  }
+const FeatureText = styled.span`
+  color: ${({ theme }) => theme.colors.text};
+  font-size: ${({ theme }) => theme.fontSizes.md};
 `
 
-const CallToActionImage = styled.img`
-  flex: 1;
-  max-width: 500px;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  box-shadow: ${({ theme }) => theme.shadows.xl};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
-    width: 100%;
-  }
+const CTAButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
+`
+
+const NoCardText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.lightText};
+  margin-top: ${({ theme }) => theme.space.md};
 `
 
 export default CallToAction

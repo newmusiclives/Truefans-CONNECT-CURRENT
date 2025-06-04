@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import PageTransition from '../components/common/PageTransition'
 
 const Blog = () => {
   const [activeCategory, setActiveCategory] = useState('all')
-  const location = useLocation()
   
-  // Get query parameters for category filtering
-  useEffect(() => {
-    const params = new URLSearchParams(location.search)
-    const category = params.get('category')
-    if (category) {
-      setActiveCategory(category)
-    }
-  }, [location])
-  
-  // Mock data for blog posts
+  // Mock data for blog posts - all authored by Paul Saunders
   const blogPosts = [
     {
       id: 1,
@@ -26,11 +16,13 @@ const Blog = () => {
       excerpt: "Learn the strategies that top-earning independent artists use to increase their revenue streams and build sustainable careers.",
       category: "tips",
       date: "June 15, 2023",
-      author: "Sarah Johnson",
-      authorImage: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
-      featured: true,
-      slug: "maximize-earnings-independent-artist"
+      featured: true
     },
     {
       id: 2,
@@ -38,11 +30,13 @@ const Blog = () => {
       excerpt: "Discover how direct fan support is changing the music industry landscape and why many artists are choosing to go independent.",
       category: "industry",
       date: "May 28, 2023",
-      author: "Michael Chen",
-      authorImage: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
-      featured: true,
-      slug: "power-direct-fan-support"
+      featured: true
     },
     {
       id: 3,
@@ -50,11 +44,13 @@ const Blog = () => {
       excerpt: "Effective promotion strategies that independent artists can implement with limited budgets to reach new audiences.",
       category: "tips",
       date: "May 12, 2023",
-      author: "Emily Rodriguez",
-      authorImage: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg",
-      featured: false,
-      slug: "promote-music-budget-friendly"
+      featured: false
     },
     {
       id: 4,
@@ -62,11 +58,13 @@ const Blog = () => {
       excerpt: "Learn how to create a compelling artist brand that resonates with fans and helps you stand out in a crowded market.",
       category: "tips",
       date: "April 30, 2023",
-      author: "David Williams",
-      authorImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg",
-      featured: false,
-      slug: "building-artist-brand-guide"
+      featured: false
     },
     {
       id: 5,
@@ -74,11 +72,13 @@ const Blog = () => {
       excerpt: "An analysis of current trends in music streaming and what they mean for independent artists' revenue and exposure.",
       category: "industry",
       date: "April 15, 2023",
-      author: "John Smith",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
       authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/1626481/pexels-photo-1626481.jpeg",
-      featured: false,
-      slug: "future-music-streaming"
+      featured: false
     },
     {
       id: 6,
@@ -86,11 +86,13 @@ const Blog = () => {
       excerpt: "An inside look at how our platform is changing the way fans support their favorite artists and creating new opportunities.",
       category: "news",
       date: "April 5, 2023",
-      author: "Sarah Johnson",
-      authorImage: "https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/7147720/pexels-photo-7147720.jpeg",
-      featured: true,
-      slug: "truefans-revolutionizing-artist-support"
+      featured: true
     },
     {
       id: 7,
@@ -98,11 +100,13 @@ const Blog = () => {
       excerpt: "Practical advice for independent artists looking to increase their live performance opportunities and build venue relationships.",
       category: "tips",
       date: "March 22, 2023",
-      author: "Emily Rodriguez",
-      authorImage: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/2747446/pexels-photo-2747446.jpeg",
-      featured: false,
-      slug: "venue-relationships-booking-shows"
+      featured: false
     },
     {
       id: 8,
@@ -110,11 +114,13 @@ const Blog = () => {
       excerpt: "A comprehensive guide to music copyright laws and how to ensure your creative work is properly protected.",
       category: "legal",
       date: "March 10, 2023",
-      author: "Michael Chen",
-      authorImage: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+      author: "Paul Saunders",
+      authorTitle: "Founder, TrueFans CONNECT™",
+      authorEmail: "paul@truefansconnect.com",
+      authorPhone: "1-602-577-6556",
+      authorImage: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
       image: "https://images.pexels.com/photos/6953867/pexels-photo-6953867.jpeg",
-      featured: false,
-      slug: "understanding-music-copyright"
+      featured: false
     }
   ]
   
@@ -128,12 +134,6 @@ const Blog = () => {
   
   // Get unique categories
   const categories = ['all', ...new Set(blogPosts.map(post => post.category))]
-  
-  // Handle category change
-  const handleCategoryChange = (category) => {
-    setActiveCategory(category)
-    window.scrollTo(0, 0)
-  }
   
   return (
     <PageTransition>
@@ -165,7 +165,7 @@ const Blog = () => {
                       <FeaturedPostDate>{post.date}</FeaturedPostDate>
                     </FeaturedPostMeta>
                     <FeaturedPostExcerpt>{post.excerpt}</FeaturedPostExcerpt>
-                    <ReadMoreButton as={Link} to={`/blog/${post.slug}`}>Read Article</ReadMoreButton>
+                    <ReadMoreButton as={Link} to={`/blog/${post.id}`}>Read Article</ReadMoreButton>
                   </FeaturedPostOverlay>
                 </FeaturedPost>
               ))}
@@ -181,7 +181,7 @@ const Blog = () => {
               <CategoryTab 
                 key={category}
                 active={activeCategory === category}
-                onClick={() => handleCategoryChange(category)}
+                onClick={() => setActiveCategory(category)}
               >
                 {category === 'all' ? 'All Posts' : category.charAt(0).toUpperCase() + category.slice(1)}
               </CategoryTab>
@@ -190,22 +190,22 @@ const Blog = () => {
           
           <BlogGrid>
             {filteredPosts.map(post => (
-              <BlogArticle key={post.id}>
-                <BlogArticleImage src={post.image} alt={post.title} />
-                <BlogArticleContent>
-                  <BlogArticleCategory>{post.category.charAt(0).toUpperCase() + post.category.slice(1)}</BlogArticleCategory>
-                  <BlogArticleTitle>{post.title}</BlogArticleTitle>
-                  <BlogArticleExcerpt>{post.excerpt}</BlogArticleExcerpt>
-                  <BlogArticleMeta>
-                    <BlogArticleAuthor>
-                      <BlogArticleAuthorImage src={post.authorImage} alt={post.author} />
-                      <BlogArticleAuthorName>By {post.author}</BlogArticleAuthorName>
-                    </BlogArticleAuthor>
-                    <BlogArticleDate>{post.date}</BlogArticleDate>
-                  </BlogArticleMeta>
-                  <ReadMoreLink as={Link} to={`/blog/${post.slug}`}>Read More →</ReadMoreLink>
-                </BlogArticleContent>
-              </BlogArticle>
+              <BlogPost key={post.id}>
+                <BlogPostImage src={post.image} alt={post.title} />
+                <BlogPostContent>
+                  <BlogPostCategory>{post.category.charAt(0).toUpperCase() + post.category.slice(1)}</BlogPostCategory>
+                  <BlogPostTitle>{post.title}</BlogPostTitle>
+                  <BlogPostExcerpt>{post.excerpt}</BlogPostExcerpt>
+                  <BlogPostMeta>
+                    <BlogPostAuthor>
+                      <BlogPostAuthorImage src={post.authorImage} alt={post.author} />
+                      <BlogPostAuthorName>By {post.author}</BlogPostAuthorName>
+                    </BlogPostAuthor>
+                    <BlogPostDate>{post.date}</BlogPostDate>
+                  </BlogPostMeta>
+                  <ReadMoreLink as={Link} to={`/blog/${post.id}`}>Read More →</ReadMoreLink>
+                </BlogPostContent>
+              </BlogPost>
             ))}
           </BlogGrid>
           
@@ -391,8 +391,6 @@ const ReadMoreButton = styled(Button)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
-  text-decoration: none;
-  display: inline-block;
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.primaryDark};
@@ -440,7 +438,7 @@ const BlogGrid = styled.div`
   }
 `
 
-const BlogArticle = styled.article`
+const BlogPost = styled.article`
   background-color: white;
   border-radius: ${({ theme }) => theme.radii.lg};
   overflow: hidden;
@@ -453,17 +451,17 @@ const BlogArticle = styled.article`
   }
 `
 
-const BlogArticleImage = styled.img`
+const BlogPostImage = styled.img`
   width: 100%;
   height: 200px;
   object-fit: cover;
 `
 
-const BlogArticleContent = styled.div`
+const BlogPostContent = styled.div`
   padding: ${({ theme }) => theme.space.lg};
 `
 
-const BlogArticleCategory = styled.div`
+const BlogPostCategory = styled.div`
   display: inline-block;
   background-color: ${({ theme }) => theme.colors.lightGray};
   color: ${({ theme }) => theme.colors.darkText};
@@ -474,7 +472,7 @@ const BlogArticleCategory = styled.div`
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const BlogArticleTitle = styled.h3`
+const BlogPostTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
@@ -482,26 +480,26 @@ const BlogArticleTitle = styled.h3`
   line-height: 1.3;
 `
 
-const BlogArticleExcerpt = styled.p`
+const BlogPostExcerpt = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.lightText};
   line-height: 1.5;
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const BlogArticleMeta = styled.div`
+const BlogPostMeta = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const BlogArticleAuthor = styled.div`
+const BlogPostAuthor = styled.div`
   display: flex;
   align-items: center;
 `
 
-const BlogArticleAuthorImage = styled.img`
+const BlogPostAuthorImage = styled.img`
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -509,12 +507,12 @@ const BlogArticleAuthorImage = styled.img`
   object-fit: cover;
 `
 
-const BlogArticleAuthorName = styled.span`
+const BlogPostAuthorName = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
 `
 
-const BlogArticleDate = styled.span`
+const BlogPostDate = styled.span`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
 `
@@ -526,7 +524,6 @@ const ReadMoreLink = styled(Link)`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
-  text-decoration: none;
   
   &:hover {
     color: ${({ theme }) => theme.colors.primaryDark};

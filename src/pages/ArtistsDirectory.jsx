@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
 
 const ArtistsDirectory = () => {
   const [activeTab, setActiveTab] = useState('featured')
   const [searchQuery, setSearchQuery] = useState('')
   const [genreFilter, setGenreFilter] = useState('all')
-  const navigate = useNavigate()
   
   // Mock data for artists
   const artists = [
@@ -120,11 +119,6 @@ const ArtistsDirectory = () => {
   // Get unique genres for filter dropdown
   const genres = ['all', ...new Set(artists.map(artist => artist.genre.toLowerCase()))]
   
-  // Handle support artist click
-  const handleSupportArtist = (artistId) => {
-    navigate(`/artist-profile/${artistId}?support=true`)
-  }
-  
   return (
     <PageWrapper
       as={motion.main}
@@ -203,8 +197,8 @@ const ArtistsDirectory = () => {
                       </StatItem>
                     </ArtistStats>
                     <ArtistActions>
-                      <SupportButton onClick={() => handleSupportArtist(artist.id)}>Support Artist</SupportButton>
-                      <ViewProfileButton as={Link} to={`/artist-profile/${artist.id}`}>View Profile</ViewProfileButton>
+                      <SupportButton>Support Artist</SupportButton>
+                      <ViewProfileButton as={Link} to="/artist-profile">View Profile</ViewProfileButton>
                     </ArtistActions>
                   </ArtistInfo>
                 </ArtistCard>

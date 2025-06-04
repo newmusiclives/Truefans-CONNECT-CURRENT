@@ -1,275 +1,406 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+// Replacing react-icons with Unicode emoji icons
+// import { AiOutlineSave, AiOutlineReload, AiOutlinePicture, AiOutlineFont, AiOutlineBgColors, AiOutlineCheck } from 'react-icons/ai'
 import Button from '../ui/Button'
+import { theme as defaultTheme } from '../../styles/theme'
 
 const AdminBrandKit = () => {
-  const [activeTab, setActiveTab] = useState('colors')
+  const [brandColors, setBrandColors] = useState({
+    primary: defaultTheme.colors.primary,
+    primaryDark: defaultTheme.colors.primaryDark,
+    primaryLight: defaultTheme.colors.primaryLight,
+    secondary: defaultTheme.colors.secondary,
+    secondaryDark: defaultTheme.colors.secondaryDark,
+    secondaryLight: defaultTheme.colors.secondaryLight,
+    trustworthyNavy: defaultTheme.colors.trustworthyNavy,
+    trustworthyNavyLight: defaultTheme.colors.trustworthyNavyLight,
+  })
   
-  // Brand colors
-  const brandColors = [
-    { name: 'Primary', hex: '#FFD700', rgb: 'rgb(255, 215, 0)', usage: 'Primary buttons, highlights, and key interactive elements' },
-    { name: 'TrustworthyNavy', hex: '#1A2B4C', rgb: 'rgb(26, 43, 76)', usage: 'Headers, footers, and primary background' },
-    { name: 'TrustworthyNavyLight', hex: '#2A3B5C', rgb: 'rgb(42, 59, 92)', usage: 'Secondary backgrounds, hover states' },
-    { name: 'Success', hex: '#4CAF50', rgb: 'rgb(76, 175, 80)', usage: 'Success messages, positive indicators' },
-    { name: 'Warning', hex: '#FF9800', rgb: 'rgb(255, 152, 0)', usage: 'Warning messages, attention indicators' },
-    { name: 'Error', hex: '#F44336', rgb: 'rgb(244, 67, 54)', usage: 'Error messages, destructive actions' },
-    { name: 'Info', hex: '#2196F3', rgb: 'rgb(33, 150, 243)', usage: 'Information messages, neutral indicators' },
-    { name: 'LightGray', hex: '#F5F7FA', rgb: 'rgb(245, 247, 250)', usage: 'Background for cards, subtle separators' },
-    { name: 'MediumGray', hex: '#E1E4E8', rgb: 'rgb(225, 228, 232)', usage: 'Borders, dividers, secondary elements' },
-    { name: 'DarkText', hex: '#333333', rgb: 'rgb(51, 51, 51)', usage: 'Primary text color' },
-    { name: 'LightText', hex: '#6E7A8A', rgb: 'rgb(110, 122, 138)', usage: 'Secondary text, labels, placeholders' },
-  ]
+  const [siteImages, setSiteImages] = useState({
+    logo: '/logo.png',
+    hero: 'https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg',
+    about: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
+    artists: 'https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg',
+    venues: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg',
+  })
   
-  // Typography
-  const typography = [
-    { name: 'Heading 1', size: '2.5rem (40px)', weight: 'Bold (700)', family: 'Inter, sans-serif', usage: 'Main page headings' },
-    { name: 'Heading 2', size: '2rem (32px)', weight: 'SemiBold (600)', family: 'Inter, sans-serif', usage: 'Section headings' },
-    { name: 'Heading 3', size: '1.5rem (24px)', weight: 'SemiBold (600)', family: 'Inter, sans-serif', usage: 'Subsection headings' },
-    { name: 'Heading 4', size: '1.25rem (20px)', weight: 'Medium (500)', family: 'Inter, sans-serif', usage: 'Card headings, smaller sections' },
-    { name: 'Body', size: '1rem (16px)', weight: 'Regular (400)', family: 'Inter, sans-serif', usage: 'Main body text' },
-    { name: 'Small', size: '0.875rem (14px)', weight: 'Regular (400)', family: 'Inter, sans-serif', usage: 'Secondary text, captions' },
-    { name: 'XSmall', size: '0.75rem (12px)', weight: 'Regular (400)', family: 'Inter, sans-serif', usage: 'Legal text, footnotes' },
-  ]
+  const [fonts, setFonts] = useState({
+    headings: 'Inter',
+    body: 'Inter',
+  })
   
-  // Logos
-  const logos = [
-    { name: 'Primary Logo', description: 'Full color logo for use on light backgrounds', format: 'SVG, PNG', download: 'primary-logo.zip' },
-    { name: 'Inverse Logo', description: 'White logo for use on dark backgrounds', format: 'SVG, PNG', download: 'inverse-logo.zip' },
-    { name: 'Icon Only', description: 'Logo icon without text for small spaces', format: 'SVG, PNG', download: 'icon-only.zip' },
-    { name: 'Monochrome', description: 'Single color versions for special applications', format: 'SVG, PNG', download: 'monochrome.zip' },
-  ]
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
   
-  // UI Components
-  const uiComponents = [
-    { name: 'Buttons', description: 'Primary, secondary, and tertiary button styles', preview: 'buttons.png' },
-    { name: 'Forms', description: 'Input fields, checkboxes, radio buttons, and selects', preview: 'forms.png' },
-    { name: 'Cards', description: 'Content containers for various information displays', preview: 'cards.png' },
-    { name: 'Navigation', description: 'Header, footer, and sidebar navigation components', preview: 'navigation.png' },
-    { name: 'Modals', description: 'Dialog boxes and overlay components', preview: 'modals.png' },
-    { name: 'Tables', description: 'Data display tables with various styling options', preview: 'tables.png' },
-  ]
-  
-  // Guidelines
-  const guidelines = [
-    { title: 'Logo Usage', content: 'Guidelines for proper logo placement, sizing, and clearance space.' },
-    { title: 'Color Application', content: 'How to apply the color palette effectively across different mediums.' },
-    { title: 'Typography Rules', content: 'Hierarchy, spacing, and alignment guidelines for text elements.' },
-    { title: 'Voice & Tone', content: 'How to communicate in the TrueFans brand voice across different channels.' },
-    { title: 'Photography Style', content: 'Guidelines for selecting and editing photos that align with the brand.' },
-    { title: 'Accessibility', content: 'Ensuring all brand materials meet WCAG 2.1 AA standards for accessibility.' },
-  ]
-  
-  // Function to copy color to clipboard
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        alert(`Copied: ${text}`)
-      })
-      .catch(err => {
-        console.error('Failed to copy: ', err)
-      })
+  const handleColorChange = (colorKey, value) => {
+    setBrandColors(prev => ({
+      ...prev,
+      [colorKey]: value
+    }))
   }
+  
+  const handleImageChange = (imageKey, value) => {
+    setSiteImages(prev => ({
+      ...prev,
+      [imageKey]: value
+    }))
+  }
+  
+  const handleFontChange = (fontKey, value) => {
+    setFonts(prev => ({
+      ...prev,
+      [fontKey]: value
+    }))
+  }
+  
+  const handleSaveChanges = () => {
+    // In a real application, this would save to a database or configuration file
+    console.log('Saving brand settings:', { brandColors, siteImages, fonts })
+    
+    // Show success message
+    setShowSuccessMessage(true)
+    
+    // Hide success message after 3 seconds
+    setTimeout(() => {
+      setShowSuccessMessage(false)
+    }, 3000)
+  }
+  
+  const handleResetToDefaults = () => {
+    setBrandColors({
+      primary: defaultTheme.colors.primary,
+      primaryDark: defaultTheme.colors.primaryDark,
+      primaryLight: defaultTheme.colors.primaryLight,
+      secondary: defaultTheme.colors.secondary,
+      secondaryDark: defaultTheme.colors.secondaryDark,
+      secondaryLight: defaultTheme.colors.secondaryLight,
+      trustworthyNavy: defaultTheme.colors.trustworthyNavy,
+      trustworthyNavyLight: defaultTheme.colors.trustworthyNavyLight,
+    })
+    
+    setSiteImages({
+      logo: '/logo.png',
+      hero: 'https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg',
+      about: 'https://images.pexels.com/photos/3184465/pexels-photo-3184465.jpeg',
+      artists: 'https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg',
+      venues: 'https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg',
+    })
+    
+    setFonts({
+      headings: 'Inter',
+      body: 'Inter',
+    })
+  }
+  
+  // Available font options
+  const fontOptions = [
+    'Inter',
+    'Roboto',
+    'Open Sans',
+    'Montserrat',
+    'Lato',
+    'Poppins',
+    'Raleway',
+    'Playfair Display',
+    'Merriweather',
+    'Source Sans Pro',
+  ]
   
   return (
     <BrandKitContainer>
       <BrandKitHeader>
-        <BrandKitTitle>Brand Kit</BrandKitTitle>
-        <BrandKitDescription>
-          Comprehensive guidelines and assets for maintaining brand consistency across all touchpoints.
-        </BrandKitDescription>
+        <BrandKitTitle>Brand Customization</BrandKitTitle>
+        <HeaderActions>
+          <Button 
+            variant="outline" 
+            size="md" 
+            icon={<span>🔄</span>}
+            onClick={handleResetToDefaults}
+          >
+            Reset to Defaults
+          </Button>
+          <Button 
+            variant="primary" 
+            size="md" 
+            icon={<span>💾</span>}
+            onClick={handleSaveChanges}
+          >
+            Save Changes
+          </Button>
+        </HeaderActions>
       </BrandKitHeader>
       
-      <TabsContainer>
-        <TabButton 
-          active={activeTab === 'colors'} 
-          onClick={() => setActiveTab('colors')}
-        >
-          Colors
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'typography'} 
-          onClick={() => setActiveTab('typography')}
-        >
-          Typography
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'logos'} 
-          onClick={() => setActiveTab('logos')}
-        >
-          Logos
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'ui'} 
-          onClick={() => setActiveTab('ui')}
-        >
-          UI Components
-        </TabButton>
-        <TabButton 
-          active={activeTab === 'guidelines'} 
-          onClick={() => setActiveTab('guidelines')}
-        >
-          Guidelines
-        </TabButton>
-      </TabsContainer>
+      {showSuccessMessage && (
+        <SuccessMessage>
+          <SuccessIcon>✅</SuccessIcon>
+          Brand settings saved successfully!
+        </SuccessMessage>
+      )}
       
-      <TabContent>
-        {activeTab === 'colors' && (
-          <ColorsSection>
-            <SectionSubtitle>Brand Colors</SectionSubtitle>
-            <ColorsGrid>
-              {brandColors.map(color => (
-                <ColorCard key={color.name}>
-                  <ColorSwatch color={color.hex} onClick={() => copyToClipboard(color.hex)} />
-                  <ColorInfo>
-                    <ColorName>{color.name}</ColorName>
-                    <ColorValues>
-                      <ColorValue onClick={() => copyToClipboard(color.hex)}>{color.hex}</ColorValue>
-                      <ColorValue onClick={() => copyToClipboard(color.rgb)}>{color.rgb}</ColorValue>
-                    </ColorValues>
-                    <ColorUsage>{color.usage}</ColorUsage>
-                  </ColorInfo>
-                </ColorCard>
-              ))}
-            </ColorsGrid>
-            <DownloadSection>
-              <Button variant="primary">Download Color Palette (Adobe)</Button>
-              <Button variant="outline">Download Color Palette (Figma)</Button>
-            </DownloadSection>
-          </ColorsSection>
-        )}
+      <BrandKitSection>
+        <SectionTitle>
+          <SectionIcon>🎨</SectionIcon>
+          Color Palette
+        </SectionTitle>
+        <SectionDescription>
+          Customize your brand colors. These colors will be applied throughout the platform.
+        </SectionDescription>
         
-        {activeTab === 'typography' && (
-          <TypographySection>
-            <SectionSubtitle>Typography System</SectionSubtitle>
-            <TypographyInfo>
-              <p>Our brand uses the Inter font family for all digital and print applications. Inter is a versatile sans-serif typeface designed for excellent readability on screens.</p>
-            </TypographyInfo>
-            
-            <TypographyTable>
-              <thead>
-                <tr>
-                  <th>Style</th>
-                  <th>Size</th>
-                  <th>Weight</th>
-                  <th>Font Family</th>
-                  <th>Usage</th>
-                </tr>
-              </thead>
-              <tbody>
-                {typography.map(type => (
-                  <tr key={type.name}>
-                    <td>
-                      <TypeSample style={{ 
-                        fontSize: type.size.split(' ')[0], 
-                        fontWeight: type.weight.split(' ')[1].replace('(', '').replace(')', '') 
-                      }}>
-                        {type.name}
-                      </TypeSample>
-                    </td>
-                    <td>{type.size}</td>
-                    <td>{type.weight}</td>
-                    <td>{type.family}</td>
-                    <td>{type.usage}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </TypographyTable>
-            
-            <DownloadSection>
-              <Button variant="primary">Download Font Files</Button>
-              <Button variant="outline">Typography Guidelines PDF</Button>
-            </DownloadSection>
-          </TypographySection>
-        )}
+        <ColorGrid>
+          <ColorItem>
+            <ColorLabel>Primary</ColorLabel>
+            <ColorPreview color={brandColors.primary} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.primary}
+              onChange={(e) => handleColorChange('primary', e.target.value)}
+            />
+            <ColorValue>{brandColors.primary}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Primary Dark</ColorLabel>
+            <ColorPreview color={brandColors.primaryDark} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.primaryDark}
+              onChange={(e) => handleColorChange('primaryDark', e.target.value)}
+            />
+            <ColorValue>{brandColors.primaryDark}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Primary Light</ColorLabel>
+            <ColorPreview color={brandColors.primaryLight} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.primaryLight}
+              onChange={(e) => handleColorChange('primaryLight', e.target.value)}
+            />
+            <ColorValue>{brandColors.primaryLight}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Secondary</ColorLabel>
+            <ColorPreview color={brandColors.secondary} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.secondary}
+              onChange={(e) => handleColorChange('secondary', e.target.value)}
+            />
+            <ColorValue>{brandColors.secondary}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Secondary Dark</ColorLabel>
+            <ColorPreview color={brandColors.secondaryDark} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.secondaryDark}
+              onChange={(e) => handleColorChange('secondaryDark', e.target.value)}
+            />
+            <ColorValue>{brandColors.secondaryDark}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Secondary Light</ColorLabel>
+            <ColorPreview color={brandColors.secondaryLight} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.secondaryLight}
+              onChange={(e) => handleColorChange('secondaryLight', e.target.value)}
+            />
+            <ColorValue>{brandColors.secondaryLight}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Navy</ColorLabel>
+            <ColorPreview color={brandColors.trustworthyNavy} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.trustworthyNavy}
+              onChange={(e) => handleColorChange('trustworthyNavy', e.target.value)}
+            />
+            <ColorValue>{brandColors.trustworthyNavy}</ColorValue>
+          </ColorItem>
+          
+          <ColorItem>
+            <ColorLabel>Navy Light</ColorLabel>
+            <ColorPreview color={brandColors.trustworthyNavyLight} />
+            <ColorInput 
+              type="color" 
+              value={brandColors.trustworthyNavyLight}
+              onChange={(e) => handleColorChange('trustworthyNavyLight', e.target.value)}
+            />
+            <ColorValue>{brandColors.trustworthyNavyLight}</ColorValue>
+          </ColorItem>
+        </ColorGrid>
         
-        {activeTab === 'logos' && (
-          <LogosSection>
-            <SectionSubtitle>Logo Assets</SectionSubtitle>
-            <LogoInfo>
-              <p>The TrueFans CONNECT™ logo represents our brand identity. Use these official logo files for all communications and marketing materials.</p>
-            </LogoInfo>
-            
-            <LogosGrid>
-              {logos.map(logo => (
-                <LogoCard key={logo.name}>
-                  <LogoPreview>
-                    <LogoPlaceholder>{logo.name}</LogoPlaceholder>
-                  </LogoPreview>
-                  <LogoDetails>
-                    <LogoName>{logo.name}</LogoName>
-                    <LogoDescription>{logo.description}</LogoDescription>
-                    <LogoFormat>Format: {logo.format}</LogoFormat>
-                    <DownloadButton variant="outline" size="sm">Download</DownloadButton>
-                  </LogoDetails>
-                </LogoCard>
-              ))}
-            </LogosGrid>
-            
-            <LogoUsageGuidelines>
-              <h3>Logo Usage Guidelines</h3>
-              <LogoGuidelinesList>
-                <LogoGuidelineItem>Maintain clear space around the logo equal to the height of the "T" in TrueFans.</LogoGuidelineItem>
-                <LogoGuidelineItem>Never alter the logo colors outside of the approved versions provided.</LogoGuidelineItem>
-                <LogoGuidelineItem>Do not stretch, distort, or rotate the logo.</LogoGuidelineItem>
-                <LogoGuidelineItem>Ensure the logo is legible at all sizes. For very small applications, use the icon-only version.</LogoGuidelineItem>
-              </LogoGuidelinesList>
-            </LogoUsageGuidelines>
-          </LogosSection>
-        )}
+        <ColorPreviewSection>
+          <PreviewTitle>Color Preview</PreviewTitle>
+          <PreviewDescription>See how your colors look together</PreviewDescription>
+          
+          <PreviewElements>
+            <PreviewButton color={brandColors.primary}>Primary Button</PreviewButton>
+            <PreviewButton color={brandColors.secondary}>Secondary Button</PreviewButton>
+            <PreviewCard 
+              bgColor={brandColors.trustworthyNavy} 
+              textColor="white"
+              accentColor={brandColors.primary}
+            >
+              <PreviewCardTitle>Card Title</PreviewCardTitle>
+              <PreviewCardText>This is how your colors will look on dark backgrounds.</PreviewCardText>
+            </PreviewCard>
+            <PreviewCard 
+              bgColor="white" 
+              textColor={brandColors.trustworthyNavy}
+              accentColor={brandColors.primary}
+            >
+              <PreviewCardTitle>Card Title</PreviewCardTitle>
+              <PreviewCardText>This is how your colors will look on light backgrounds.</PreviewCardText>
+            </PreviewCard>
+          </PreviewElements>
+        </ColorPreviewSection>
+      </BrandKitSection>
+      
+      <BrandKitSection>
+        <SectionTitle>
+          <SectionIcon>🔤</SectionIcon>
+          Typography
+        </SectionTitle>
+        <SectionDescription>
+          Choose fonts for your headings and body text. These fonts will be applied throughout the platform.
+        </SectionDescription>
         
-        {activeTab === 'ui' && (
-          <UIComponentsSection>
-            <SectionSubtitle>UI Component Library</SectionSubtitle>
-            <UIInfo>
-              <p>These standardized UI components ensure consistency across all digital products and interfaces.</p>
-            </UIInfo>
-            
-            <UIComponentsGrid>
-              {uiComponents.map(component => (
-                <UIComponentCard key={component.name}>
-                  <UIComponentPreview>
-                    <UIComponentPlaceholder>{component.name}</UIComponentPlaceholder>
-                  </UIComponentPreview>
-                  <UIComponentDetails>
-                    <UIComponentName>{component.name}</UIComponentName>
-                    <UIComponentDescription>{component.description}</UIComponentDescription>
-                  </UIComponentDetails>
-                </UIComponentCard>
+        <FontSelectionGrid>
+          <FontSelectionItem>
+            <FontLabel>Heading Font</FontLabel>
+            <FontSelect 
+              value={fonts.headings}
+              onChange={(e) => handleFontChange('headings', e.target.value)}
+            >
+              {fontOptions.map(font => (
+                <option key={font} value={font}>{font}</option>
               ))}
-            </UIComponentsGrid>
-            
-            <DownloadSection>
-              <Button variant="primary">Download UI Kit (Figma)</Button>
-              <Button variant="outline">Download UI Kit (Sketch)</Button>
-            </DownloadSection>
-          </UIComponentsSection>
-        )}
+            </FontSelect>
+            <FontPreview fontFamily={fonts.headings}>
+              <FontPreviewHeading>This is a heading</FontPreviewHeading>
+              <FontPreviewSubheading>This is a subheading</FontPreviewSubheading>
+            </FontPreview>
+          </FontSelectionItem>
+          
+          <FontSelectionItem>
+            <FontLabel>Body Font</FontLabel>
+            <FontSelect 
+              value={fonts.body}
+              onChange={(e) => handleFontChange('body', e.target.value)}
+            >
+              {fontOptions.map(font => (
+                <option key={font} value={font}>{font}</option>
+              ))}
+            </FontSelect>
+            <FontPreview fontFamily={fonts.body}>
+              <FontPreviewParagraph>
+                This is a paragraph of text that shows how your body font will look throughout the platform. 
+                It should be easy to read at various sizes and work well with your brand colors.
+              </FontPreviewParagraph>
+            </FontPreview>
+          </FontSelectionItem>
+        </FontSelectionGrid>
+      </BrandKitSection>
+      
+      <BrandKitSection>
+        <SectionTitle>
+          <SectionIcon>🖼️</SectionIcon>
+          Site Images
+        </SectionTitle>
+        <SectionDescription>
+          Update the key images used throughout the platform. For best results, use high-quality images in the recommended dimensions.
+        </SectionDescription>
         
-        {activeTab === 'guidelines' && (
-          <GuidelinesSection>
-            <SectionSubtitle>Brand Guidelines</SectionSubtitle>
-            <GuidelinesInfo>
-              <p>These guidelines help maintain brand consistency across all communications and touchpoints.</p>
-            </GuidelinesInfo>
-            
-            <GuidelinesList>
-              {guidelines.map((guideline, index) => (
-                <GuidelineItem key={index}>
-                  <GuidelineTitle>{guideline.title}</GuidelineTitle>
-                  <GuidelineContent>{guideline.content}</GuidelineContent>
-                  <GuidelineAction>
-                    <Button variant="text" size="sm">View Details</Button>
-                  </GuidelineAction>
-                </GuidelineItem>
-              ))}
-            </GuidelinesList>
-            
-            <DownloadSection>
-              <Button variant="primary">Download Complete Brand Guidelines (PDF)</Button>
-            </DownloadSection>
-          </GuidelinesSection>
-        )}
-      </TabContent>
+        <ImagesGrid>
+          <ImageItem>
+            <ImageLabel>Logo</ImageLabel>
+            <ImagePreview>
+              <img src={siteImages.logo} alt="Logo Preview" />
+            </ImagePreview>
+            <ImageInput
+              type="text"
+              value={siteImages.logo}
+              onChange={(e) => handleImageChange('logo', e.target.value)}
+              placeholder="Enter logo URL"
+            />
+            <ImageDimensions>Recommended: 200×50px</ImageDimensions>
+          </ImageItem>
+          
+          <ImageItem>
+            <ImageLabel>Hero Image</ImageLabel>
+            <ImagePreview large>
+              <img src={siteImages.hero} alt="Hero Preview" />
+            </ImagePreview>
+            <ImageInput
+              type="text"
+              value={siteImages.hero}
+              onChange={(e) => handleImageChange('hero', e.target.value)}
+              placeholder="Enter hero image URL"
+            />
+            <ImageDimensions>Recommended: 1920×1080px</ImageDimensions>
+          </ImageItem>
+          
+          <ImageItem>
+            <ImageLabel>About Page Image</ImageLabel>
+            <ImagePreview>
+              <img src={siteImages.about} alt="About Page Preview" />
+            </ImagePreview>
+            <ImageInput
+              type="text"
+              value={siteImages.about}
+              onChange={(e) => handleImageChange('about', e.target.value)}
+              placeholder="Enter about page image URL"
+            />
+            <ImageDimensions>Recommended: 800×600px</ImageDimensions>
+          </ImageItem>
+          
+          <ImageItem>
+            <ImageLabel>Artists Page Image</ImageLabel>
+            <ImagePreview>
+              <img src={siteImages.artists} alt="Artists Page Preview" />
+            </ImagePreview>
+            <ImageInput
+              type="text"
+              value={siteImages.artists}
+              onChange={(e) => handleImageChange('artists', e.target.value)}
+              placeholder="Enter artists page image URL"
+            />
+            <ImageDimensions>Recommended: 800×600px</ImageDimensions>
+          </ImageItem>
+          
+          <ImageItem>
+            <ImageLabel>Venues Page Image</ImageLabel>
+            <ImagePreview>
+              <img src={siteImages.venues} alt="Venues Page Preview" />
+            </ImagePreview>
+            <ImageInput
+              type="text"
+              value={siteImages.venues}
+              onChange={(e) => handleImageChange('venues', e.target.value)}
+              placeholder="Enter venues page image URL"
+            />
+            <ImageDimensions>Recommended: 800×600px</ImageDimensions>
+          </ImageItem>
+        </ImagesGrid>
+      </BrandKitSection>
+      
+      <SaveButtonContainer>
+        <Button 
+          variant="primary" 
+          size="lg" 
+          icon={<span>💾</span>}
+          onClick={handleSaveChanges}
+        >
+          Save All Changes
+        </Button>
+      </SaveButtonContainer>
     </BrandKitContainer>
   )
 }
@@ -277,89 +408,176 @@ const AdminBrandKit = () => {
 const BrandKitContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${({ theme }) => theme.space.lg};
+  gap: ${({ theme }) => theme.space.xl};
 `
 
 const BrandKitHeader = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.lg};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: ${({ theme }) => theme.space.md};
+  }
 `
 
 const BrandKitTitle = styled.h1`
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.sm};
+  margin: 0;
 `
 
-const BrandKitDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.lightText};
-  max-width: 800px;
-`
-
-const TabsContainer = styled.div`
+const HeaderActions = styled.div`
   display: flex;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGray};
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  overflow-x: auto;
+  gap: ${({ theme }) => theme.space.md};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    flex-wrap: nowrap;
-    padding-bottom: ${({ theme }) => theme.space.xs};
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    width: 100%;
+    flex-direction: column;
   }
 `
 
-const TabButton = styled.button`
-  padding: ${({ theme }) => `${theme.space.md} ${theme.space.lg}`};
-  background: none;
-  border: none;
-  border-bottom: 3px solid ${({ active, theme }) => active ? theme.colors.primary : 'transparent'};
-  color: ${({ active, theme }) => active ? theme.colors.darkText : theme.colors.lightText};
-  font-weight: ${({ active, theme }) => active ? theme.fontWeights.semiBold : theme.fontWeights.medium};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  cursor: pointer;
-  transition: ${({ theme }) => theme.transitions.default};
-  white-space: nowrap;
-  
-  &:hover {
-    color: ${({ theme }) => theme.colors.darkText};
-  }
+const SuccessMessage = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => `${theme.colors.success}15`};
+  color: ${({ theme }) => theme.colors.success};
+  padding: ${({ theme }) => theme.space.md};
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
 `
 
-const TabContent = styled.div`
+const SuccessIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: ${({ theme }) => theme.space.md};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+`
+
+const BrandKitSection = styled.section`
   background-color: white;
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: ${({ theme }) => theme.space.xl};
   box-shadow: ${({ theme }) => theme.shadows.sm};
 `
 
-const SectionSubtitle = styled.h2`
+const SectionTitle = styled.h2`
+  display: flex;
+  align-items: center;
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.lg};
+  margin: 0 0 ${({ theme }) => theme.space.sm} 0;
 `
 
-// Colors Section
-const ColorsSection = styled.div``
+const SectionIcon = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: ${({ theme }) => theme.space.md};
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.primary};
+`
 
-const ColorsGrid = styled.div`
+const SectionDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.lightText};
+  margin: 0 0 ${({ theme }) => theme.space.lg} 0;
+`
+
+// Color Palette Styles
+const ColorGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: ${({ theme }) => theme.space.lg};
   margin-bottom: ${({ theme }) => theme.space.xl};
 `
 
-const ColorCard = styled.div`
+const ColorItem = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const ColorLabel = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.sm};
+`
+
+const ColorPreview = styled.div`
+  width: 100px;
+  height: 100px;
   border-radius: ${({ theme }) => theme.radii.md};
-  overflow: hidden;
+  background-color: ${({ color }) => color};
+  margin-bottom: ${({ theme }) => theme.space.sm};
   box-shadow: ${({ theme }) => theme.shadows.sm};
 `
 
-const ColorSwatch = styled.div`
-  width: 80px;
+const ColorInput = styled.input`
+  width: 100px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  margin-bottom: ${({ theme }) => theme.space.sm};
+  cursor: pointer;
+  
+  &::-webkit-color-swatch-wrapper {
+    padding: 0;
+  }
+  
+  &::-webkit-color-swatch {
+    border: none;
+    border-radius: ${({ theme }) => theme.radii.md};
+  }
+`
+
+const ColorValue = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.lightText};
+  font-family: monospace;
+`
+
+// Color Preview Styles
+const ColorPreviewSection = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border-radius: ${({ theme }) => theme.radii.lg};
+  padding: ${({ theme }) => theme.space.lg};
+`
+
+const PreviewTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin: 0 0 ${({ theme }) => theme.space.xs} 0;
+`
+
+const PreviewDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.lightText};
+  margin: 0 0 ${({ theme }) => theme.space.lg} 0;
+`
+
+const PreviewElements = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: ${({ theme }) => theme.space.lg};
+`
+
+const PreviewButton = styled.button`
   background-color: ${({ color }) => color};
+  color: white;
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.lg}`};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
   
@@ -368,279 +586,149 @@ const ColorSwatch = styled.div`
   }
 `
 
-const ColorInfo = styled.div`
-  flex: 1;
-  padding: ${({ theme }) => theme.space.md};
-  background-color: white;
-`
-
-const ColorName = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  margin-bottom: ${({ theme }) => theme.space.xs};
-`
-
-const ColorValues = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.xs};
-  margin-bottom: ${({ theme }) => theme.space.sm};
-`
-
-const ColorValue = styled.div`
-  font-family: monospace;
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.lightText};
-  cursor: pointer;
-  
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary};
-  }
-`
-
-const ColorUsage = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.lightText};
-`
-
-// Typography Section
-const TypographySection = styled.div``
-
-const TypographyInfo = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  
-  p {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-    line-height: 1.6;
-    color: ${({ theme }) => theme.colors.lightText};
-  }
-`
-
-const TypographyTable = styled.table`
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: ${({ theme }) => theme.space.xl};
-  
-  th, td {
-    padding: ${({ theme }) => theme.space.md};
-    text-align: left;
-    border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGray};
-  }
-  
-  th {
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    color: ${({ theme }) => theme.colors.darkText};
-    background-color: ${({ theme }) => theme.colors.lightGray};
-  }
-  
-  td {
-    color: ${({ theme }) => theme.colors.lightText};
-  }
-`
-
-const TypeSample = styled.div`
-  color: ${({ theme }) => theme.colors.darkText};
-  line-height: 1.2;
-`
-
-// Logos Section
-const LogosSection = styled.div``
-
-const LogoInfo = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  
-  p {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-    line-height: 1.6;
-    color: ${({ theme }) => theme.colors.lightText};
-  }
-`
-
-const LogosGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: ${({ theme }) => theme.space.lg};
-  margin-bottom: ${({ theme }) => theme.space.xl};
-`
-
-const LogoCard = styled.div`
+const PreviewCard = styled.div`
+  background-color: ${({ bgColor }) => bgColor};
+  color: ${({ textColor }) => textColor};
   border-radius: ${({ theme }) => theme.radii.md};
-  overflow: hidden;
-  box-shadow: ${({ theme }) => theme.shadows.sm};
-  background-color: white;
-`
-
-const LogoPreview = styled.div`
-  height: 150px;
-  background-color: ${({ theme }) => theme.colors.lightGray};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGray};
-`
-
-const LogoPlaceholder = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-`
-
-const LogoDetails = styled.div`
-  padding: ${({ theme }) => theme.space.md};
-`
-
-const LogoName = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  margin-bottom: ${({ theme }) => theme.space.xs};
-`
-
-const LogoDescription = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.lightText};
-  margin-bottom: ${({ theme }) => theme.space.sm};
-`
-
-const LogoFormat = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.lightText};
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const DownloadButton = styled(Button)`
-  width: 100%;
-`
-
-const LogoUsageGuidelines = styled.div`
-  background-color: ${({ theme }) => theme.colors.lightGray};
   padding: ${({ theme }) => theme.space.lg};
-  border-radius: ${({ theme }) => theme.radii.md};
-  margin-bottom: ${({ theme }) => theme.space.xl};
-  
-  h3 {
-    font-size: ${({ theme }) => theme.fontSizes.lg};
-    font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-    margin-bottom: ${({ theme }) => theme.space.md};
-  }
+  box-shadow: ${({ theme }) => theme.shadows.md};
+  border-left: 4px solid ${({ accentColor }) => accentColor};
 `
 
-const LogoGuidelinesList = styled.ul`
-  padding-left: ${({ theme }) => theme.space.lg};
-`
-
-const LogoGuidelineItem = styled.li`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
-  margin-bottom: ${({ theme }) => theme.space.sm};
-  line-height: 1.6;
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
-`
-
-// UI Components Section
-const UIComponentsSection = styled.div``
-
-const UIInfo = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  
-  p {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-    line-height: 1.6;
-    color: ${({ theme }) => theme.colors.lightText};
-  }
-`
-
-const UIComponentsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: ${({ theme }) => theme.space.lg};
-  margin-bottom: ${({ theme }) => theme.space.xl};
-`
-
-const UIComponentCard = styled.div`
-  border-radius: ${({ theme }) => theme.radii.md};
-  overflow: hidden;
-  box-shadow: ${({ theme }) => theme.shadows.sm};
-  background-color: white;
-`
-
-const UIComponentPreview = styled.div`
-  height: 180px;
-  background-color: ${({ theme }) => theme.colors.lightGray};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.mediumGray};
-`
-
-const UIComponentPlaceholder = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-`
-
-const UIComponentDetails = styled.div`
-  padding: ${({ theme }) => theme.space.md};
-`
-
-const UIComponentName = styled.div`
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  margin-bottom: ${({ theme }) => theme.space.xs};
-`
-
-const UIComponentDescription = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  color: ${({ theme }) => theme.colors.lightText};
-`
-
-// Guidelines Section
-const GuidelinesSection = styled.div``
-
-const GuidelinesInfo = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  
-  p {
-    font-size: ${({ theme }) => theme.fontSizes.md};
-    line-height: 1.6;
-    color: ${({ theme }) => theme.colors.lightText};
-  }
-`
-
-const GuidelinesList = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.md};
-  margin-bottom: ${({ theme }) => theme.space.xl};
-`
-
-const GuidelineItem = styled.div`
-  padding: ${({ theme }) => theme.space.lg};
-  background-color: white;
-  border-radius: ${({ theme }) => theme.radii.md};
-  box-shadow: ${({ theme }) => theme.shadows.sm};
-  border-left: 4px solid ${({ theme }) => theme.colors.primary};
-`
-
-const GuidelineTitle = styled.h3`
+const PreviewCardTitle = styled.h4`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  margin: 0 0 ${({ theme }) => theme.space.md} 0;
+`
+
+const PreviewCardText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  margin: 0;
+  opacity: 0.9;
+`
+
+// Typography Styles
+const FontSelectionGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: ${({ theme }) => theme.space.xl};
+`
+
+const FontSelectionItem = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const FontLabel = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.darkText};
   margin-bottom: ${({ theme }) => theme.space.sm};
 `
 
-const GuidelineContent = styled.p`
+const FontSelect = styled.select`
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.md}`};
+  border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+  border-radius: ${({ theme }) => theme.radii.md};
   font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
+  background-color: white;
   margin-bottom: ${({ theme }) => theme.space.md};
-  line-height: 1.6;
+  
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 2px ${({ theme }) => `${theme.colors.primary}33`};
+  }
 `
 
-const GuidelineAction = styled.div``
+const FontPreview = styled.div`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => theme.space.lg};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
+  font-family: ${({ fontFamily }) => fontFamily}, sans-serif;
+`
 
-const DownloadSection = styled.div`
+const FontPreviewHeading = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin: 0 0 ${({ theme }) => theme.space.md} 0;
+`
+
+const FontPreviewSubheading = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin: 0 0 ${({ theme }) => theme.space.md} 0;
+`
+
+const FontPreviewParagraph = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  line-height: 1.6;
+  color: ${({ theme }) => theme.colors.darkText};
+  margin: 0;
+`
+
+// Images Styles
+const ImagesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: ${({ theme }) => theme.space.xl};
+`
+
+const ImageItem = styled.div`
   display: flex;
-  gap: ${({ theme }) => theme.space.md};
+  flex-direction: column;
+`
+
+const ImageLabel = styled.label`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.sm};
+`
+
+const ImagePreview = styled.div`
+  width: 100%;
+  height: ${({ large }) => large ? '200px' : '150px'};
+  border-radius: ${({ theme }) => theme.radii.md};
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  margin-bottom: ${({ theme }) => theme.space.md};
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.sm};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
-    flex-direction: column;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
+`
+
+const ImageInput = styled.input`
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.md}`};
+  border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  background-color: white;
+  margin-bottom: ${({ theme }) => theme.space.sm};
+  
+  &:focus {
+    outline: none;
+    border-color: ${({ theme }) => theme.colors.primary};
+    box-shadow: 0 0 0 2px ${({ theme }) => `${theme.colors.primary}33`};
+  }
+`
+
+const ImageDimensions = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.lightText};
+`
+
+const SaveButtonContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: ${({ theme }) => theme.space.md};
 `
 
 export default AdminBrandKit

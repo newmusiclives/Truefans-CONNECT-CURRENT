@@ -7,7 +7,8 @@ const Logo = ({ size = 'default' }) => {
     <LogoWrapper size={size}>
       <LogoText>
         <MainText>
-          <BrandText>TrueFans</BrandText>
+          <TrueText>True</TrueText>
+          <FansText>Fans</FansText>
         </MainText>
         <ConnectText
           initial={{ opacity: 0, y: 5 }}
@@ -33,7 +34,7 @@ const LogoWrapper = styled.div`
         `
       case 'large':
         return `
-          transform: scale(1.2);
+          transform: scale(1.5);
         `
       default:
         return ``
@@ -50,30 +51,32 @@ const LogoText = styled.div`
 const MainText = styled.div`
   display: flex;
   align-items: center;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-  font-size: 1.4rem;
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-weight: ${({ theme }) => theme.fontWeights.black};
+  font-size: 1.8rem;
 `
 
-const BrandText = styled.span`
-  color: ${({ theme }) => theme.colors.primary};
-  &:first-child {
-    margin-right: 4px;
-  }
+const TrueText = styled.span`
+  color: ${({ theme }) => theme.colors.passionateCrimson};
+`
+
+const FansText = styled.span`
+  color: ${({ theme }) => theme.colors.trustworthyNavy};
+  margin-left: 4px;
 `
 
 const ConnectText = styled(motion.div)`
-  font-family: 'Montserrat', sans-serif;
-  font-weight: ${({ theme }) => theme.fontWeights.black};
-  font-size: 1.4rem;
+  font-family: ${({ theme }) => theme.fonts.heading};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  font-size: 0.9rem;
   letter-spacing: 2px;
-  color: ${({ theme }) => theme.colors.primary};
-  margin-top: 4px;
-  align-self: center;
+  color: ${({ theme }) => theme.colors.energyOrange};
+  margin-top: -2px;
+  align-self: flex-end;
 `
 
 const TrademarkSymbol = styled.sup`
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   vertical-align: super;
 `
 

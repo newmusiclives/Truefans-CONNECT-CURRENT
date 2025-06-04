@@ -1,134 +1,119 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Button from '../components/ui/Button'
 import PageTransition from '../components/common/PageTransition'
 
 const SuccessStories = () => {
-  // State to track which story is expanded
-  const [expandedStory, setExpandedStory] = useState(null)
-  
   // Mock data for success stories
-  const successStories = [
+  const featuredStories = [
     {
       id: 1,
-      artist: "Sarah James",
-      title: "From Local Gigs to National Tour",
-      excerpt: "How Sarah James used TrueFans CONNECT™ to build a dedicated fan base and fund her first national tour.",
-      image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
-      category: "touring",
-      results: [
-        "Grew fan base from 500 to 15,000 in 18 months",
-        "Raised $25,000 for tour expenses through fan contributions",
-        "Booked 32 venues across the country through the platform"
-      ],
-      quote: "TrueFans CONNECT™ changed everything for me. I went from playing small local venues to touring nationally, all while maintaining complete creative control of my music and career.",
-      fullStory: "Sarah James was playing in coffee shops and small bars in her hometown when she discovered TrueFans CONNECT™. With a handful of original songs and a small but dedicated local following, she decided to take a chance on the platform. \"I was skeptical at first,\" Sarah admits. \"There are so many platforms promising to help independent artists, but most of them just want your money without delivering results.\"\n\nWithin three months of joining, Sarah had connected with fans across the country who discovered her music through the platform's recommendation algorithm. \"The platform matched me with listeners who enjoyed similar artists, and I started seeing my follower count grow every day,\" she explains.\n\nSarah used the platform's direct support feature to fund her first EP, raising $8,000 from fans eager to hear more of her music. The success of the EP led to more followers, and when she announced her intention to tour, her fans rallied behind her.\n\n\"I was able to map out a tour based on where my most engaged listeners were located,\" Sarah says. \"The venue connection feature made it easy to book shows in cities I'd never played before, because venue owners could see my fan metrics in their area.\"\n\nToday, Sarah is planning her second national tour and working on her first full-length album, all funded through fan support on TrueFans CONNECT™. \"The best part is that I own all my music and maintain complete creative control,\" she says. \"This platform has made it possible for me to build a sustainable career on my own terms.\""
+      artist: "Marcus Rivera",
+      genre: "Hip Hop",
+      location: "Atlanta, GA",
+      image: "https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg",
+      artistImage: "https://images.pexels.com/photos/1699159/pexels-photo-1699159.jpeg",
+      title: "From Local Gigs to National Tours",
+      quote: "TrueFans CONNECT™ has completely transformed my career as an independent artist. The direct support from fans and the venue connections have allowed me to focus on creating music full-time.",
+      story: "Marcus was performing at small local venues and struggling to make ends meet when he joined TrueFans CONNECT™ in 2022. Within six months, he had built a dedicated supporter base that provided him with a stable monthly income. The platform's venue connections helped him book shows in cities across the country, and the affiliate program created an additional revenue stream. Today, Marcus is a full-time artist with a growing national fanbase.",
+      stats: {
+        monthlySupport: "$3,200",
+        supporters: 124,
+        venueBookings: 18,
+        affiliateEarnings: "$580/month"
+      }
     },
     {
       id: 2,
-      artist: "The Midnight Echo",
-      title: "Indie Band Funds Album Without Label Support",
-      excerpt: "How this four-piece indie rock band used direct fan support to record and release their breakthrough album.",
-      image: "https://images.pexels.com/photos/164693/pexels-photo-164693.jpeg",
-      category: "recording",
-      results: [
-        "Raised $18,000 for professional studio recording",
-        "Pre-sold 1,200 album copies to dedicated fans",
-        "Album reached #3 on indie charts"
-      ],
-      quote: "We were turned down by several labels, but our fans believed in us. Through TrueFans CONNECT™, we not only funded our album but built a community that continues to support our journey.",
-      fullStory: "The Midnight Echo had been together for three years, building a local following in their hometown of Portland, Oregon. Despite positive reviews of their self-produced EP, multiple record labels had passed on signing them. \"We were told our sound wasn't commercial enough,\" says lead vocalist Maya Chen. \"One label even suggested we change our style to be more mainstream.\"\n\nUnwilling to compromise their artistic vision but lacking the funds to produce a professional-quality album, the band turned to TrueFans CONNECT™. \"We had about 2,000 followers across our social media platforms, but we weren't sure how many would actually contribute financially,\" explains guitarist Tom Rodriguez.\n\nThe band created a detailed campaign on the platform, offering various tiers of support with different rewards, from digital downloads to private concerts. They set an initial goal of $12,000 to cover basic recording costs.\n\n\"We were shocked when we hit that target in just two weeks,\" says drummer Liam Johnson. \"We ended up raising $18,000, which allowed us to work with a producer we really admired and spend more time in the studio perfecting the sound.\"\n\nBeyond the financial support, The Midnight Echo found that the platform helped them build deeper connections with their audience. \"We used the update feature to share demos and behind-the-scenes content during the recording process,\" says bassist Olivia Kim. \"The feedback we got actually influenced some of our creative decisions in a really positive way.\"\n\nWhen the album was released, it debuted at #3 on the indie charts, leading to opportunities the band had previously been denied. \"We've been approached by labels that rejected us before,\" says Maya, \"but we're actually considering staying independent. TrueFans CONNECT™ has shown us there's a sustainable path forward without giving up control of our music.\""
+      artist: "Sophia Martinez",
+      genre: "Jazz",
+      location: "New Orleans, LA",
+      image: "https://images.pexels.com/photos/3984827/pexels-photo-3984827.jpeg",
+      artistImage: "https://images.pexels.com/photos/733872/pexels-photo-733872.jpeg",
+      title: "Building a Sustainable Jazz Career",
+      quote: "The affiliate program has been a game-changer for me. Not only am I earning from my music, but I'm also generating passive income by referring other artists to the platform.",
+      story: "As a jazz vocalist in New Orleans, Sophia was finding it difficult to monetize her talent beyond live performances. After joining TrueFans CONNECT™, she set up multiple donation methods that allowed her fans to support her work directly. The platform's affiliate program became a significant source of additional income as she referred other musicians from her network. With the financial stability provided by the platform, Sophia was able to record and release her debut album independently.",
+      stats: {
+        monthlySupport: "$2,800",
+        supporters: 95,
+        albumSales: 350,
+        affiliateEarnings: "$750/month"
+      }
     },
     {
       id: 3,
-      artist: "DJ Pulse",
-      title: "Electronic Artist Builds Global Following",
-      excerpt: "How DJ Pulse leveraged the platform to connect with fans worldwide and book international gigs.",
-      image: "https://images.pexels.com/photos/2111015/pexels-photo-2111015.jpeg",
-      category: "international",
-      results: [
-        "Connected with fans across 45 countries",
-        "Secured bookings at 5 international festivals",
-        "Increased monthly income by 300%"
-      ],
-      quote: "As an electronic artist, I was struggling to stand out. TrueFans CONNECT™ helped me find my audience and turn my passion into a sustainable career that takes me around the world.",
-      fullStory: "Marcus Lee, known professionally as DJ Pulse, was creating electronic music in his bedroom studio in Chicago while working a day job as an IT specialist. \"The electronic music scene is incredibly saturated,\" Marcus explains. \"I was posting my mixes online, but it felt like shouting into the void.\"\n\nAfter joining TrueFans CONNECT™, Marcus was surprised to discover that his music resonated particularly well with listeners in Europe and Asia. \"The platform's analytics showed me that my biggest supporters were in places like Berlin, Tokyo, and Seoul—cities with vibrant electronic music scenes that I had never reached before.\"\n\nUsing this information, Marcus began tailoring his release schedule to accommodate different time zones and creating content that appealed to his international audience. \"I started doing livestream sessions at times when my European and Asian fans could tune in, and the engagement skyrocketed.\"\n\nAs his following grew, Marcus caught the attention of event promoters who used the platform to discover new talent. \"A promoter from Berlin reached out about an opening slot at a club night. That first international gig led to connections with other promoters, and within a year, I was getting booked for festivals.\"\n\nThe consistent income from fan support on the platform allowed Marcus to quit his day job and focus on music full-time. \"The subscription model means I have a predictable monthly income from my core supporters, which gives me the financial stability to take creative risks and invest in better equipment.\"\n\nToday, DJ Pulse performs at clubs and festivals around the world and has collaborated with several established artists in the electronic music scene. \"What's amazing is that I've built this career while remaining completely independent. I don't have a manager or a label—just a direct connection with my fans through TrueFans CONNECT™.\""
-    },
+      artist: "David Williams",
+      genre: "Rock",
+      location: "Chicago, IL",
+      image: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg",
+      artistImage: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
+      title: "From Garage Band to Festival Stage",
+      quote: "The multiple donation methods have made it so easy for my fans to support me. I've seen a significant increase in my income since joining TrueFans CONNECT™.",
+      story: "David's rock band had a small but dedicated following in Chicago, but they were struggling to break through to larger venues and festivals. After setting up their profile on TrueFans CONNECT™, they implemented QR codes at their merchandise table and embedded donation widgets on their website. The increased visibility through the platform's artist directory led to connections with festival organizers, resulting in their first major festival appearance. The band now tours regularly and has a sustainable income from their music.",
+      stats: {
+        monthlySupport: "$4,100",
+        supporters: 178,
+        festivalAppearances: 5,
+        merchandiseSales: "300% increase"
+      }
+    }
+  ]
+  
+  const regularStories = [
     {
       id: 4,
-      artist: "Elena Rivera",
-      title: "Classical Violinist Finds New Audience",
-      excerpt: "How a classically trained violinist expanded beyond traditional venues to reach new listeners.",
-      image: "https://images.pexels.com/photos/7097455/pexels-photo-7097455.jpeg",
-      category: "crossover",
-      results: [
-        "Attracted 8,000 new fans outside the classical music scene",
-        "Funded a crossover album featuring classical and contemporary pieces",
-        "Booked 15 unconventional venues for intimate performances"
-      ],
-      quote: "I was confined to the traditional classical music world until TrueFans CONNECT™ helped me reach listeners who might never attend a symphony but love my violin interpretations of popular music.",
-      fullStory: "Elena Rivera began studying violin at age four and graduated from Juilliard with high honors. Despite her technical proficiency and passion, she found the classical music world increasingly restrictive. \"There's this perception that classical music is elitist or inaccessible,\" Elena says. \"I wanted to break down those barriers and share the beauty of the violin with a broader audience.\"\n\nElena began experimenting with contemporary arrangements, blending classical techniques with popular music. \"I started posting videos of me playing violin covers of pop and rock songs, but I was struggling to find the right audience.\"\n\nAfter joining TrueFans CONNECT™, Elena discovered a surprising interest in her crossover approach. \"The platform connected me with people who wouldn't typically seek out classical music but were intrigued by my modern interpretations. Suddenly, I was reaching listeners who had never been to a symphony hall.\"\n\nEncouraged by the positive response, Elena launched a campaign to fund a crossover album. \"I raised over $12,000 from supporters on the platform, which allowed me to record in a professional studio and work with a producer who understood both classical and contemporary music.\"\n\nBeyond funding, the platform helped Elena identify where her fans were located, allowing her to plan a tour of unconventional venues. \"Instead of concert halls, I performed in art galleries, boutique hotels, and even breweries. These intimate spaces created a different kind of connection with the audience.\"\n\nElena's approach has revitalized her relationship with classical music as well. \"I still perform traditional classical pieces, but now I have the freedom to explore other styles without worrying about alienating the classical establishment. My audience appreciates the diversity, and I've found a sustainable way to make a living as a violinist on my own terms.\"\n\nToday, Elena continues to build bridges between musical worlds, with a growing following of over 15,000 supporters on TrueFans CONNECT™. \"The platform didn't just help me find an audience—it helped me find my authentic voice as an artist.\""
+      artist: "Emily Chen",
+      genre: "Electronic",
+      location: "Los Angeles, CA",
+      image: "https://images.pexels.com/photos/1587009/pexels-photo-1587009.jpeg",
+      title: "From Bedroom Producer to Club Headliner",
+      quote: "TrueFans CONNECT™ gave me the financial freedom to invest in better equipment and focus on my craft. Now I'm headlining clubs across the West Coast.",
+      stats: {
+        monthlySupport: "$2,400",
+        supporters: 87
+      }
+    },
+    {
+      id: 5,
+      artist: "James Wilson",
+      genre: "Country",
+      location: "Austin, TX",
+      image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg",
+      title: "Building a Country Music Career on My Own Terms",
+      quote: "I turned down a record deal because TrueFans CONNECT™ showed me I could make more money and keep creative control by going independent.",
+      stats: {
+        monthlySupport: "$3,800",
+        supporters: 142
+      }
+    },
+    {
+      id: 6,
+      artist: "Olivia Taylor",
+      genre: "Pop",
+      location: "New York, NY",
+      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+      title: "From Teaching Music to Making It Full-Time",
+      quote: "I was teaching piano lessons to pay the bills while trying to launch my pop career. TrueFans CONNECT™ allowed me to quit my day job and focus on my music.",
+      stats: {
+        monthlySupport: "$3,100",
+        supporters: 115
+      }
+    },
+    {
+      id: 7,
+      artist: "Michael Brown",
+      genre: "R&B",
+      location: "Philadelphia, PA",
+      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg",
+      title: "From Church Choir to Soul Sensation",
+      quote: "The venue connections through TrueFans CONNECT™ helped me book my first tour. Now I'm performing at sold-out venues across the East Coast.",
+      stats: {
+        monthlySupport: "$2,900",
+        supporters: 103
+      }
     }
   ]
-  
-  // Mock data for testimonials
-  const testimonials = [
-    {
-      id: 1,
-      name: "Michael Chen",
-      role: "Venue Owner, The Sound Garden",
-      quote: "Since joining TrueFans CONNECT™, we've discovered amazing talent that our audiences love. The platform makes it easy to find artists with proven fan bases in our area, reducing the risk of poorly attended shows.",
-      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg"
-    },
-    {
-      id: 2,
-      name: "Lisa Johnson",
-      role: "Fan",
-      quote: "I love being able to directly support the artists I care about. It's amazing to see how my contributions help them create new music and tour to cities they couldn't reach before.",
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg"
-    },
-    {
-      id: 3,
-      name: "David Williams",
-      role: "Artist Manager",
-      quote: "As a manager, I've seen firsthand how TrueFans CONNECT™ has transformed the careers of my clients. The direct fan support model creates sustainable income streams that weren't possible before.",
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg"
-    }
-  ]
-  
-  // Mock data for statistics
-  const statistics = [
-    {
-      value: "$4.2M+",
-      label: "Contributed to Artists"
-    },
-    {
-      value: "15,000+",
-      label: "Artists on Platform"
-    },
-    {
-      value: "2,500+",
-      label: "Venue Partners"
-    },
-    {
-      value: "250,000+",
-      label: "Active Fans"
-    }
-  ]
-  
-  // Function to toggle story expansion
-  const toggleStory = (id) => {
-    if (expandedStory === id) {
-      setExpandedStory(null)
-    } else {
-      setExpandedStory(id)
-      // Scroll to the expanded story
-      setTimeout(() => {
-        document.getElementById(`story-${id}`).scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 100)
-    }
-  }
   
   return (
     <PageTransition>
@@ -141,75 +126,153 @@ const SuccessStories = () => {
         </Container>
       </HeroSection>
       
-      <StatsSection>
+      <IntroSection>
         <Container>
-          <StatsGrid>
-            {statistics.map(stat => (
-              <StatItem key={stat.value}>
-                <StatValue>{stat.value}</StatValue>
-                <StatLabel>{stat.label}</StatLabel>
+          <IntroContent>
+            <IntroText>
+              <IntroHeading>Empowering Independent Artists</IntroHeading>
+              <IntroParagraph>
+                At TrueFans CONNECT™, we're proud to help independent artists build sustainable careers on their own terms. Our platform provides the tools, connections, and support system that artists need to thrive in today's music industry.
+              </IntroParagraph>
+              <IntroParagraph>
+                The stories featured here represent just a small sample of the thousands of artists who have transformed their careers using our platform. From full-time musicians to emerging talents, TrueFans CONNECT™ is helping artists at every stage of their journey.
+              </IntroParagraph>
+            </IntroText>
+            <IntroStats>
+              <StatItem>
+                <StatNumber>10,000+</StatNumber>
+                <StatLabel>Artists on the platform</StatLabel>
               </StatItem>
-            ))}
-          </StatsGrid>
+              <StatItem>
+                <StatNumber>$2M+</StatNumber>
+                <StatLabel>Paid to artists</StatLabel>
+              </StatItem>
+              <StatItem>
+                <StatNumber>80%</StatNumber>
+                <StatLabel>Revenue to artists</StatLabel>
+              </StatItem>
+              <StatItem>
+                <StatNumber>500+</StatNumber>
+                <StatLabel>Venue partners</StatLabel>
+              </StatItem>
+            </IntroStats>
+          </IntroContent>
         </Container>
-      </StatsSection>
+      </IntroSection>
       
-      <StoriesSection>
+      <FeaturedStoriesSection>
         <Container>
           <SectionTitle>Featured Success Stories</SectionTitle>
+          
+          {featuredStories.map((story, index) => (
+            <FeaturedStory key={story.id}>
+              <FeaturedStoryContent order={index % 2}>
+                <FeaturedStoryText>
+                  <FeaturedStoryArtist>
+                    <FeaturedStoryArtistImage src={story.artistImage} alt={story.artist} />
+                    <FeaturedStoryArtistInfo>
+                      <FeaturedStoryArtistName>{story.artist}</FeaturedStoryArtistName>
+                      <FeaturedStoryArtistDetails>{story.genre} • {story.location}</FeaturedStoryArtistDetails>
+                    </FeaturedStoryArtistInfo>
+                  </FeaturedStoryArtist>
+                  <FeaturedStoryTitle>{story.title}</FeaturedStoryTitle>
+                  <FeaturedStoryQuote>"{story.quote}"</FeaturedStoryQuote>
+                  <FeaturedStoryDescription>{story.story}</FeaturedStoryDescription>
+                  <FeaturedStoryStats>
+                    {Object.entries(story.stats).map(([key, value]) => (
+                      <FeaturedStoryStat key={key}>
+                        <FeaturedStoryStatValue>{value}</FeaturedStoryStatValue>
+                        <FeaturedStoryStatLabel>
+                          {key
+                            .replace(/([A-Z])/g, ' $1')
+                            .replace(/^./, str => str.toUpperCase())}
+                        </FeaturedStoryStatLabel>
+                      </FeaturedStoryStat>
+                    ))}
+                  </FeaturedStoryStats>
+                  <FeaturedStoryButton as={Link} to="/artist-profile">View Artist Profile</FeaturedStoryButton>
+                </FeaturedStoryText>
+                <FeaturedStoryImage src={story.image} alt={story.title} />
+              </FeaturedStoryContent>
+            </FeaturedStory>
+          ))}
+        </Container>
+      </FeaturedStoriesSection>
+      
+      <MoreStoriesSection>
+        <Container>
+          <SectionTitle>More Success Stories</SectionTitle>
           <StoriesGrid>
-            {successStories.map(story => (
-              <StoryCard key={story.id} id={`story-${story.id}`}>
-                <StoryImage src={story.image} alt={story.artist} />
-                <StoryContent>
-                  <StoryCategory>{story.category.charAt(0).toUpperCase() + story.category.slice(1)}</StoryCategory>
-                  <StoryTitle>{story.title}</StoryTitle>
-                  <StoryArtist>{story.artist}</StoryArtist>
-                  <StoryExcerpt>{story.excerpt}</StoryExcerpt>
-                  <StoryResults>
-                    <ResultsTitle>Results:</ResultsTitle>
-                    <ResultsList>
-                      {story.results.map((result, index) => (
-                        <ResultItem key={index}>{result}</ResultItem>
-                      ))}
-                    </ResultsList>
-                  </StoryResults>
-                  <StoryQuote>"{story.quote}"</StoryQuote>
-                  
-                  {expandedStory === story.id && (
-                    <FullStory>
-                      {story.fullStory.split('\n\n').map((paragraph, index) => (
-                        <StoryParagraph key={index}>{paragraph}</StoryParagraph>
-                      ))}
-                    </FullStory>
-                  )}
-                  
-                  <ReadMoreButton onClick={() => toggleStory(story.id)}>
-                    {expandedStory === story.id ? 'Show Less' : 'Read Full Story'}
-                  </ReadMoreButton>
-                </StoryContent>
+            {regularStories.map(story => (
+              <StoryCard key={story.id}>
+                <StoryCardImage src={story.image} alt={story.artist} />
+                <StoryCardContent>
+                  <StoryCardArtist>{story.artist}</StoryCardArtist>
+                  <StoryCardTitle>{story.title}</StoryCardTitle>
+                  <StoryCardQuote>"{story.quote}"</StoryCardQuote>
+                  <StoryCardStats>
+                    {Object.entries(story.stats).map(([key, value]) => (
+                      <StoryCardStat key={key}>
+                        <StoryCardStatValue>{value}</StoryCardStatValue>
+                        <StoryCardStatLabel>
+                          {key
+                            .replace(/([A-Z])/g, ' $1')
+                            .replace(/^./, str => str.toUpperCase())}
+                        </StoryCardStatLabel>
+                      </StoryCardStat>
+                    ))}
+                  </StoryCardStats>
+                  <StoryCardButton as={Link} to="/artist-profile">View Profile</StoryCardButton>
+                </StoryCardContent>
               </StoryCard>
             ))}
           </StoriesGrid>
         </Container>
-      </StoriesSection>
+      </MoreStoriesSection>
       
       <TestimonialsSection>
         <Container>
-          <SectionTitle>What Our Community Says</SectionTitle>
+          <TestimonialsTitle>What Artists Are Saying</TestimonialsTitle>
           <TestimonialsGrid>
-            {testimonials.map(testimonial => (
-              <TestimonialCard key={testimonial.id}>
-                <TestimonialQuote>"{testimonial.quote}"</TestimonialQuote>
-                <TestimonialAuthor>
-                  <TestimonialImage src={testimonial.image} alt={testimonial.name} />
-                  <TestimonialInfo>
-                    <TestimonialName>{testimonial.name}</TestimonialName>
-                    <TestimonialRole>{testimonial.role}</TestimonialRole>
-                  </TestimonialInfo>
-                </TestimonialAuthor>
-              </TestimonialCard>
-            ))}
+            <TestimonialCard>
+              <TestimonialContent>
+                "TrueFans CONNECT™ has been the single most important factor in my ability to make music full-time. The direct support from fans has changed everything."
+              </TestimonialContent>
+              <TestimonialAuthor>
+                <TestimonialAuthorName>Alex Johnson</TestimonialAuthorName>
+                <TestimonialAuthorRole>Folk Singer-Songwriter</TestimonialAuthorRole>
+              </TestimonialAuthor>
+            </TestimonialCard>
+            
+            <TestimonialCard>
+              <TestimonialContent>
+                "The venue connections through this platform helped me book my first national tour. I'm now playing shows I never thought possible at this stage of my career."
+              </TestimonialContent>
+              <TestimonialAuthor>
+                <TestimonialAuthorName>Maria Garcia</TestimonialAuthorName>
+                <TestimonialAuthorRole>Indie Rock Vocalist</TestimonialAuthorRole>
+              </TestimonialAuthor>
+            </TestimonialCard>
+            
+            <TestimonialCard>
+              <TestimonialContent>
+                "As a hip hop producer, I was struggling to monetize my beats. TrueFans CONNECT™ gave me a platform to build a community that supports my work directly."
+              </TestimonialContent>
+              <TestimonialAuthor>
+                <TestimonialAuthorName>Jamal Williams</TestimonialAuthorName>
+                <TestimonialAuthorRole>Hip Hop Producer</TestimonialAuthorRole>
+              </TestimonialAuthor>
+            </TestimonialCard>
+            
+            <TestimonialCard>
+              <TestimonialContent>
+                "The affiliate program has created a whole new revenue stream for me. I'm earning passive income while helping other artists succeed too."
+              </TestimonialContent>
+              <TestimonialAuthor>
+                <TestimonialAuthorName>Sarah Miller</TestimonialAuthorName>
+                <TestimonialAuthorRole>Classical Pianist</TestimonialAuthorRole>
+              </TestimonialAuthor>
+            </TestimonialCard>
           </TestimonialsGrid>
         </Container>
       </TestimonialsSection>
@@ -218,12 +281,10 @@ const SuccessStories = () => {
         <Container>
           <CTAContent>
             <CTATitle>Ready to Write Your Success Story?</CTATitle>
-            <CTAText>
-              Join thousands of artists who are building sustainable careers through direct fan support and venue connections.
-            </CTAText>
+            <CTASubtitle>Join thousands of independent artists who are building sustainable careers with TrueFans CONNECT™</CTASubtitle>
             <CTAButtons>
-              <CTAButton as={Link} to="/artist-signup">Sign Up as an Artist</CTAButton>
-              <CTASecondaryButton as={Link} to="/venue-signup">Register Your Venue</CTASecondaryButton>
+              <PrimaryCTAButton as={Link} to="/artist-signup">Sign Up as an Artist</PrimaryCTAButton>
+              <SecondaryCTAButton as={Link} to="/about">Learn More</SecondaryCTAButton>
             </CTAButtons>
           </CTAContent>
         </Container>
@@ -262,21 +323,47 @@ const HeroSubtitle = styled.p`
   line-height: 1.5;
 `
 
-// Stats Section
-const StatsSection = styled.section`
-  padding: ${({ theme }) => theme.space.lg} 0;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
+// Intro Section
+const IntroSection = styled.section`
+  padding: ${({ theme }) => theme.space.xl} 0;
+  background-color: white;
 `
 
-const StatsGrid = styled.div`
+const IntroContent = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: ${({ theme }) => theme.space.lg};
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.space.xl};
+  align-items: center;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
+`
+
+const IntroText = styled.div``
+
+const IntroHeading = styled.h2`
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
+const IntroParagraph = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  color: ${({ theme }) => theme.colors.lightText};
+  line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.space.md};
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+`
+
+const IntroStats = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${({ theme }) => theme.space.lg};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     grid-template-columns: 1fr;
@@ -284,25 +371,34 @@ const StatsGrid = styled.div`
 `
 
 const StatItem = styled.div`
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border-radius: ${({ theme }) => theme.radii.lg};
+  padding: ${({ theme }) => theme.space.lg};
   text-align: center;
-  padding: ${({ theme }) => theme.space.md};
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${({ theme }) => theme.shadows.md};
+  }
 `
 
-const StatValue = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes['3xl']};
+const StatNumber = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
   font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.primary};
   margin-bottom: ${({ theme }) => theme.space.xs};
 `
 
 const StatLabel = styled.div`
   font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.darkText};
 `
 
-// Stories Section
-const StoriesSection = styled.section`
+// Featured Stories Section
+const FeaturedStoriesSection = styled.section`
   padding: ${({ theme }) => theme.space.xl} 0;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.background};
 `
 
 const SectionTitle = styled.h2`
@@ -313,133 +409,242 @@ const SectionTitle = styled.h2`
   text-align: center;
 `
 
-const StoriesGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.xl};
+const FeaturedStory = styled.article`
+  margin-bottom: ${({ theme }) => theme.space.xl};
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
 `
 
-const StoryCard = styled.article`
+const FeaturedStoryContent = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.space.xl};
-  background-color: white;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  overflow: hidden;
-  box-shadow: ${({ theme }) => theme.shadows.md};
-  transition: all 0.3s ease;
+  align-items: center;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     grid-template-columns: 1fr;
   }
-`
-
-const StoryImage = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    height: 300px;
-  }
+  ${({ order }) => order === 1 && `
+    direction: rtl;
+    
+    @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+      direction: ltr;
+    }
+  `}
 `
 
-const StoryContent = styled.div`
-  padding: ${({ theme }) => theme.space.lg};
+const FeaturedStoryText = styled.div`
+  direction: ltr;
 `
 
-const StoryCategory = styled.div`
-  display: inline-block;
-  background-color: ${({ theme }) => theme.colors.lightGray};
-  color: ${({ theme }) => theme.colors.darkText};
-  padding: ${({ theme }) => `${theme.space.xs} ${theme.space.md}`};
-  border-radius: ${({ theme }) => theme.radii.md};
-  font-size: ${({ theme }) => theme.fontSizes.sm};
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+const FeaturedStoryArtist = styled.div`
+  display: flex;
+  align-items: center;
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const StoryTitle = styled.h3`
+const FeaturedStoryArtistImage = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: ${({ theme }) => theme.space.md};
+`
+
+const FeaturedStoryArtistInfo = styled.div``
+
+const FeaturedStoryArtistName = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const FeaturedStoryArtistDetails = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.lightText};
+`
+
+const FeaturedStoryTitle = styled.h3`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.xs};
-`
-
-const StoryArtist = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.primary};
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const StoryExcerpt = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.6;
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const StoryResults = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const ResultsTitle = styled.h4`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.sm};
-`
-
-const ResultsList = styled.ul`
-  padding-left: ${({ theme }) => theme.space.lg};
-`
-
-const ResultItem = styled.li`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.6;
-  margin-bottom: ${({ theme }) => theme.space.xs};
-  
-  &:last-child {
-    margin-bottom: 0;
-  }
-`
-
-const StoryQuote = styled.blockquote`
+const FeaturedStoryQuote = styled.blockquote`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   font-style: italic;
   color: ${({ theme }) => theme.colors.darkText};
-  line-height: 1.5;
-  margin-bottom: ${({ theme }) => theme.space.lg};
+  margin-bottom: ${({ theme }) => theme.space.md};
   padding-left: ${({ theme }) => theme.space.md};
   border-left: 3px solid ${({ theme }) => theme.colors.primary};
 `
 
-const FullStory = styled.div`
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  animation: fadeIn 0.5s ease;
-  
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-`
-
-const StoryParagraph = styled.p`
+const FeaturedStoryDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.8;
-  margin-bottom: ${({ theme }) => theme.space.md};
+  line-height: 1.6;
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
+const FeaturedStoryStats = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${({ theme }) => theme.space.md};
+  margin-bottom: ${({ theme }) => theme.space.lg};
   
-  &:last-child {
-    margin-bottom: 0;
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
   }
 `
 
-const ReadMoreButton = styled(Button)`
+const FeaturedStoryStat = styled.div`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => theme.space.md};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: ${({ theme }) => theme.shadows.md};
+  }
+`
+
+const FeaturedStoryStatValue = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const FeaturedStoryStatLabel = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.lightText};
+`
+
+const FeaturedStoryButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
-  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.lg}`};
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.lg}`};
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primaryDark};
+    text-decoration: none;
+  }
+`
+
+const FeaturedStoryImage = styled.img`
+  width: 100%;
+  border-radius: ${({ theme }) => theme.radii.lg};
+  box-shadow: ${({ theme }) => theme.shadows.md};
+  direction: ltr;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    margin-bottom: ${({ theme }) => theme.space.lg};
+    order: -1;
+  }
+`
+
+// More Stories Section
+const MoreStoriesSection = styled.section`
+  padding: ${({ theme }) => theme.space.xl} 0;
+  background-color: white;
+`
+
+const StoriesGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: ${({ theme }) => theme.space.xl};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const StoryCard = styled.article`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.lg};
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.md};
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: ${({ theme }) => theme.shadows.lg};
+  }
+`
+
+const StoryCardImage = styled.img`
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+`
+
+const StoryCardContent = styled.div`
+  padding: ${({ theme }) => theme.space.lg};
+`
+
+const StoryCardArtist = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const StoryCardTitle = styled.h4`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const StoryCardQuote = styled.blockquote`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-style: italic;
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.lg};
+  line-height: 1.5;
+`
+
+const StoryCardStats = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: ${({ theme }) => theme.space.md};
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
+const StoryCardStat = styled.div`
+  text-align: center;
+`
+
+const StoryCardStatValue = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.primary};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const StoryCardStatLabel = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  color: ${({ theme }) => theme.colors.lightText};
+`
+
+const StoryCardButton = styled(Button)`
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.trustworthyNavy};
+  padding: ${({ theme }) => theme.space.md};
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
   font-size: ${({ theme }) => theme.fontSizes.md};
@@ -456,62 +661,54 @@ const ReadMoreButton = styled(Button)`
 // Testimonials Section
 const TestimonialsSection = styled.section`
   padding: ${({ theme }) => theme.space.xl} 0;
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: ${({ theme }) => theme.colors.lightGray};
+`
+
+const TestimonialsTitle = styled.h2`
+  font-size: ${({ theme }) => theme.fontSizes['2xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.xl};
+  text-align: center;
 `
 
 const TestimonialsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: ${({ theme }) => theme.space.lg};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
-    grid-template-columns: 1fr;
-  }
 `
 
 const TestimonialCard = styled.div`
   background-color: white;
   border-radius: ${({ theme }) => theme.radii.lg};
   padding: ${({ theme }) => theme.space.lg};
-  box-shadow: ${({ theme }) => theme.shadows.md};
+  box-shadow: ${({ theme }) => theme.shadows.sm};
   transition: ${({ theme }) => theme.transitions.default};
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: ${({ theme }) => theme.shadows.lg};
+    box-shadow: ${({ theme }) => theme.shadows.md};
   }
 `
 
-const TestimonialQuote = styled.blockquote`
+const TestimonialContent = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
+  color: ${({ theme }) => theme.colors.darkText};
   line-height: 1.6;
   margin-bottom: ${({ theme }) => theme.space.lg};
   font-style: italic;
 `
 
-const TestimonialAuthor = styled.div`
-  display: flex;
-  align-items: center;
-`
+const TestimonialAuthor = styled.div``
 
-const TestimonialImage = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: ${({ theme }) => theme.space.md};
-  object-fit: cover;
-`
-
-const TestimonialInfo = styled.div``
-
-const TestimonialName = styled.div`
+const TestimonialAuthorName = styled.h4`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.xs};
 `
 
-const TestimonialRole = styled.div`
+const TestimonialAuthorRole = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.sm};
   color: ${({ theme }) => theme.colors.lightText};
 `
@@ -525,27 +722,27 @@ const CTASection = styled.section`
 
 const CTAContent = styled.div`
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
 `
 
 const CTATitle = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   margin-bottom: ${({ theme }) => theme.space.md};
 `
 
-const CTAText = styled.p`
+const CTASubtitle = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   opacity: 0.9;
   line-height: 1.5;
-  margin-bottom: ${({ theme }) => theme.space.lg};
+  margin-bottom: ${({ theme }) => theme.space.xl};
 `
 
 const CTAButtons = styled.div`
   display: flex;
   justify-content: center;
-  gap: ${({ theme }) => theme.space.md};
+  gap: ${({ theme }) => theme.space.lg};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     flex-direction: column;
@@ -553,13 +750,13 @@ const CTAButtons = styled.div`
   }
 `
 
-const CTAButton = styled(Button)`
+const PrimaryCTAButton = styled(Button)`
   background-color: ${({ theme }) => theme.colors.primary};
   color: ${({ theme }) => theme.colors.trustworthyNavy};
   padding: ${({ theme }) => `${theme.space.md} ${theme.space.xl}`};
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
-  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
@@ -570,13 +767,13 @@ const CTAButton = styled(Button)`
   }
 `
 
-const CTASecondaryButton = styled(Button)`
+const SecondaryCTAButton = styled(Button)`
   background-color: transparent;
   color: white;
   padding: ${({ theme }) => `${theme.space.md} ${theme.space.xl}`};
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: ${({ theme }) => theme.radii.md};
-  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};

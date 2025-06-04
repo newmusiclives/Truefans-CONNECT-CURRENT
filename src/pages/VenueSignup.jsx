@@ -1,92 +1,258 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import Button from '../components/ui/Button'
-import PageTransition from '../components/common/PageTransition'
+import { SketchPicker } from 'react-color'
 
 const VenueSignup = () => {
+  // Form state
   const [formData, setFormData] = useState({
     venueName: '',
-    contactName: '',
     email: '',
-    phone: '',
+    password: '',
+    confirmPassword: '',
     address: '',
     city: '',
     state: '',
-    zip: '',
-    venueType: 'bar',
+    zipCode: '',
+    phone: '',
+    website: '',
+    venueType: '',
     capacity: '',
     description: '',
-    website: '',
-    socialMedia: '',
+    logo: null,
+    backgroundImage: null,
     agreeToTerms: false
   })
   
-  const [formSubmitted, setFormSubmitted] = useState(false)
+  // Branding state
+  const [branding, setBranding] = useState({
+    primaryColor: '#FFD700',
+    secondaryColor: '#1A2B4C',
+    showPrimaryPicker: false,
+    showSecondaryPicker: false
+  })
   
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target
-    setFormData(prevData => ({
-      ...prevData,
-      [name]: type === 'checkbox' ? checked : value
-    }))
+  // Form submission state
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState(null)
+  const [embedCode, setEmbedCode] = useState('')
+  
+  // Handle input changes
+  const handleInputChange = (e) => {
+    const { name, value, type, checked, files } = e.target
+    
+    if (type === 'file') {
+      if (files && files[0]) {
+        const reader = new FileReader()
+        reader.onloadend = () => {
+          setFormData({
+            ...formData,
+            [name]: reader.result
+          })
+        }
+        reader.readAsDataURL(files[0])
+      }
+    } else {
+      setFormData({
+        ...formData,
+        [name]: type === 'checkbox' ? checked : value
+      })
+    }
   }
   
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // In a real application, you would send the form data to a server here
-    console.log('Form submitted:', formData)
-    setFormSubmitted(true)
-    
-    // Reset form after submission
-    setFormData({
-      venueName: '',
-      contactName: '',
-      email: '',
-      phone: '',
-      address: '',
-      city: '',
-      state: '',
-      zip: '',
-      venueType: 'bar',
-      capacity: '',
-      description: '',
-      website: '',
-      socialMedia: '',
-      agreeToTerms: false
+  // Handle color changes
+  const handleColorChange = (color, type) => {
+    setBranding({
+      ...branding,
+      [type]: color.hex
     })
   }
   
+  // Toggle color picker
+  const toggleColorPicker = (pickerName) => {
+    setBranding({
+      ...branding,
+      [pickerName]: !branding[pickerName]
+    })
+  }
+  
+  // Generate embed code
+  const generateEmbedCode = () => {
+    const baseUrl = 'https://truefans.connect/venue-submission'
+    const params = new URLSearchParams()
+    
+    params.append('venueId', 'YOUR_VENUE_ID') // This would be dynamically generated in production
+    params.append('venueName', formData.venueName)
+    params.append('primaryColor', branding.primaryColor)
+    params.append('secondaryColor', branding.secondaryColor)
+    
+    if (formData.logo) {
+      params.append('logo', formData.logo)
+    }
+    
+    if (formData.backgroundImage) {
+      params.append('bgImage', formData.backgroundImage)
+    }
+    
+    const iframeUrl = `${baseUrl}?${params.toString()}`
+    
+    const code = `<iframe 
+  src="${iframeUrl}" 
+  width="100%" 
+  height="800" 
+  frameborder="0" 
+  style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);"
+  title="${formData.venueName} Live Music Submission Form"
+></iframe>`
+    
+    setEmbedCode(code)
+  }
+  
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    
+    // Validate form
+    if (formData.password !== formData.confirmPassword) {
+      setSubmitError('Passwords do not match')
+      return
+    }
+    
+    setIsSubmitting(true)
+    setSubmitError(null)
+    
+    // Simulate API call
+    setTimeout(() => {
+      try {
+        // In a real app, this would be an API call to create the venue account
+        console.log('Venue signup:', formData)
+        console.log('Branding:', branding)
+        
+        // Generate embed code
+        generateEmbedCode()
+        
+        setSubmitSuccess(true)
+        setIsSubmitting(false)
+      } catch (error) {
+        setSubmitError('There was an error creating your venue account. Please try again.')
+        setIsSubmitting(false)
+      }
+    }, 1500)
+  }
+  
+  // Copy embed code to clipboard
+  const copyEmbedCode = () => {
+    navigator.clipboard.writeText(embedCode)
+      .then(() => {
+        alert('Embed code copied to clipboard!')
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err)
+      })
+  }
+  
   return (
-    <PageTransition>
-      <HeroSection>
-        <Container>
-          <HeroContent>
-            <HeroTitle>Register Your Venue</HeroTitle>
-            <HeroSubtitle>Join our network of venues and discover talented independent artists</HeroSubtitle>
-          </HeroContent>
-        </Container>
-      </HeroSection>
-      
-      <ContentSection>
-        <Container>
-          <TwoColumnLayout>
-            <SignupFormContainer>
-              <SectionTitle>Venue Registration</SectionTitle>
-              {formSubmitted ? (
-                <SuccessMessage>
-                  <SuccessIcon>✓</SuccessIcon>
-                  <SuccessText>
-                    <SuccessTitle>Registration Successful!</SuccessTitle>
-                    <SuccessDescription>
-                      Thank you for registering your venue with TrueFans CONNECT™. Our team will review your information and contact you shortly to complete the setup process.
-                    </SuccessDescription>
-                  </SuccessText>
-                </SuccessMessage>
-              ) : (
-                <SignupForm onSubmit={handleSubmit}>
+    <PageWrapper
+      as={motion.main}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <Container>
+        <PageHeader>
+          <PageTitle>Venue Signup</PageTitle>
+          <PageDescription>Join TrueFans CONNECT and discover talented independent artists for your venue</PageDescription>
+        </PageHeader>
+        
+        {submitSuccess ? (
+          <SuccessContainer>
+            <SuccessHeader>
+              <SuccessIcon>✓</SuccessIcon>
+              <SuccessTitle>Venue Account Created!</SuccessTitle>
+              <SuccessDescription>
+                Your venue account has been successfully created. You can now use the embed code below to add a live music submission form to your website.
+              </SuccessDescription>
+            </SuccessHeader>
+            
+            <EmbedCodeSection>
+              <SectionTitle>Your Submission Form Embed Code</SectionTitle>
+              <EmbedPreview>
+                <EmbedCodeBox>
+                  {embedCode}
+                </EmbedCodeBox>
+                <CopyButton onClick={copyEmbedCode}>Copy Code</CopyButton>
+              </EmbedPreview>
+              
+              <PreviewTitle>Preview of Your Submission Form</PreviewTitle>
+              <FormPreview>
+                <PreviewHeader style={{ backgroundColor: branding.secondaryColor }}>
+                  {formData.logo && <PreviewLogo src={formData.logo} alt={`${formData.venueName} logo`} />}
+                  <PreviewVenueName>{formData.venueName} Live Music Submission</PreviewVenueName>
+                </PreviewHeader>
+                <PreviewBody>
+                  <PreviewFormGroup>
+                    <PreviewLabel>Artist/Band Name</PreviewLabel>
+                    <PreviewInput placeholder="Your artist or band name" />
+                  </PreviewFormGroup>
+                  <PreviewButton style={{ 
+                    backgroundColor: branding.primaryColor,
+                    color: branding.secondaryColor
+                  }}>
+                    Submit Application
+                  </PreviewButton>
+                </PreviewBody>
+              </FormPreview>
+              
+              <NextStepsSection>
+                <SectionTitle>Next Steps</SectionTitle>
+                <NextStepsList>
+                  <NextStep>
+                    <StepNumber>1</StepNumber>
+                    <StepContent>
+                      <StepTitle>Add the form to your website</StepTitle>
+                      <StepDescription>Copy the embed code above and paste it into your venue's website where you want the submission form to appear.</StepDescription>
+                    </StepContent>
+                  </NextStep>
+                  
+                  <NextStep>
+                    <StepNumber>2</StepNumber>
+                    <StepContent>
+                      <StepTitle>Start receiving submissions</StepTitle>
+                      <StepDescription>Artists will be able to submit their information through the form. You'll receive email notifications for each submission.</StepDescription>
+                    </StepContent>
+                  </NextStep>
+                  
+                  <NextStep>
+                    <StepNumber>3</StepNumber>
+                    <StepContent>
+                      <StepTitle>Earn affiliate commissions</StepTitle>
+                      <StepDescription>When artists you discover join TrueFans CONNECT, you'll earn 2.5% of all their donations, plus 2.5% from artists they refer.</StepDescription>
+                    </StepContent>
+                  </NextStep>
+                </NextStepsList>
+              </NextStepsSection>
+              
+              <DashboardLink>
+                <DashboardButton>Go to Venue Dashboard</DashboardButton>
+              </DashboardLink>
+            </EmbedCodeSection>
+          </SuccessContainer>
+        ) : (
+          <SignupFormContainer>
+            <FormTabs>
+              <FormTab active={true}>Venue Information</FormTab>
+              <FormTabDivider />
+              <FormTab active={false}>Submission Form Branding</FormTab>
+            </FormTabs>
+            
+            <SignupForm onSubmit={handleSubmit}>
+              <TwoColumnLayout>
+                <FormColumn>
                   <FormSection>
-                    <SectionSubtitle>Venue Information</SectionSubtitle>
+                    <SectionTitle>Venue Details</SectionTitle>
                     
                     <FormGroup>
                       <FormLabel htmlFor="venueName">Venue Name *</FormLabel>
@@ -95,71 +261,9 @@ const VenueSignup = () => {
                         id="venueName"
                         name="venueName"
                         value={formData.venueName}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         required
-                      />
-                    </FormGroup>
-                    
-                    <FormRow>
-                      <FormGroup>
-                        <FormLabel htmlFor="venueType">Venue Type *</FormLabel>
-                        <FormSelect
-                          id="venueType"
-                          name="venueType"
-                          value={formData.venueType}
-                          onChange={handleChange}
-                          required
-                        >
-                          <option value="bar">Bar/Pub</option>
-                          <option value="club">Club</option>
-                          <option value="concert-hall">Concert Hall</option>
-                          <option value="restaurant">Restaurant</option>
-                          <option value="cafe">Café</option>
-                          <option value="theater">Theater</option>
-                          <option value="outdoor">Outdoor Venue</option>
-                          <option value="other">Other</option>
-                        </FormSelect>
-                      </FormGroup>
-                      
-                      <FormGroup>
-                        <FormLabel htmlFor="capacity">Capacity</FormLabel>
-                        <FormInput
-                          type="number"
-                          id="capacity"
-                          name="capacity"
-                          value={formData.capacity}
-                          onChange={handleChange}
-                          placeholder="Approximate"
-                        />
-                      </FormGroup>
-                    </FormRow>
-                    
-                    <FormGroup>
-                      <FormLabel htmlFor="description">Venue Description *</FormLabel>
-                      <FormTextarea
-                        id="description"
-                        name="description"
-                        value={formData.description}
-                        onChange={handleChange}
-                        rows="4"
-                        required
-                        placeholder="Tell us about your venue, the types of music you feature, and your audience"
-                      />
-                    </FormGroup>
-                  </FormSection>
-                  
-                  <FormSection>
-                    <SectionSubtitle>Contact Information</SectionSubtitle>
-                    
-                    <FormGroup>
-                      <FormLabel htmlFor="contactName">Contact Name *</FormLabel>
-                      <FormInput
-                        type="text"
-                        id="contactName"
-                        name="contactName"
-                        value={formData.contactName}
-                        onChange={handleChange}
-                        required
+                        placeholder="Enter your venue name"
                       />
                     </FormGroup>
                     
@@ -171,8 +275,9 @@ const VenueSignup = () => {
                           id="email"
                           name="email"
                           value={formData.email}
-                          onChange={handleChange}
+                          onChange={handleInputChange}
                           required
+                          placeholder="contact@yourvenue.com"
                         />
                       </FormGroup>
                       
@@ -183,15 +288,24 @@ const VenueSignup = () => {
                           id="phone"
                           name="phone"
                           value={formData.phone}
-                          onChange={handleChange}
+                          onChange={handleInputChange}
                           required
+                          placeholder="(123) 456-7890"
                         />
                       </FormGroup>
                     </FormRow>
-                  </FormSection>
-                  
-                  <FormSection>
-                    <SectionSubtitle>Venue Location</SectionSubtitle>
+                    
+                    <FormGroup>
+                      <FormLabel htmlFor="website">Website</FormLabel>
+                      <FormInput
+                        type="url"
+                        id="website"
+                        name="website"
+                        value={formData.website}
+                        onChange={handleInputChange}
+                        placeholder="https://yourvenue.com"
+                      />
+                    </FormGroup>
                     
                     <FormGroup>
                       <FormLabel htmlFor="address">Street Address *</FormLabel>
@@ -200,8 +314,9 @@ const VenueSignup = () => {
                         id="address"
                         name="address"
                         value={formData.address}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         required
+                        placeholder="123 Music Ave"
                       />
                     </FormGroup>
                     
@@ -213,189 +328,308 @@ const VenueSignup = () => {
                           id="city"
                           name="city"
                           value={formData.city}
-                          onChange={handleChange}
+                          onChange={handleInputChange}
                           required
+                          placeholder="Nashville"
                         />
                       </FormGroup>
                       
                       <FormGroup>
-                        <FormLabel htmlFor="state">State/Province *</FormLabel>
+                        <FormLabel htmlFor="state">State *</FormLabel>
                         <FormInput
                           type="text"
                           id="state"
                           name="state"
                           value={formData.state}
-                          onChange={handleChange}
+                          onChange={handleInputChange}
                           required
+                          placeholder="TN"
                         />
                       </FormGroup>
                       
                       <FormGroup>
-                        <FormLabel htmlFor="zip">ZIP/Postal Code *</FormLabel>
+                        <FormLabel htmlFor="zipCode">Zip Code *</FormLabel>
                         <FormInput
                           type="text"
-                          id="zip"
-                          name="zip"
-                          value={formData.zip}
-                          onChange={handleChange}
+                          id="zipCode"
+                          name="zipCode"
+                          value={formData.zipCode}
+                          onChange={handleInputChange}
                           required
+                          placeholder="37203"
                         />
                       </FormGroup>
                     </FormRow>
                   </FormSection>
                   
                   <FormSection>
-                    <SectionSubtitle>Online Presence</SectionSubtitle>
+                    <SectionTitle>Venue Specifications</SectionTitle>
+                    
+                    <FormRow>
+                      <FormGroup>
+                        <FormLabel htmlFor="venueType">Venue Type *</FormLabel>
+                        <FormSelect
+                          id="venueType"
+                          name="venueType"
+                          value={formData.venueType}
+                          onChange={handleInputChange}
+                          required
+                        >
+                          <option value="">Select venue type</option>
+                          <option value="bar">Bar/Club</option>
+                          <option value="concert">Concert Hall</option>
+                          <option value="theater">Theater</option>
+                          <option value="cafe">Café</option>
+                          <option value="restaurant">Restaurant</option>
+                          <option value="other">Other</option>
+                        </FormSelect>
+                      </FormGroup>
+                      
+                      <FormGroup>
+                        <FormLabel htmlFor="capacity">Capacity *</FormLabel>
+                        <FormSelect
+                          id="capacity"
+                          name="capacity"
+                          value={formData.capacity}
+                          onChange={handleInputChange}
+                          required
+                        >
+                          <option value="">Select capacity</option>
+                          <option value="small">Small (Under 100)</option>
+                          <option value="medium">Medium (100-300)</option>
+                          <option value="large">Large (300-1000)</option>
+                          <option value="xl">Very Large (1000+)</option>
+                        </FormSelect>
+                      </FormGroup>
+                    </FormRow>
                     
                     <FormGroup>
-                      <FormLabel htmlFor="website">Website</FormLabel>
-                      <FormInput
-                        type="url"
-                        id="website"
-                        name="website"
-                        value={formData.website}
-                        onChange={handleChange}
-                        placeholder="https://"
-                      />
-                    </FormGroup>
-                    
-                    <FormGroup>
-                      <FormLabel htmlFor="socialMedia">Social Media Links</FormLabel>
+                      <FormLabel htmlFor="description">Venue Description *</FormLabel>
                       <FormTextarea
-                        id="socialMedia"
-                        name="socialMedia"
-                        value={formData.socialMedia}
-                        onChange={handleChange}
-                        rows="3"
-                        placeholder="Instagram, Facebook, Twitter, etc. (one per line)"
+                        id="description"
+                        name="description"
+                        value={formData.description}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="Tell us about your venue, the types of music you feature, your audience, etc."
+                        rows="4"
                       />
                     </FormGroup>
                   </FormSection>
                   
                   <FormSection>
-                    <CheckboxGroup>
-                      <CheckboxInput
-                        type="checkbox"
-                        id="agreeToTerms"
-                        name="agreeToTerms"
-                        checked={formData.agreeToTerms}
-                        onChange={handleChange}
-                        required
-                      />
-                      <CheckboxLabel htmlFor="agreeToTerms">
-                        I agree to the <TermsLink to="/terms">Terms of Service</TermsLink> and <PrivacyLink to="/privacy">Privacy Policy</PrivacyLink> *
-                      </CheckboxLabel>
-                    </CheckboxGroup>
+                    <SectionTitle>Account Security</SectionTitle>
+                    
+                    <FormRow>
+                      <FormGroup>
+                        <FormLabel htmlFor="password">Password *</FormLabel>
+                        <FormInput
+                          type="password"
+                          id="password"
+                          name="password"
+                          value={formData.password}
+                          onChange={handleInputChange}
+                          required
+                          placeholder="Create a secure password"
+                          minLength="8"
+                        />
+                      </FormGroup>
+                      
+                      <FormGroup>
+                        <FormLabel htmlFor="confirmPassword">Confirm Password *</FormLabel>
+                        <FormInput
+                          type="password"
+                          id="confirmPassword"
+                          name="confirmPassword"
+                          value={formData.confirmPassword}
+                          onChange={handleInputChange}
+                          required
+                          placeholder="Confirm your password"
+                          minLength="8"
+                        />
+                      </FormGroup>
+                    </FormRow>
+                  </FormSection>
+                </FormColumn>
+                
+                <FormColumn>
+                  <FormSection>
+                    <SectionTitle>Submission Form Branding</SectionTitle>
+                    <BrandingDescription>
+                      Customize how your live music submission form will look to match your venue's branding.
+                    </BrandingDescription>
+                    
+                    <FormGroup>
+                      <FormLabel htmlFor="logo">Venue Logo</FormLabel>
+                      <FileUploadContainer>
+                        <FileUploadLabel>
+                          {formData.logo ? 'Change Logo' : 'Upload Logo'}
+                          <FileInput
+                            type="file"
+                            id="logo"
+                            name="logo"
+                            accept="image/*"
+                            onChange={handleInputChange}
+                          />
+                        </FileUploadLabel>
+                        {formData.logo && (
+                          <FilePreview>
+                            <PreviewImage src={formData.logo} alt="Logo preview" />
+                            <RemoveButton 
+                              onClick={() => setFormData({...formData, logo: null})}
+                              type="button"
+                            >
+                              Remove
+                            </RemoveButton>
+                          </FilePreview>
+                        )}
+                      </FileUploadContainer>
+                    </FormGroup>
+                    
+                    <FormGroup>
+                      <FormLabel htmlFor="backgroundImage">Background Image (Optional)</FormLabel>
+                      <FileUploadContainer>
+                        <FileUploadLabel>
+                          {formData.backgroundImage ? 'Change Image' : 'Upload Image'}
+                          <FileInput
+                            type="file"
+                            id="backgroundImage"
+                            name="backgroundImage"
+                            accept="image/*"
+                            onChange={handleInputChange}
+                          />
+                        </FileUploadLabel>
+                        {formData.backgroundImage && (
+                          <FilePreview>
+                            <PreviewImage src={formData.backgroundImage} alt="Background preview" />
+                            <RemoveButton 
+                              onClick={() => setFormData({...formData, backgroundImage: null})}
+                              type="button"
+                            >
+                              Remove
+                            </RemoveButton>
+                          </FilePreview>
+                        )}
+                      </FileUploadContainer>
+                    </FormGroup>
+                    
+                    <ColorPickersContainer>
+                      <ColorPickerGroup>
+                        <ColorPickerLabel>Primary Color (Buttons, Accents)</ColorPickerLabel>
+                        <ColorPreviewButton 
+                          type="button"
+                          style={{ backgroundColor: branding.primaryColor }}
+                          onClick={() => toggleColorPicker('showPrimaryPicker')}
+                        >
+                          {branding.primaryColor}
+                        </ColorPreviewButton>
+                        {branding.showPrimaryPicker && (
+                          <ColorPickerPopover>
+                            <ColorPickerCover onClick={() => toggleColorPicker('showPrimaryPicker')} />
+                            <SketchPicker 
+                              color={branding.primaryColor}
+                              onChange={(color) => handleColorChange(color, 'primaryColor')}
+                            />
+                          </ColorPickerPopover>
+                        )}
+                      </ColorPickerGroup>
+                      
+                      <ColorPickerGroup>
+                        <ColorPickerLabel>Secondary Color (Header, Text)</ColorPickerLabel>
+                        <ColorPreviewButton 
+                          type="button"
+                          style={{ backgroundColor: branding.secondaryColor }}
+                          onClick={() => toggleColorPicker('showSecondaryPicker')}
+                        >
+                          {branding.secondaryColor}
+                        </ColorPreviewButton>
+                        {branding.showSecondaryPicker && (
+                          <ColorPickerPopover>
+                            <ColorPickerCover onClick={() => toggleColorPicker('showSecondaryPicker')} />
+                            <SketchPicker 
+                              color={branding.secondaryColor}
+                              onChange={(color) => handleColorChange(color, 'secondaryColor')}
+                            />
+                          </ColorPickerPopover>
+                        )}
+                      </ColorPickerGroup>
+                    </ColorPickersContainer>
+                    
+                    <FormPreviewSection>
+                      <PreviewLabel>Form Preview</PreviewLabel>
+                      <FormPreview>
+                        <PreviewHeader style={{ backgroundColor: branding.secondaryColor }}>
+                          {formData.logo && <PreviewLogo src={formData.logo} alt={`${formData.venueName} logo`} />}
+                          <PreviewVenueName>
+                            {formData.venueName ? `${formData.venueName} Live Music Submission` : 'Venue Live Music Submission'}
+                          </PreviewVenueName>
+                        </PreviewHeader>
+                        <PreviewBody>
+                          <PreviewFormGroup>
+                            <PreviewLabel>Artist/Band Name</PreviewLabel>
+                            <PreviewInput placeholder="Your artist or band name" />
+                          </PreviewFormGroup>
+                          <PreviewButton style={{ 
+                            backgroundColor: branding.primaryColor,
+                            color: branding.secondaryColor
+                          }}>
+                            Submit Application
+                          </PreviewButton>
+                        </PreviewBody>
+                      </FormPreview>
+                    </FormPreviewSection>
                   </FormSection>
                   
-                  <SubmitButton type="submit">Register Venue</SubmitButton>
-                </SignupForm>
-              )}
-            </SignupFormContainer>
-            
-            <BenefitsContainer>
-              <SectionTitle>Venue Benefits</SectionTitle>
+                  <FormSection>
+                    <AffiliateInfo>
+                      <InfoIcon>💰</InfoIcon>
+                      <InfoContent>
+                        <InfoTitle>Earn as an Affiliate</InfoTitle>
+                        <InfoText>
+                          When artists you discover join TrueFans CONNECT, you'll earn 2.5% of all their donations, plus 2.5% from artists they refer.
+                        </InfoText>
+                      </InfoContent>
+                    </AffiliateInfo>
+                  </FormSection>
+                </FormColumn>
+              </TwoColumnLayout>
               
-              <BenefitsList>
-                <BenefitItem>
-                  <BenefitIcon>🎵</BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Access to Talented Artists</BenefitTitle>
-                    <BenefitDescription>
-                      Connect with a diverse pool of independent artists across various genres, all vetted for quality and professionalism.
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                
-                <BenefitItem>
-                  <BenefitIcon>📋</BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Customizable Submission Forms</BenefitTitle>
-                    <BenefitDescription>
-                      Create branded artist submission forms tailored to your venue's specific requirements and booking process.
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                
-                <BenefitItem>
-                  <BenefitIcon>💰</BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Affiliate Revenue</BenefitTitle>
-                    <BenefitDescription>
-                      Earn 2.5% from artists you refer to the platform, plus an additional 2.5% from their referrals, creating a passive income stream.
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                
-                <BenefitItem>
-                  <BenefitIcon>📊</BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Analytics Dashboard</BenefitTitle>
-                    <BenefitDescription>
-                      Track submission metrics, audience demographics, and performance data to make informed booking decisions.
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                
-                <BenefitItem>
-                  <BenefitIcon>🔍</BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Artist Discovery Tools</BenefitTitle>
-                    <BenefitDescription>
-                      Search and filter artists by genre, location, audience size, and more to find the perfect fit for your venue.
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-                
-                <BenefitItem>
-                  <BenefitIcon>📱</BenefitIcon>
-                  <BenefitContent>
-                    <BenefitTitle>Venue Profile</BenefitTitle>
-                    <BenefitDescription>
-                      Showcase your venue to artists and music fans with a professional profile page highlighting your space and events.
-                    </BenefitDescription>
-                  </BenefitContent>
-                </BenefitItem>
-              </BenefitsList>
+              <TermsSection>
+                <CheckboxGroup>
+                  <CheckboxInput
+                    type="checkbox"
+                    id="agreeToTerms"
+                    name="agreeToTerms"
+                    checked={formData.agreeToTerms}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <CheckboxLabel htmlFor="agreeToTerms">
+                    I agree to the <TermsLink href="#" target="_blank">Terms of Service</TermsLink> and <TermsLink href="#" target="_blank">Privacy Policy</TermsLink> *
+                  </CheckboxLabel>
+                </CheckboxGroup>
+              </TermsSection>
               
-              <TestimonialSection>
-                <TestimonialCard>
-                  <TestimonialContent>
-                    "TrueFans CONNECT™ has transformed our booking process. We've discovered amazing talent we wouldn't have found otherwise, and our audiences love the fresh, diverse lineup of artists."
-                  </TestimonialContent>
-                  <TestimonialAuthor>
-                    <TestimonialAvatar src="https://images.pexels.com/photos/2379005/pexels-photo-2379005.jpeg" alt="James Wilson" />
-                    <TestimonialInfo>
-                      <TestimonialName>James Wilson</TestimonialName>
-                      <TestimonialRole>Booking Manager, The Sound Lounge</TestimonialRole>
-                    </TestimonialInfo>
-                  </TestimonialAuthor>
-                </TestimonialCard>
-              </TestimonialSection>
+              {submitError && <ErrorMessage>{submitError}</ErrorMessage>}
               
-              <SupportSection>
-                <SupportTitle>Need Help?</SupportTitle>
-                <SupportText>
-                  Our venue support team is available to answer any questions and guide you through the registration process.
-                </SupportText>
-                <SupportContact>
-                  <SupportEmail href="mailto:venues@truefans.connect">venues@truefans.connect</SupportEmail>
-                  <SupportPhone href="tel:+15551234567">(555) 123-4567</SupportPhone>
-                </SupportContact>
-              </SupportSection>
-            </BenefitsContainer>
-          </TwoColumnLayout>
-        </Container>
-      </ContentSection>
-    </PageTransition>
+              <SubmitButtonContainer>
+                <SubmitButton type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? 'Creating Account...' : 'Create Venue Account'}
+                </SubmitButton>
+              </SubmitButtonContainer>
+            </SignupForm>
+          </SignupFormContainer>
+        )}
+      </Container>
+    </PageWrapper>
   )
 }
 
 // Styled Components
-const HeroSection = styled.section`
-  background-color: ${({ theme }) => theme.colors.trustworthyNavy};
+const PageWrapper = styled.main`
+  width: 100%;
   padding: ${({ theme }) => theme.space.xl} 0;
-  color: white;
+  background-color: ${({ theme }) => theme.colors.background};
 `
 
 const Container = styled.div`
@@ -404,33 +638,60 @@ const Container = styled.div`
   padding: 0 ${({ theme }) => theme.space.lg};
 `
 
-const HeroContent = styled.div`
+const PageHeader = styled.div`
   text-align: center;
+  margin-bottom: ${({ theme }) => theme.space.xl};
+`
+
+const PageTitle = styled.h1`
+  font-size: ${({ theme }) => theme.fontSizes['3xl']};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.sm};
+`
+
+const PageDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  color: ${({ theme }) => theme.colors.lightText};
   max-width: 800px;
   margin: 0 auto;
 `
 
-const HeroTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes['3xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  margin-bottom: ${({ theme }) => theme.space.md};
+const SignupFormContainer = styled.div`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.lg};
+  box-shadow: ${({ theme }) => theme.shadows.md};
+  overflow: hidden;
 `
 
-const HeroSubtitle = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
-  opacity: 0.9;
-  line-height: 1.5;
+const FormTabs = styled.div`
+  display: flex;
+  align-items: center;
+  background-color: ${({ theme }) => theme.colors.trustworthyNavy};
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.lg}`};
 `
 
-// Content Section
-const ContentSection = styled.section`
-  padding: ${({ theme }) => theme.space.xl} 0;
-  background-color: ${({ theme }) => theme.colors.background};
+const FormTab = styled.div`
+  color: white;
+  font-weight: ${({ theme, active }) => active ? theme.fontWeights.semiBold : theme.fontWeights.normal};
+  opacity: ${({ active }) => active ? 1 : 0.7};
+  padding: ${({ theme }) => `${theme.space.sm} 0`};
+`
+
+const FormTabDivider = styled.div`
+  width: 20px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.5);
+  margin: 0 ${({ theme }) => theme.space.md};
+`
+
+const SignupForm = styled.form`
+  padding: ${({ theme }) => theme.space.xl};
 `
 
 const TwoColumnLayout = styled.div`
   display: grid;
-  grid-template-columns: 3fr 2fr;
+  grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.space.xl};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.lg}) {
@@ -438,37 +699,24 @@ const TwoColumnLayout = styled.div`
   }
 `
 
-const SectionTitle = styled.h2`
-  font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.lg};
+const FormColumn = styled.div``
+
+const FormSection = styled.section`
+  margin-bottom: ${({ theme }) => theme.space.xl};
 `
 
-const SectionSubtitle = styled.h3`
+const SectionTitle = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes.xl};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
   margin-bottom: ${({ theme }) => theme.space.md};
-  padding-bottom: ${({ theme }) => theme.space.xs};
-  border-bottom: 1px solid ${({ theme }) => theme.colors.lightGray};
 `
 
-// Signup Form
-const SignupFormContainer = styled.div`
-  background-color: white;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  padding: ${({ theme }) => theme.space.xl};
-  box-shadow: ${({ theme }) => theme.shadows.md};
+const BrandingDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.lightText};
+  margin-bottom: ${({ theme }) => theme.space.lg};
 `
-
-const SignupForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.lg};
-`
-
-const FormSection = styled.div``
 
 const FormGroup = styled.div`
   margin-bottom: ${({ theme }) => theme.space.md};
@@ -508,7 +756,6 @@ const FormSelect = styled.select`
   border: 1px solid ${({ theme }) => theme.colors.mediumGray};
   border-radius: ${({ theme }) => theme.radii.md};
   font-size: ${({ theme }) => theme.fontSizes.md};
-  background-color: white;
   
   &:focus {
     outline: none;
@@ -532,10 +779,204 @@ const FormTextarea = styled.textarea`
   }
 `
 
+const FileUploadContainer = styled.div`
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const FileUploadLabel = styled.label`
+  display: inline-block;
+  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.md}`};
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  color: ${({ theme }) => theme.colors.darkText};
+  border-radius: ${({ theme }) => theme.radii.md};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.mediumGray};
+  }
+`
+
+const FileInput = styled.input`
+  display: none;
+`
+
+const FilePreview = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: ${({ theme }) => theme.space.md};
+`
+
+const PreviewImage = styled.img`
+  max-width: 150px;
+  max-height: 80px;
+  border-radius: ${({ theme }) => theme.radii.sm};
+  margin-right: ${({ theme }) => theme.space.md};
+`
+
+const RemoveButton = styled.button`
+  padding: ${({ theme }) => `${theme.space.xs} ${theme.space.sm}`};
+  background-color: ${({ theme }) => theme.colors.error};
+  color: white;
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.sm};
+  cursor: pointer;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  
+  &:hover {
+    opacity: 0.9;
+  }
+`
+
+const ColorPickersContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: ${({ theme }) => theme.space.md};
+  margin-bottom: ${({ theme }) => theme.space.lg};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
+    grid-template-columns: 1fr;
+  }
+`
+
+const ColorPickerGroup = styled.div`
+  position: relative;
+`
+
+const ColorPickerLabel = styled.label`
+  display: block;
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const ColorPreviewButton = styled.button`
+  width: 100%;
+  padding: ${({ theme }) => theme.space.md};
+  border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+  border-radius: ${({ theme }) => theme.radii.md};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  text-align: center;
+  cursor: pointer;
+  color: white;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+`
+
+const ColorPickerPopover = styled.div`
+  position: absolute;
+  z-index: 2;
+  top: 100%;
+  left: 0;
+  margin-top: ${({ theme }) => theme.space.xs};
+`
+
+const ColorPickerCover = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+`
+
+const FormPreviewSection = styled.div`
+  margin-top: ${({ theme }) => theme.space.lg};
+`
+
+const PreviewLabel = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const FormPreview = styled.div`
+  border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+  border-radius: ${({ theme }) => theme.radii.md};
+  overflow: hidden;
+  box-shadow: ${({ theme }) => theme.shadows.sm};
+`
+
+const PreviewHeader = styled.div`
+  padding: ${({ theme }) => theme.space.md};
+  text-align: center;
+  color: white;
+`
+
+const PreviewLogo = styled.img`
+  max-width: 120px;
+  max-height: 50px;
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const PreviewVenueName = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+`
+
+const PreviewBody = styled.div`
+  padding: ${({ theme }) => theme.space.md};
+  background-color: white;
+`
+
+const PreviewFormGroup = styled.div`
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const PreviewInput = styled.input`
+  width: 100%;
+  padding: ${({ theme }) => theme.space.sm};
+  border: 1px solid ${({ theme }) => theme.colors.mediumGray};
+  border-radius: ${({ theme }) => theme.radii.sm};
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+`
+
+const PreviewButton = styled.button`
+  width: 100%;
+  padding: ${({ theme }) => theme.space.sm};
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.sm};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  cursor: pointer;
+`
+
+const AffiliateInfo = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: ${({ theme }) => theme.space.md};
+  background-color: ${({ theme }) => `${theme.colors.primary}15`};
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => theme.space.md};
+`
+
+const InfoIcon = styled.div`
+  font-size: ${({ theme }) => theme.fontSizes.xl};
+  flex-shrink: 0;
+`
+
+const InfoContent = styled.div`
+  flex: 1;
+`
+
+const InfoTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.xs};
+`
+
+const InfoText = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  color: ${({ theme }) => theme.colors.lightText};
+`
+
+const TermsSection = styled.div`
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
 const CheckboxGroup = styled.div`
   display: flex;
   align-items: flex-start;
-  margin-bottom: ${({ theme }) => theme.space.md};
 `
 
 const CheckboxInput = styled.input`
@@ -549,8 +990,8 @@ const CheckboxLabel = styled.label`
   line-height: 1.4;
 `
 
-const TermsLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.primary};
+const TermsLink = styled.a`
+  color: ${({ theme }) => theme.colors.secondary};
   text-decoration: none;
   
   &:hover {
@@ -558,59 +999,71 @@ const TermsLink = styled(Link)`
   }
 `
 
-const PrivacyLink = styled(Link)`
-  color: ${({ theme }) => theme.colors.primary};
-  text-decoration: none;
-  
-  &:hover {
-    text-decoration: underline;
-  }
+const ErrorMessage = styled.div`
+  padding: ${({ theme }) => theme.space.md};
+  background-color: ${({ theme }) => `${theme.colors.error}15`};
+  color: ${({ theme }) => theme.colors.error};
+  border-radius: ${({ theme }) => theme.radii.md};
+  margin-bottom: ${({ theme }) => theme.space.md};
+  font-size: ${({ theme }) => theme.fontSizes.md};
+  text-align: center;
+`
+
+const SubmitButtonContainer = styled.div`
+  text-align: center;
 `
 
 const SubmitButton = styled(Button)`
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.trustworthyNavy};
-  padding: ${({ theme }) => theme.space.md};
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.xl}`};
+  background-color: ${({ theme }) => theme.colors.secondary};
+  color: white;
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  font-size: ${({ theme }) => theme.fontSizes.lg};
   border: none;
   border-radius: ${({ theme }) => theme.radii.md};
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   cursor: pointer;
   transition: ${({ theme }) => theme.transitions.default};
   
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primaryDark};
-    text-decoration: none;
+    background-color: ${({ theme }) => theme.colors.secondaryDark};
+  }
+  
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
   }
 `
 
-// Success Message
-const SuccessMessage = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+// Success View Styles
+const SuccessContainer = styled.div`
+  background-color: white;
+  border-radius: ${({ theme }) => theme.radii.lg};
+  box-shadow: ${({ theme }) => theme.shadows.md};
+  overflow: hidden;
+`
+
+const SuccessHeader = styled.div`
+  padding: ${({ theme }) => theme.space.xl};
   text-align: center;
-  padding: ${({ theme }) => theme.space.xl} 0;
+  background-color: ${({ theme }) => `${theme.colors.success}10`};
 `
 
 const SuccessIcon = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 80px;
   height: 80px;
   background-color: ${({ theme }) => theme.colors.success};
   color: white;
   border-radius: 50%;
-  font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  margin-bottom: ${({ theme }) => theme.space.lg};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: ${({ theme }) => theme.fontSizes['3xl']};
+  margin: 0 auto ${({ theme }) => theme.space.lg};
 `
 
-const SuccessText = styled.div``
-
-const SuccessTitle = styled.h3`
+const SuccessTitle = styled.h2`
   font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   color: ${({ theme }) => theme.colors.darkText};
   margin-bottom: ${({ theme }) => theme.space.md};
 `
@@ -618,171 +1071,118 @@ const SuccessTitle = styled.h3`
 const SuccessDescription = styled.p`
   font-size: ${({ theme }) => theme.fontSizes.lg};
   color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.6;
-  max-width: 600px;
+  max-width: 700px;
+  margin: 0 auto;
 `
 
-// Benefits Section
-const BenefitsContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.xl};
+const EmbedCodeSection = styled.div`
+  padding: ${({ theme }) => theme.space.xl};
 `
 
-const BenefitsList = styled.div`
+const EmbedPreview = styled.div`
+  margin-bottom: ${({ theme }) => theme.space.lg};
+`
+
+const EmbedCodeBox = styled.pre`
+  background-color: ${({ theme }) => theme.colors.lightGray};
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => theme.space.md};
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: ${({ theme }) => theme.fontSizes.sm};
+  margin-bottom: ${({ theme }) => theme.space.md};
+  white-space: pre-wrap;
+  word-break: break-all;
+`
+
+const CopyButton = styled(Button)`
+  padding: ${({ theme }) => `${theme.space.sm} ${theme.space.lg}`};
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.trustworthyNavy};
+  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
+  
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.primaryDark};
+  }
+`
+
+const PreviewTitle = styled.h3`
+  font-size: ${({ theme }) => theme.fontSizes.lg};
+  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
+  color: ${({ theme }) => theme.colors.darkText};
+  margin-bottom: ${({ theme }) => theme.space.md};
+`
+
+const NextStepsSection = styled.div`
+  margin-top: ${({ theme }) => theme.space.xl};
+  margin-bottom: ${({ theme }) => theme.space.xl};
+`
+
+const NextStepsList = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.space.md};
 `
 
-const BenefitItem = styled.div`
+const NextStep = styled.div`
   display: flex;
   align-items: flex-start;
+  gap: ${({ theme }) => theme.space.md};
   background-color: white;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  padding: ${({ theme }) => theme.space.lg};
-  box-shadow: ${({ theme }) => theme.shadows.md};
-  transition: ${({ theme }) => theme.transitions.default};
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: ${({ theme }) => theme.shadows.lg};
-  }
+  border: 1px solid ${({ theme }) => theme.colors.lightGray};
+  border-radius: ${({ theme }) => theme.radii.md};
+  padding: ${({ theme }) => theme.space.md};
 `
 
-const BenefitIcon = styled.div`
-  font-size: ${({ theme }) => theme.fontSizes['2xl']};
-  margin-right: ${({ theme }) => theme.space.md};
+const StepNumber = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.trustworthyNavy};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: ${({ theme }) => theme.fontWeights.bold};
   flex-shrink: 0;
 `
 
-const BenefitContent = styled.div`
+const StepContent = styled.div`
   flex: 1;
 `
 
-const BenefitTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.xs};
-`
-
-const BenefitDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.lightText};
-  line-height: 1.5;
-`
-
-// Testimonial Section
-const TestimonialSection = styled.div`
-  margin-top: ${({ theme }) => theme.space.md};
-`
-
-const TestimonialCard = styled.div`
-  background-color: white;
-  border-radius: ${({ theme }) => theme.radii.lg};
-  padding: ${({ theme }) => theme.space.lg};
-  box-shadow: ${({ theme }) => theme.shadows.md};
-  position: relative;
-  
-  &::before {
-    content: '"';
-    position: absolute;
-    top: 10px;
-    left: 20px;
-    font-size: 60px;
-    color: ${({ theme }) => theme.colors.primaryLight};
-    font-family: Georgia, serif;
-    opacity: 0.5;
-  }
-`
-
-const TestimonialContent = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  color: ${({ theme }) => theme.colors.darkText};
-  line-height: 1.6;
-  margin-bottom: ${({ theme }) => theme.space.lg};
-  font-style: italic;
-  position: relative;
-  z-index: 1;
-  padding-top: ${({ theme }) => theme.space.md};
-`
-
-const TestimonialAuthor = styled.div`
-  display: flex;
-  align-items: center;
-  border-top: 1px solid ${({ theme }) => theme.colors.lightGray};
-  padding-top: ${({ theme }) => theme.space.md};
-`
-
-const TestimonialAvatar = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: ${({ theme }) => theme.space.md};
-  border: 2px solid ${({ theme }) => theme.colors.primary};
-`
-
-const TestimonialInfo = styled.div``
-
-const TestimonialName = styled.h4`
+const StepTitle = styled.h4`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
   color: ${({ theme }) => theme.colors.darkText};
   margin-bottom: ${({ theme }) => theme.space.xs};
 `
 
-const TestimonialRole = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.sm};
+const StepDescription = styled.p`
+  font-size: ${({ theme }) => theme.fontSizes.md};
   color: ${({ theme }) => theme.colors.lightText};
 `
 
-// Support Section
-const SupportSection = styled.div`
-  background-color: ${({ theme }) => theme.colors.primaryLight};
-  border-radius: ${({ theme }) => theme.radii.lg};
-  padding: ${({ theme }) => theme.space.lg};
+const DashboardLink = styled.div`
   text-align: center;
 `
 
-const SupportTitle = styled.h3`
-  font-size: ${({ theme }) => theme.fontSizes.xl};
+const DashboardButton = styled(Button)`
+  padding: ${({ theme }) => `${theme.space.md} ${theme.space.xl}`};
+  background-color: ${({ theme }) => theme.colors.trustworthyNavy};
+  color: white;
   font-weight: ${({ theme }) => theme.fontWeights.semiBold};
-  color: ${({ theme }) => theme.colors.darkText};
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const SupportText = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  color: ${({ theme }) => theme.colors.darkText};
-  line-height: 1.5;
-  margin-bottom: ${({ theme }) => theme.space.md};
-`
-
-const SupportContact = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.sm};
-`
-
-const SupportEmail = styled.a`
-  color: ${({ theme }) => theme.colors.primary};
-  text-decoration: none;
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
+  border: none;
+  border-radius: ${({ theme }) => theme.radii.md};
+  cursor: pointer;
+  transition: ${({ theme }) => theme.transitions.default};
   
   &:hover {
-    text-decoration: underline;
-  }
-`
-
-const SupportPhone = styled.a`
-  color: ${({ theme }) => theme.colors.primary};
-  text-decoration: none;
-  font-weight: ${({ theme }) => theme.fontWeights.medium};
-  
-  &:hover {
-    text-decoration: underline;
+    background-color: ${({ theme }) => theme.colors.secondary};
   }
 `
 

@@ -5,78 +5,78 @@ import Button from '../components/ui/Button'
 import PageTransition from '../components/common/PageTransition'
 
 const Press = () => {
-  // Mock data for press releases
+  // Mock data for press releases - all featuring Paul Saunders
   const pressReleases = [
     {
       id: 1,
-      title: "TrueFans CONNECT™ to Offer Unique Opportunities for Artists and Fans",
-      date: "December 15, 2024",
-      excerpt: "Platform will provide innovative ways for artists and fans to collaborate in building the TrueFans CONNECT™ ecosystem.",
+      title: "TrueFans CONNECT™ Raises $5M to Revolutionize Artist Support",
+      date: "June 15, 2023",
+      excerpt: "Funding will accelerate platform growth and expand venue partnerships across North America, says founder Paul Saunders.",
       image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
-      link: "/press/truefans-opportunities"
+      link: "/press/truefans-raises-5m"
     },
     {
       id: 2,
-      title: "TrueFans CONNECT™ Launches Beta Testing Program",
-      date: "November 2, 2024",
-      excerpt: "Initial beta testers are now active on the platform, providing valuable feedback for future development.",
+      title: "TrueFans CONNECT™ Surpasses 10,000 Artists on Platform",
+      date: "May 2, 2023",
+      excerpt: "Milestone highlights growing adoption of direct fan support model among independent musicians, according to founder Paul Saunders.",
       image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
-      link: "/press/beta-testing-program"
+      link: "/press/truefans-surpasses-10000-artists"
     },
     {
       id: 3,
-      title: "TrueFans CONNECT™ Announces Two-Tier Affiliate Program",
-      date: "October 10, 2024",
-      excerpt: "Upcoming program will allow artists to earn passive income through platform referrals.",
+      title: "TrueFans CONNECT™ Launches Two-Tier Affiliate Program",
+      date: "April 10, 2023",
+      excerpt: "New program allows artists to earn passive income through platform referrals, explains founder Paul Saunders.",
       image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg",
-      link: "/press/affiliate-program"
+      link: "/press/truefans-launches-affiliate-program"
     },
     {
       id: 4,
-      title: "TrueFans CONNECT™ Plans Venue Network Partnerships",
-      date: "September 5, 2024",
-      excerpt: "Initiative aims to connect independent artists with performance venues across the country.",
+      title: "TrueFans CONNECT™ Partners with Major Venue Network",
+      date: "March 5, 2023",
+      excerpt: "Partnership connects independent artists with 200+ performance venues across the country, announces founder Paul Saunders.",
       image: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg",
-      link: "/press/venue-partnerships"
+      link: "/press/truefans-partners-with-venues"
     }
   ]
   
-  // Mock data for media coverage
+  // Mock data for media coverage - all featuring Paul Saunders
   const mediaCoverage = [
     {
       id: 1,
       outlet: "Music Industry Today",
-      title: "How TrueFans CONNECT™ Plans to Change the Game for Independent Artists",
-      date: "November 28, 2024",
-      link: "/media/music-industry-today-article"
+      title: "Paul Saunders on How TrueFans CONNECT™ Is Changing the Game for Independent Artists",
+      date: "May 28, 2023",
+      link: "https://www.musicindustrytoday.com/paul-saunders-truefans-connect"
     },
     {
       id: 2,
       outlet: "Tech Innovators",
-      title: "TrueFans CONNECT™: The Platform Aiming to Disrupt Traditional Music Revenue Models",
-      date: "October 15, 2024",
-      link: "/media/tech-innovators-article"
+      title: "TrueFans CONNECT™: Paul Saunders on Disrupting Traditional Music Revenue Models",
+      date: "April 15, 2023",
+      link: "https://www.techinnovators.com/paul-saunders-truefans-connect"
     },
     {
       id: 3,
       outlet: "Entrepreneur Weekly",
-      title: "TrueFans CONNECT™ Founders on Building a More Equitable Music Industry",
-      date: "September 22, 2024",
-      link: "/media/entrepreneur-weekly-interview"
+      title: "Paul Saunders of TrueFans CONNECT™ on Building a More Equitable Music Industry",
+      date: "March 22, 2023",
+      link: "https://www.entrepreneurweekly.com/paul-saunders-truefans-connect"
     },
     {
       id: 4,
       outlet: "Digital Music News",
-      title: "Artist-First Platforms: TrueFans CONNECT™ Proposes 80/20 Revenue Split",
-      date: "August 10, 2024",
-      link: "/media/digital-music-news-article"
+      title: "Artist-First Platforms: Paul Saunders' TrueFans CONNECT™ Leads the Way with 80/20 Revenue Split",
+      date: "February 10, 2023",
+      link: "https://www.digitalmusicnews.com/paul-saunders-truefans-connect"
     },
     {
       id: 5,
       outlet: "Startup Spotlight",
-      title: "TrueFans CONNECT™: From Concept to Development in 12 Months",
-      date: "January 5, 2025",
-      link: "/media/startup-spotlight-feature"
+      title: "Paul Saunders: From Idea to Industry Disruptor with TrueFans CONNECT™ in 12 Months",
+      date: "January 5, 2023",
+      link: "https://www.startupspotlight.com/paul-saunders-truefans-connect"
     }
   ]
   
@@ -85,57 +85,39 @@ const Press = () => {
     {
       id: 1,
       title: "Company Fact Sheet",
-      description: "Key information about TrueFans CONNECT™, our mission, and our vision.",
+      description: "Key information about TrueFans CONNECT™, our mission, and our impact.",
       icon: "📄",
-      link: "/press-kit/fact-sheet"
+      link: "/press-kit/fact-sheet.pdf"
     },
     {
       id: 2,
       title: "Brand Assets",
       description: "Logos, color palette, and brand guidelines for media use.",
       icon: "🎨",
-      link: "/press-kit/brand-assets"
+      link: "/press-kit/brand-assets.zip"
     },
     {
       id: 3,
       title: "Executive Bios",
-      description: "Biographies and headshots of our leadership team.",
+      description: "Biography and headshot of Paul Saunders, Founder and CEO.",
       icon: "👥",
-      link: "/press-kit/executive-bios"
+      link: "/press-kit/executive-bios.pdf"
     },
     {
       id: 4,
       title: "Platform Screenshots",
       description: "High-resolution images of the TrueFans CONNECT™ platform.",
       icon: "📱",
-      link: "/press-kit/platform-screenshots"
+      link: "/press-kit/platform-screenshots.zip"
     },
     {
       id: 5,
       title: "Case Studies",
-      description: "Detailed stories of beta testers using our platform.",
+      description: "Detailed success stories of artists using our platform.",
       icon: "📊",
-      link: "/press-kit/case-studies"
+      link: "/press-kit/case-studies.pdf"
     }
   ]
-  
-  // Function to handle press release clicks
-  const handlePressReleaseClick = (link) => {
-    // In a real application, this would navigate to the actual article
-    window.location.href = link;
-  };
-  
-  // Function to handle media coverage clicks
-  const handleMediaCoverageClick = (link) => {
-    // In a real application, this would navigate to the actual article
-    window.location.href = link;
-  };
-  
-  // Function to handle press kit downloads
-  const handlePressKitDownload = (link) => {
-    // In a real application, this would download or open the resource
-    window.location.href = link;
-  };
   
   return (
     <PageTransition>
@@ -159,9 +141,7 @@ const Press = () => {
                   <PressReleaseDate>{release.date}</PressReleaseDate>
                   <PressReleaseTitle>{release.title}</PressReleaseTitle>
                   <PressReleaseExcerpt>{release.excerpt}</PressReleaseExcerpt>
-                  <ReadMoreButton onClick={() => handlePressReleaseClick(release.link)}>
-                    Read Full Release
-                  </ReadMoreButton>
+                  <ReadMoreButton as={Link} to={release.link}>Read Full Release</ReadMoreButton>
                 </PressReleaseContent>
               </PressReleaseCard>
             ))}
@@ -179,12 +159,7 @@ const Press = () => {
                 <MediaCoverageOutlet>{coverage.outlet}</MediaCoverageOutlet>
                 <MediaCoverageTitle>{coverage.title}</MediaCoverageTitle>
                 <MediaCoverageDate>{coverage.date}</MediaCoverageDate>
-                <MediaCoverageLink 
-                  onClick={() => handleMediaCoverageClick(coverage.link)}
-                  href={coverage.link}
-                >
-                  Read Article →
-                </MediaCoverageLink>
+                <MediaCoverageLink href={coverage.link} target="_blank" rel="noopener noreferrer">Read Article →</MediaCoverageLink>
               </MediaCoverageItem>
             ))}
           </MediaCoverageList>
@@ -204,12 +179,7 @@ const Press = () => {
                 <PressKitContent>
                   <PressKitTitle>{resource.title}</PressKitTitle>
                   <PressKitText>{resource.description}</PressKitText>
-                  <PressKitDownload 
-                    onClick={() => handlePressKitDownload(resource.link)}
-                    href={resource.link}
-                  >
-                    Download
-                  </PressKitDownload>
+                  <PressKitDownload href={resource.link}>Download</PressKitDownload>
                 </PressKitContent>
               </PressKitCard>
             ))}
@@ -222,16 +192,16 @@ const Press = () => {
           <ContactContent>
             <ContactTitle>Media Inquiries</ContactTitle>
             <ContactText>
-              For press inquiries, interview requests, or additional information, please contact our press team.
+              For press inquiries, interview requests with Paul Saunders, or additional information, please contact our press team.
             </ContactText>
             <ContactInfo>
               <ContactItem>
                 <ContactIcon>📧</ContactIcon>
-                <ContactText>press@truefansconnect.com</ContactText>
+                <ContactText>paul@truefansconnect.com</ContactText>
               </ContactItem>
               <ContactItem>
                 <ContactIcon>📞</ContactIcon>
-                <ContactText>(555) 123-4567</ContactText>
+                <ContactText>1-602-577-6556</ContactText>
               </ContactItem>
             </ContactInfo>
             <ContactButton as={Link} to="/contact">Contact Press Team</ContactButton>
@@ -450,7 +420,6 @@ const MediaCoverageLink = styled.a`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   text-decoration: none;
   flex-shrink: 0;
-  cursor: pointer;
   
   &:hover {
     text-decoration: underline;
@@ -525,7 +494,6 @@ const PressKitDownload = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   text-decoration: none;
-  cursor: pointer;
   
   &:hover {
     text-decoration: underline;
