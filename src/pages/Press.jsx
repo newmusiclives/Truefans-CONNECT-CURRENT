@@ -9,31 +9,35 @@ const Press = () => {
   const pressReleases = [
     {
       id: 1,
-      title: "TrueFans CONNECT™ Raises $5M to Revolutionize Artist Support",
-      date: "June 15, 2023",
-      excerpt: "Funding will accelerate platform growth and expand venue partnerships across North America.",
-      image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg"
+      title: "TrueFans CONNECT™ to Offer Unique Opportunities for Artists and Fans",
+      date: "December 15, 2024",
+      excerpt: "Platform will provide innovative ways for artists and fans to collaborate in building the TrueFans CONNECT™ ecosystem.",
+      image: "https://images.pexels.com/photos/7149165/pexels-photo-7149165.jpeg",
+      link: "/press/truefans-opportunities"
     },
     {
       id: 2,
-      title: "TrueFans CONNECT™ Surpasses 10,000 Artists on Platform",
-      date: "May 2, 2023",
-      excerpt: "Milestone highlights growing adoption of direct fan support model among independent musicians.",
-      image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg"
+      title: "TrueFans CONNECT™ Launches Beta Testing Program",
+      date: "November 2, 2024",
+      excerpt: "Initial beta testers are now active on the platform, providing valuable feedback for future development.",
+      image: "https://images.pexels.com/photos/7504837/pexels-photo-7504837.jpeg",
+      link: "/press/beta-testing-program"
     },
     {
       id: 3,
-      title: "TrueFans CONNECT™ Launches Two-Tier Affiliate Program",
-      date: "April 10, 2023",
-      excerpt: "New program allows artists to earn passive income through platform referrals.",
-      image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg"
+      title: "TrueFans CONNECT™ Announces Two-Tier Affiliate Program",
+      date: "October 10, 2024",
+      excerpt: "Upcoming program will allow artists to earn passive income through platform referrals.",
+      image: "https://images.pexels.com/photos/4571219/pexels-photo-4571219.jpeg",
+      link: "/press/affiliate-program"
     },
     {
       id: 4,
-      title: "TrueFans CONNECT™ Partners with Major Venue Network",
-      date: "March 5, 2023",
-      excerpt: "Partnership connects independent artists with 200+ performance venues across the country.",
-      image: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg"
+      title: "TrueFans CONNECT™ Plans Venue Network Partnerships",
+      date: "September 5, 2024",
+      excerpt: "Initiative aims to connect independent artists with performance venues across the country.",
+      image: "https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg",
+      link: "/press/venue-partnerships"
     }
   ]
   
@@ -42,37 +46,37 @@ const Press = () => {
     {
       id: 1,
       outlet: "Music Industry Today",
-      title: "How TrueFans CONNECT™ Is Changing the Game for Independent Artists",
-      date: "May 28, 2023",
-      link: "#"
+      title: "How TrueFans CONNECT™ Plans to Change the Game for Independent Artists",
+      date: "November 28, 2024",
+      link: "/media/music-industry-today-article"
     },
     {
       id: 2,
       outlet: "Tech Innovators",
-      title: "TrueFans CONNECT™: The Platform Disrupting Traditional Music Revenue Models",
-      date: "April 15, 2023",
-      link: "#"
+      title: "TrueFans CONNECT™: The Platform Aiming to Disrupt Traditional Music Revenue Models",
+      date: "October 15, 2024",
+      link: "/media/tech-innovators-article"
     },
     {
       id: 3,
       outlet: "Entrepreneur Weekly",
       title: "TrueFans CONNECT™ Founders on Building a More Equitable Music Industry",
-      date: "March 22, 2023",
-      link: "#"
+      date: "September 22, 2024",
+      link: "/media/entrepreneur-weekly-interview"
     },
     {
       id: 4,
       outlet: "Digital Music News",
-      title: "Artist-First Platforms: TrueFans CONNECT™ Leads the Way with 80/20 Revenue Split",
-      date: "February 10, 2023",
-      link: "#"
+      title: "Artist-First Platforms: TrueFans CONNECT™ Proposes 80/20 Revenue Split",
+      date: "August 10, 2024",
+      link: "/media/digital-music-news-article"
     },
     {
       id: 5,
       outlet: "Startup Spotlight",
-      title: "TrueFans CONNECT™: From Idea to Industry Disruptor in 12 Months",
-      date: "January 5, 2023",
-      link: "#"
+      title: "TrueFans CONNECT™: From Concept to Development in 12 Months",
+      date: "January 5, 2025",
+      link: "/media/startup-spotlight-feature"
     }
   ]
   
@@ -81,39 +85,57 @@ const Press = () => {
     {
       id: 1,
       title: "Company Fact Sheet",
-      description: "Key information about TrueFans CONNECT™, our mission, and our impact.",
+      description: "Key information about TrueFans CONNECT™, our mission, and our vision.",
       icon: "📄",
-      link: "#"
+      link: "/press-kit/fact-sheet"
     },
     {
       id: 2,
       title: "Brand Assets",
       description: "Logos, color palette, and brand guidelines for media use.",
       icon: "🎨",
-      link: "#"
+      link: "/press-kit/brand-assets"
     },
     {
       id: 3,
       title: "Executive Bios",
       description: "Biographies and headshots of our leadership team.",
       icon: "👥",
-      link: "#"
+      link: "/press-kit/executive-bios"
     },
     {
       id: 4,
       title: "Platform Screenshots",
       description: "High-resolution images of the TrueFans CONNECT™ platform.",
       icon: "📱",
-      link: "#"
+      link: "/press-kit/platform-screenshots"
     },
     {
       id: 5,
       title: "Case Studies",
-      description: "Detailed success stories of artists using our platform.",
+      description: "Detailed stories of beta testers using our platform.",
       icon: "📊",
-      link: "#"
+      link: "/press-kit/case-studies"
     }
   ]
+  
+  // Function to handle press release clicks
+  const handlePressReleaseClick = (link) => {
+    // In a real application, this would navigate to the actual article
+    window.location.href = link;
+  };
+  
+  // Function to handle media coverage clicks
+  const handleMediaCoverageClick = (link) => {
+    // In a real application, this would navigate to the actual article
+    window.location.href = link;
+  };
+  
+  // Function to handle press kit downloads
+  const handlePressKitDownload = (link) => {
+    // In a real application, this would download or open the resource
+    window.location.href = link;
+  };
   
   return (
     <PageTransition>
@@ -137,12 +159,14 @@ const Press = () => {
                   <PressReleaseDate>{release.date}</PressReleaseDate>
                   <PressReleaseTitle>{release.title}</PressReleaseTitle>
                   <PressReleaseExcerpt>{release.excerpt}</PressReleaseExcerpt>
-                  <ReadMoreButton>Read Full Release</ReadMoreButton>
+                  <ReadMoreButton onClick={() => handlePressReleaseClick(release.link)}>
+                    Read Full Release
+                  </ReadMoreButton>
                 </PressReleaseContent>
               </PressReleaseCard>
             ))}
           </PressReleaseGrid>
-          <ViewAllButton>View All Press Releases</ViewAllButton>
+          <ViewAllButton as={Link} to="/press/all">View All Press Releases</ViewAllButton>
         </Container>
       </PressReleasesSection>
       
@@ -155,7 +179,12 @@ const Press = () => {
                 <MediaCoverageOutlet>{coverage.outlet}</MediaCoverageOutlet>
                 <MediaCoverageTitle>{coverage.title}</MediaCoverageTitle>
                 <MediaCoverageDate>{coverage.date}</MediaCoverageDate>
-                <MediaCoverageLink href={coverage.link}>Read Article →</MediaCoverageLink>
+                <MediaCoverageLink 
+                  onClick={() => handleMediaCoverageClick(coverage.link)}
+                  href={coverage.link}
+                >
+                  Read Article →
+                </MediaCoverageLink>
               </MediaCoverageItem>
             ))}
           </MediaCoverageList>
@@ -175,7 +204,12 @@ const Press = () => {
                 <PressKitContent>
                   <PressKitTitle>{resource.title}</PressKitTitle>
                   <PressKitText>{resource.description}</PressKitText>
-                  <PressKitDownload href={resource.link}>Download</PressKitDownload>
+                  <PressKitDownload 
+                    onClick={() => handlePressKitDownload(resource.link)}
+                    href={resource.link}
+                  >
+                    Download
+                  </PressKitDownload>
                 </PressKitContent>
               </PressKitCard>
             ))}
@@ -193,7 +227,7 @@ const Press = () => {
             <ContactInfo>
               <ContactItem>
                 <ContactIcon>📧</ContactIcon>
-                <ContactText>press@truefans.connect</ContactText>
+                <ContactText>press@truefansconnect.com</ContactText>
               </ContactItem>
               <ContactItem>
                 <ContactIcon>📞</ContactIcon>
@@ -416,6 +450,7 @@ const MediaCoverageLink = styled.a`
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   text-decoration: none;
   flex-shrink: 0;
+  cursor: pointer;
   
   &:hover {
     text-decoration: underline;
@@ -490,6 +525,7 @@ const PressKitDownload = styled.a`
   font-size: ${({ theme }) => theme.fontSizes.md};
   font-weight: ${({ theme }) => theme.fontWeights.medium};
   text-decoration: none;
+  cursor: pointer;
   
   &:hover {
     text-decoration: underline;

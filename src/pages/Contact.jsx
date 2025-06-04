@@ -147,7 +147,7 @@ const Contact = () => {
                   <ContactInfoContent>
                     <ContactInfoTitle>Email Us</ContactInfoTitle>
                     <ContactInfoText>
-                      <ContactInfoLink href="mailto:info@truefans.connect">info@truefans.connect</ContactInfoLink>
+                      <ContactInfoLink href="mailto:info@truefansconnect.com">info@truefansconnect.com</ContactInfoLink>
                     </ContactInfoText>
                   </ContactInfoContent>
                 </ContactInfoItem>
@@ -179,7 +179,7 @@ const Contact = () => {
               <DepartmentList>
                 <DepartmentItem>
                   <DepartmentTitle>Artist Support</DepartmentTitle>
-                  <DepartmentEmail href="mailto:artists@truefans.connect">artists@truefans.connect</DepartmentEmail>
+                  <DepartmentEmail href="mailto:artists@truefansconnect.com">artists@truefansconnect.com</DepartmentEmail>
                   <DepartmentDescription>
                     For questions related to artist accounts, features, and support.
                   </DepartmentDescription>
@@ -187,7 +187,7 @@ const Contact = () => {
                 
                 <DepartmentItem>
                   <DepartmentTitle>Venue Relations</DepartmentTitle>
-                  <DepartmentEmail href="mailto:venues@truefans.connect">venues@truefans.connect</DepartmentEmail>
+                  <DepartmentEmail href="mailto:venues@truefansconnect.com">venues@truefansconnect.com</DepartmentEmail>
                   <DepartmentDescription>
                     For venue owners interested in joining our network or current venue partners.
                   </DepartmentDescription>
@@ -195,7 +195,7 @@ const Contact = () => {
                 
                 <DepartmentItem>
                   <DepartmentTitle>Press & Media</DepartmentTitle>
-                  <DepartmentEmail href="mailto:press@truefans.connect">press@truefans.connect</DepartmentEmail>
+                  <DepartmentEmail href="mailto:press@truefansconnect.com">press@truefansconnect.com</DepartmentEmail>
                   <DepartmentDescription>
                     For media inquiries, interview requests, and press materials.
                   </DepartmentDescription>
@@ -203,7 +203,7 @@ const Contact = () => {
                 
                 <DepartmentItem>
                   <DepartmentTitle>Partnerships</DepartmentTitle>
-                  <DepartmentEmail href="mailto:partnerships@truefans.connect">partnerships@truefans.connect</DepartmentEmail>
+                  <DepartmentEmail href="mailto:partnerships@truefansconnect.com">partnerships@truefansconnect.com</DepartmentEmail>
                   <DepartmentDescription>
                     For business development and strategic partnership opportunities.
                   </DepartmentDescription>
@@ -270,14 +270,14 @@ const Contact = () => {
             <FAQItem>
               <FAQQuestion>I'm having technical issues with the platform. Who should I contact?</FAQQuestion>
               <FAQAnswer>
-                For technical support, please email support@truefans.connect with details of the issue you're experiencing, including screenshots if possible.
+                For technical support, please email support@truefansconnect.com with details of the issue you're experiencing, including screenshots if possible.
               </FAQAnswer>
             </FAQItem>
             
             <FAQItem>
               <FAQQuestion>How can I request a feature for the platform?</FAQQuestion>
               <FAQAnswer>
-                We welcome feature suggestions! Please email features@truefans.connect with your ideas, and our product team will review them.
+                We welcome feature suggestions! Please email features@truefansconnect.com with your ideas, and our product team will review them.
               </FAQAnswer>
             </FAQItem>
             

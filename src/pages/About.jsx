@@ -226,7 +226,7 @@ const About = () => {
               <ContactInfo>
                 <ContactItem>
                   <ContactIcon>📧</ContactIcon>
-                  <ContactText>info@truefans.connect</ContactText>
+                  <ContactText>info@truefansconnect.com</ContactText>
                 </ContactItem>
                 
                 <ContactItem>
